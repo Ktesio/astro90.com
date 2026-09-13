@@ -1,15 +1,15 @@
 +++
 title = "Lighthouse"
-description = "A calm coastal logic game from Astro90. Explore an illustrated archipelago, solve thoughtful puzzles, and find a little light. Coming to iOS."
+description = "A coastal logic game from Astro90. Solve puzzles across an illustrated archipelago of islands, water and lighthouses. In development for iOS."
 template = "project.html"
 weight = 1
 [extra]
 project = "lighthouse"
 parent = "games/"
 parent_label = "All games"
-feature_title = "Find your bearings."
-feature_accent = "Follow the light."
-feature_intro = "A coastal escape built around quiet discovery and the satisfaction of a puzzle falling into place."
-next_title = "Meet Inkube. Make a little mess."
+feature_title = "Explore the islands."
+feature_accent = "Solve the coast."
+feature_intro = "A nautical puzzle world built around observation and logic."
+next_title = "Next: Inkube."
 next_path = "games/inkube/"
 +++

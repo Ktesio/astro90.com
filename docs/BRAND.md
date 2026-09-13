@@ -1,91 +1,74 @@
-# Astro90 brand guidelines
+# Astro90 identity standards
 
-Version 1 · September 2026
+Version 1.1 · September 2026
 
-## The idea
+Astro90 is a development studio for games, agentic AI software and open source. The selected identity is **04 Studio Wordmark** with **09 Saffron**, used on dark surfaces by default. The signature line is **Built from curiosity.**
 
-Astro90 is a development studio building games, agentic AI software, and open-source projects. Its identity is curious, considered, and warm. The signature line is **Built from curiosity.**
+## Signature
 
-The user selected **04 — Studio Wordmark**, followed by **09 — Saffron**, then confirmed a **cinematic studio showcase** with dark surfaces as the default. That latest direction governs the website and supersedes the yellow-background emphasis of the early palette studies.
+Use the supplied lowercase wordmark with its original rounded letterforms. The reference is `output/branding/logo-options-v1/04-wordmark.png`. The website uses an exact lossless WebP conversion, cropped through an SVG viewport at `108 289 1320 244` and filled saffron through its alpha channel. It remains a bitmap-backed web treatment; the full wordmark is not yet an outlined print master. Do not use the slightly different lettering in the generated color studies.
 
-## Wordmark
+The compact **a** is an optical vector reconstruction of the selected first letter. `assets/brand/monogram.json` holds its path and sampled contour. `scripts/trace_monogram.py` regenerates that geometry and the boxed SVG. The SVG, WebGL object and Blender object share this contour.
 
-The mark is the lowercase **astro90** wordmark, with bold, rounded forms. Keep the original proportions and letter shapes. Do not substitute a font, retype it, change the spacing, add a stroke, apply a gradient, or decorate it with an orbit. Orbital imagery is a separate part of the visual language.
-
-The original geometry reference is `output/branding/logo-options-v1/04-wordmark.png`. The website's `static/brand/wordmark-reference.webp` is the same artwork. Its SVG viewport isolates the wordmark at `108 289 1320 244`; an alpha-preserving SVG filter applies the exact saffron fill. The inline component is `ui.wordmark` in `templates/components.html`.
-
-This is a bitmap-backed web treatment, **not outlined production vector artwork**. The earlier generated color studies contain small letterform differences and must not replace the geometry reference. For large-format print or a master vector release, trace and optically review the selected reference before export.
-
-| Rule | Standard |
+| Use | Standard |
 | --- | --- |
-| Preferred treatment | Saffron wordmark on midnight or studio navy |
-| Clear space | At least half the mark's height on all four sides |
-| Minimum wordmark width | 120 CSS px on screen; inspect at final size |
-| Small icon | Use the supplied simplified `a` favicon at small browser sizes |
-| Background | Quiet and even; keep photography and detailed objects away from the mark |
-| Studio name in prose | Astro90 |
-| Studio name in the mark | astro90 |
+| Desktop header | Full saffron wordmark, 166 px wide |
+| Header and footer at 650 px or below | Boxed a only |
+| Short phone landscape, up to 950 × 600 px | Boxed a only |
+| Mobile icon | 43 px artwork inside a 44 px minimum link target |
+| Clear space | Half the full mark's height; one quarter of the box width for the a |
+| Minimum full mark | 120 CSS px, reviewed at the intended output size |
+| Prose name | Astro90 |
+| Background | An even dark field or a quiet area of a product image |
 
-The favicon is a simplified optical web icon. It does not replace the full mark or the selected standalone `a` reference in master identity work.
+Do not stretch, retype, outline, recolor individual letters or attach decoration. The metallic treatment is an illustration of the a, separate from the flat navigation signature. Examples in the identity guide may show both marks on mobile for comparison.
+
+## Meaning of the form
+
+The a identifies the studio directly. Its rounded corners preserve the selected lettering; the saffron face and dark core translate the two brand colors into a physical object. The index connects the five products to that object with paths that turn through 90 degrees. This is a visual use of the name, not a claim about its origin.
+
+The earlier rings were intended to suggest products orbiting one studio. They did not establish a distinctive Astro90 association and are retired from the website. Original explorations remain in the source archive. Do not reintroduce rings or floating spheres as default brand decoration.
 
 ## Color
 
 | Name | Hex | Role |
 | --- | --- | --- |
-| Midnight | `#0B101A` | Main canvas |
-| Deep surface | `#111925` | Sections and grouped content |
-| Raised surface | `#182230` | Interactive surfaces and previews |
-| Studio navy | `#1E293B` | Foundational brand color and sculptural material |
-| Saffron | `#F4C84C` | Wordmark, primary action, meaningful emphasis |
-| Soft saffron | `#FFE197` | Hover treatment |
+| Midnight | `#090E17` | Main canvas |
+| Deep surface | `#111925` | Grouped content |
+| Raised surface | `#182230` | Interface previews and disabled controls |
+| Studio navy | `#1E293B` | Foundational brand color |
+| Saffron | `#F4C84C` | Signature, actions, active paths and emphasis |
+| Soft saffron | `#FFE197` | Hover emphasis |
 | Warm white | `#F0F1EE` | Headlines and primary text |
 | Slate | `#A4ADBB` | Supporting text |
-| Quiet slate | `#7E8B9D` | Small secondary metadata on midnight |
+| Quiet slate | `#7E8B9D` | Secondary metadata on dark fields |
 
-Aim for roughly 70% midnight, 25% supporting surfaces and content, and 5% saffron in studio compositions. This is a guide for visual balance, not a quota. Large yellow blocks are not the default. In 3D artwork, light and metallic reflections can produce shades around the core gold hue.
+Let dark surfaces dominate. Reserve yellow for the signature and a few deliberate points of emphasis. The 3D letter can occupy a large part of a composition; ordinary content should not sit inside large gold panels. Metallic reflections naturally vary around saffron.
 
-Use dark text on a saffron button. Do not set white body text on yellow. Color supports labels and states; it must not be the only way to communicate status. Recheck contrast when applying muted colors to new surfaces.
+Use dark text on saffron, warm white for headings on dark surfaces, and slate for supporting copy. Recheck contrast for new surface combinations. Color alone must not communicate a release state or an action.
 
 ## Typography
 
-**Sora** carries display text. Its round geometry complements the selected mark without imitating it. Use weight 550–600 for large headlines, compact tracking, and a deliberate line break only where the layout supports it.
+Sora is the display face, normally weight 450–550. Large headings use tight tracking and compact line height. Manrope carries body text, navigation and actions. System monospace is reserved for code and technical values. Fonts are self-hosted and their SIL Open Font Licenses are included.
 
-**Manrope** carries body text, navigation, and actions. Use comfortable line height, short paragraphs, and clear differences between primary and supporting copy.
+Use scale, alignment and spacing for hierarchy. Avoid decorative chips, numbered eyebrows above every section, repetitive subtitles and several slogans in one composition. The wordmark is supplied artwork, not a typeface.
 
-**System monospace** carries code and small orientation labels. Uppercase labels are brief and secondary. Essential instructions must remain readable body copy.
+## Product worlds
 
-The wordmark is artwork, not either typeface. Fonts are self-hosted, and both font licenses are included with the files.
+Lighthouse keeps its coastal illustration and nautical interfaces. Inkube keeps its colorful ink and dark puzzle board. Heronis uses violet and Yanando uses mint within clearly labeled interface studies. Ktesio uses technical typography and a terminal illustration.
 
-## Images and forms
-
-The studio's recurring form is the orbit: a dark ceramic core, warm gold rings, and small companion spheres. It expresses exploration and connected ideas. Use a small number of carefully lit forms, with generous negative space.
-
-Lighthouse keeps its coastal greens, sea blues, brass details, and illustrated world. Inkube keeps its playful ink colors. Heronis uses soft violet and Yanando uses cool mint within their interface studies. Product art can be expressive inside the consistent dark studio frame.
-
-Use actual product screens where available. Mark conceptual interfaces as studies, and development screenshots as previews. Avoid stock dashboards or unrelated imagery that imply a product feature or release.
+Actual development screens take priority over invented mockups. Label interface studies and unreleased products. Do not fabricate stores, dates, reviews, ratings, customers or usage metrics. Ktesio has a non-commercial source-available license, which is distinct from OSI open source.
 
 ## Motion
 
-Motion is gentle and optional. Sculptures float slowly; a card moves slightly on hover; content enters once as it comes into view. Nothing takes control of the visitor's scrolling.
+Input controls the composition. The pointer changes the letter's rotation and lighting. Scrolling changes camera distance, image crops, oversized titles and the position of product screens. The index previews respond equally to pointer hover and keyboard focus.
 
-Respect `prefers-reduced-motion`. Provide a visible pause control for ambient animation and remember the choice for the current browser session. A paused or reduced-motion view must preserve every word, image, link, and layout.
+Scenes settle when input stops. There is no autonomous rotation, floating loop, top progress line, scroll hijacking, loading gate, custom cursor or forced scene completion. Normal document scrolling and direct links remain available.
 
-Do not use flashing, custom cursors, loading gates, autoplay video, forced scene changes, or repetitive animation on essential text.
+Honor `prefers-reduced-motion`. The manual Reduce motion control in the index and footer uses a session preference. Reduced motion removes the extra pinned scroll distance and substitutes the Blender poster for WebGL. All content and links remain available.
 
 ## Voice
 
-Speak plainly and with care. Describe the experience or useful behavior before its implementation. Keep technical detail for the developer workbench, where it helps the reader.
+Describe what the product does and where it stands. Let artwork supply atmosphere. Use concrete language such as “coastal logic puzzles,” “personal AI agents” and “token budgets.” Keep technical detail where it helps a developer decide what to inspect.
 
-| Context | Example |
-| --- | --- |
-| Studio introduction | Built from curiosity. |
-| Game invitation | Take a closer look. |
-| Release state | In development · Release details coming soon |
-| Developer product | Run AI agents like services. |
-| Error state | This page isn't here. There's plenty more to explore. |
-
-Avoid unearned superlatives, invented testimonials, fictional metrics, and promises about unconfirmed release dates. State license terms accurately: public source code is not automatically open source.
-
-## Brand architecture
-
-Astro90 is the parent studio. Lighthouse, Inkube, Heronis, Yanando, and Ktesio retain distinct product names and personalities. Use “from Astro90” where attribution helps. A product's imagery and tone can vary; the site's navigation, typography hierarchy, spacing, and interaction rules stay consistent.
+Astro90 is the shared signature, while Lighthouse, Inkube, Heronis, Yanando and Ktesio retain distinct names and product identities.

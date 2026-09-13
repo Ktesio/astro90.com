@@ -1,16 +1,16 @@
 +++
-title = "Out in the open."
-description = "Tools, experiments, and code from the studio workbench. Built with the community in mind, with the terms of each project clearly in view."
+title = "Built here."
+description = "Developer tools, experiments and public repositories from Astro90. Each project carries its own license."
 template = "catalog.html"
 sort_by = "weight"
 [extra]
 meta_title = "Open source & public code"
 eyebrow = "03 / THE DEVELOPER WORKBENCH"
-title_accent = "Yours to explore."
+title_accent = "Shared here."
 caption = "OPEN SOURCE & PUBLIC CODE"
 label = "On the workbench"
-count = "01 FEATURED"
+count = "1 featured"
 kind = "code"
-next_title = "The curious studio behind it all."
+next_title = "Meet the studio."
 next_path = "studio/"
 +++

@@ -1,0 +1,7 @@
+{
+  "name": "astro90-artwork",
+  "private": true,
+  "type": "module",
+  "scripts": { "build": "esbuild scene.js --bundle --minify --format=esm --target=es2022 --outfile=../../static/js/scene.js --legal-comments=linked" },
+  "devDependencies": { "esbuild": "0.28.2", "three": "0.186.0" }
+}

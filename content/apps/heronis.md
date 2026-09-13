@@ -7,14 +7,14 @@ weight = 1
 project = "heronis"
 parent = "apps/"
 parent_label = "All apps"
-feature_title = "From a first thought"
-feature_accent = "to a little momentum."
+feature_title = "Start a conversation."
+feature_accent = "Follow the work."
 feature_intro = "An agent should make work feel clearer. Heronis brings the conversation, the progress, and the result into view."
-story_title = "Big possibilities. A personal starting point."
-next_title = "Meet Yanando. Find your focus."
+story_title = "A workspace for your agents."
+next_title = "Next: Yanando."
 next_path = "apps/yanando/"
 +++
-Some ideas need a sounding board. Others need a first draft, a plan, or a little help getting started. Heronis is being built to meet you at that first step.
+Heronis is being built for people who want to work with personal AI agents through conversation.
 
 Keep the conversation close to the work it creates. Follow the progress of a run, look through the results, and decide where to go next.
 

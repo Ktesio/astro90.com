@@ -9,7 +9,7 @@ from PIL import Image
 ROOT = Path(__file__).resolve().parents[1]
 MEDIA = ROOT / "static" / "media"
 
-sources = sorted((ROOT / "assets/source/products").iterdir()) + sorted((ROOT / "assets/renders").iterdir())
+sources = sorted((ROOT / "assets/source/products").iterdir()) + [ROOT / "assets/renders/monogram.png"]
 for source in sources:
     if source.suffix.lower() not in {".png", ".jpg"}:
         continue

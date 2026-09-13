@@ -1,26 +1,26 @@
-# Astro90 website direction
+# Creative direction
 
-The user confirmed the cinematic studio showcase direction before design implementation.
+The approved direction is a cinematic studio showcase, dark by default with saffron as the accent. The implemented revision uses the selected a as a physical object, spatial project navigation and scroll-controlled product compositions.
 
-## Identity
+## Reference study
 
-- Selected lettering: Studio Wordmark, concept 04; lowercase astro90 and matching a.
-- Selected palette: Saffron 09, with the latest instruction taking precedence: dark by default, golden yellow as an accent.
-- Canvas: deep navy #0B101A. Surfaces step through #111925 and #1E293B. Saffron #F4C84C is reserved for emphasis, primary actions, fine details and the brand mark.
-- Product art keeps its own palette inside the studio frame.
+The requested references informed these choices:
 
-## Direction
+- [Figma: web design trends](https://www.figma.com/resource-library/web-design-trends/#trend-1-3d-and-immersive-elements): immersive 3D, experimental navigation, kinetic typography and motion tied to exploration.
+- [Dribbble: astronomy websites](https://dribbble.com/search/astronomy-website): large cropped forms, asymmetric type and scene-oriented project selection. The Xpace study was examined as a spatial layout reference.
+- [Pinterest: astronomy website design](https://www.pinterest.com/ideas/astronomy-website-design/926383071149/): full-bleed imagery, depth and dramatic scale relationships.
+- [Behance: astronomy websites](https://www.behance.net/search/projects/astronomy%20website): editorial layouts and exploratory navigation. [Nine Planets](https://www.behance.net/gallery/188110721/Nine-Planets-Space-and-Astronomy-Website) was examined for its composition and depth.
 
-Cinematic, spacious, and tactile. An original Blender orbital sculpture anchors the homepage. Strong type and selected project art carry the page. Motion reveals hierarchy, gives depth to the hero, and responds to hover, focus and scrolling. There is no scroll hijacking, loading gate or custom cursor.
+No reference artwork or source code was copied. Astro90's mark, original Blender/WebGL geometry and the studio's product images supply the final visual material.
 
-## Page set
+## Composition
 
-Home; Games; Lighthouse; Inkube; Apps; Heronis; Yanando; Open source and developer tools; Ktesio; Studio; Brand standards; 404.
+The opening a is a recognizable studio object. Scrolling moves the camera closer before full-screen Lighthouse and Inkube scenes enter. Their artwork, names and phone screens move at different depths. Heronis and Yanando occupy overlapping interface planes. Ktesio returns the site to a restrained developer composition.
 
-## Iteration boundary
+The Index control opens a spatial map of five projects. Hover and focus change the central preview. Right-angle paths connect the projects to the studio. On phones the map becomes a large, readable list with a preview behind it. The header and footer use the boxed a at mobile widths.
 
-This is a static Zola UI/UX implementation. Navigation, menus, galleries and motion are presentation only. Install, launch and signup actions do not connect to stores, accounts, payments or services. Unverified releases are labeled as in development. No analytics, remote data calls or forms are included.
+Copy names the products and describes their behavior. Repeated slogans, decorative chips and automatic floating effects have been removed. Earlier orbital studies are archived rather than used as a recurring motif.
 
-## Content decisions
+## Scope
 
-Product copy is grounded in the existing product READMEs. Marketing art and game screenshots are reused from the user's projects. Ktesio is labeled source available because its non-commercial license is not an OSI open-source license. Do not invent downloads, reviews, ratings, user counts, release dates, or repository stars.
+The site contains twelve static routes: home, games, two game pages, apps, two app pages, public code, Ktesio, studio, identity and 404. Navigation, galleries and motion are presentation features. Store and app-launch actions remain unavailable while those products are in development. No accounts, forms, analytics, payments or product integrations are connected.

@@ -16,10 +16,6 @@
 
 {% component ui.app_visual(id) %}
 <div class="app-visual app-visual--{{ id }}" role="img" aria-label="{% if id == 'heronis' %}Heronis interface concept{% else %}Yanando interface concept{% endif %}">
-  <div class="app-orbit app-orbit--one">
-</div>
-<div class="app-orbit app-orbit--two">
-</div>
   <div class="app-window">
     <div class="window-bar">
 <span class="window-dots">
@@ -47,14 +43,14 @@
 </span>
 </div>
 <div class="agent-body">
-<p class="micro">YOUR PERSONAL AGENT</p>
-<h4>Make room for<br>your next idea.</h4>
+<p class="micro">LAUNCH PLANNING</p>
+<h4>What are we<br>working on?</h4>
 <div class="prompt-example">Help me plan my next launch.{{ <ui.icon name="diagonal" /> }}</div>
 <div class="run-preview">
 <span class="run-icon">{{ <ui.icon name="spark" /> }}</span>
 <div>
-<strong>A little momentum.</strong>
-<span>Turning an idea into a plan</span>
+<strong>Launch plan</strong>
+<span>Draft ready for review</span>
 </div>
 <i class="status-orb">
 </i>
@@ -72,8 +68,8 @@
 <i class="avatar-dot">
 </i>
 </div>
-<p class="micro">A LITTLE MORE CLARITY</p>
-<h4>Good things<br>start with a plan.</h4>
+<p class="micro">LAUNCH PROJECT</p>
+<h4>Today's<br>priorities.</h4>
 <div class="task-tabs">
 <span>Today <b>3</b>
 </span>
@@ -82,20 +78,20 @@
 <div class="task-row">
 <i>
 </i>
-<span>Make space for a new idea</span>
-<b class="task-label">Create</b>
+<span>Review the landing page</span>
+<b class="task-label">Design</b>
 </div>
 <div class="task-row">
 <i>
 </i>
-<span>Give the details some love</span>
+<span>Prepare the release notes</span>
 <b class="task-label task-label--blue">Focus</b>
 </div>
 <div class="task-row task-row--complete">
 <i>{{ <ui.icon name="check" /> }}</i>
-<span>Find a little momentum</span>
+<span>Gather product screenshots</span>
 </div>
-<div class="task-assistant">{{ <ui.icon name="spark" /> }} One clear next step. Then another.</div>
+<div class="task-assistant">{{ <ui.icon name="spark" /> }} Review the landing page before publishing.</div>
 </div>
     {% endif %}
   </div>
@@ -113,13 +109,13 @@
 <i>
 </i>
 </span>
-<span>the workbench / ktesio</span>{{ <ui.icon name="code" /> }}</div>
+<span>ktesio / Rust CLI</span>{{ <ui.icon name="code" /> }}</div>
 <div class="terminal-body">
 <p class="terminal-command">
 <span>$</span> cargo install ktesio<i class="terminal-caret">
 </i>
 </p>
-<p class="terminal-comment"># A little structure for a lot of autonomy.</p>
+<p class="terminal-comment"># Lifecycle, token usage and budgets.</p>
 <div class="terminal-rule">
 </div>
 <div class="terminal-row">
@@ -139,7 +135,7 @@
 <div class="terminal-rule">
 </div>
 <p class="terminal-end">
-<span>Rust at the core.</span> Your agents, your limits.</p>
+<span>kt</span> Agent supervision in Rust.</p>
 </div>
 </div>
 {% endcomponent %}
@@ -151,7 +147,7 @@
 <img class="coast-art" src="{{ get_url(path='media/lighthouse-coast.webp') }}" alt="Lighthouse's illustrated islands at dusk, surrounded by deep blue sea" width="1024" height="1536" loading="lazy">
 <div class="coast-light" aria-hidden="true">
 </div>
-<span class="art-name art-name--lighthouse">Lighthouse<span>A little light goes a long way.</span>
+<span class="art-name art-name--lighthouse">Lighthouse
 </span>
 {% elif project.id == "inkube" %}
 <div class="ink-grid" aria-hidden="true">
@@ -162,7 +158,7 @@
 </div>
 <div class="ink-blob ink-blob--three" aria-hidden="true">
 </div>
-<span class="art-name art-name--inkube">inkube<span>Make a little mess.</span>
+<span class="art-name art-name--inkube">inkube
 </span>
 <div class="mini-phone">
 <img src="{{ get_url(path='media/inkube-game.webp') }}" alt="Inkube game screen with colorful merging ink blots" width="1170" height="2532" loading="lazy">

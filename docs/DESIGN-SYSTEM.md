@@ -1,102 +1,59 @@
-# Astro90 design system
+# Astro90 website system
 
-This document describes the implemented static website. The executable source of truth is `sass/site.scss`; the shared Tera 2 components are in `templates/components.html`.
+The executable styles are `sass/site.scss` and its imported `sass/_spatial.scss`. Tera 2 components live in `templates/components.html`; `templates/atlas.html` provides the global project index.
 
-## Tokens
+## Foundations
 
-| Token | Value | Use |
-| --- | --- | --- |
-| `--canvas` | `#0B101A` | Page background |
-| `--surface` | `#111925` | Section and card backgrounds |
-| `--surface-raised` | `#182230` | Raised and disabled controls |
-| `--ink` | `#1E293B` | Brand navy |
-| `--saffron` | `#F4C84C` | Accent |
-| `--saffron-soft` | `#FFE197` | Accent hover |
-| `--text` | `#F0F1EE` | Main text |
-| `--muted` | `#A4ADBB` | Body/support text |
-| `--subtle` | `#7E8B9D` | Secondary metadata |
-| `--line` | `rgba(182,197,220,.15)` | Quiet separators |
-| `--line-strong` | `rgba(182,197,220,.3)` | Control and card boundaries |
-| `--content` | `1280px` | Main content maximum |
-| `--gutter` | `clamp(24px,5.55vw,88px)` | Page margins |
-| `--radius` | `16px` | Main surfaces |
-| `--radius-small` | `8px` | Small controls |
-| `--fast` | `180ms` | Color response |
-| `--medium` | `320ms` | Interaction transforms |
-| `--slow` | `700ms` | One-time content reveal |
-| `--ease` | `cubic-bezier(.22,1,.36,1)` | Soft deceleration |
-
-## Type and spacing
-
-Use Sora for headings, Manrope for body text and actions, and the system monospace stack for code/labels. Type sizes use fluid `clamp()` values where appropriate.
-
-| Role | Desktop | Phone |
-| --- | --- | --- |
-| Home headline | Up to 111 px | About 63–92 px, sized to the screen |
-| Collection headline | Fluid oversized display | 47–68 px |
-| Section heading | 36–54 px | 32–45 px |
-| Product name | Up to 88 px | 53–73 px |
-| Main body | 15–17 px | 14–15 px |
-| Card descriptions | 13–14 px | 13 px |
-| Labels | 9–11 px | 8–10 px |
-
-Labels inside interface illustrations are part of the visual preview, not controls or instructions. All real action labels remain separately readable.
-
-Compose with 4, 8, 12, 16, 24, 32, 48, 64, and 96 px intervals, with optical adjustment for large display layouts. Desktop sections generally use 116 px vertical padding; phone sections use 76 px. Avoid adding a box around content that can be organized by spacing and a divider.
-
-## Layout and responsiveness
-
-The main content maxes out at 1280 px. Large art can extend outside its column but is clipped at the page boundary. The page itself must never scroll horizontally.
-
-- Desktop: two-column project collections; split hero; four-field product metadata row.
-- Tablet: condensed navigation and spacing, with art sized to preserve the copy's priority.
-- Phone, 650 px and below: single-column cards and hero; disclosure navigation; two-column metadata; screenshot strip with native horizontal scrolling and snap points.
-- Very small screens, 370 px and below: tighter headline and action sizing.
-
-Only the screenshot strip intentionally scrolls horizontally. Use native scrolling; do not drag the whole document or replace its scroll behavior.
-
-## Components
-
-| Component | Responsibility |
+| Token | Value |
 | --- | --- |
-| `ui.wordmark` | Selected lettering and exact saffron treatment |
-| `ui.icon` | Consistent 24-unit outline icons, hidden from assistive technology |
-| `ui.button` | Real content navigation with primary/secondary treatment |
-| `ui.card` | Product artwork, title, description, platform, and status |
-| `ui.app_visual` | Explicitly labeled Heronis/Yanando interface study |
-| `ui.terminal` | Static Ktesio developer illustration |
-| `ui.next_chapter` | Large next-page invitation |
-| Gallery dialog | Native modal screenshot enlargement with close control |
+| Canvas | `#090E17` |
+| Surface / raised surface | `#111925` / `#182230` |
+| Navy / saffron | `#1E293B` / `#F4C84C` |
+| Text / supporting / metadata | `#F0F1EE` / `#A4ADBB` / `#7E8B9D` |
+| Content width | 1440 px maximum |
+| Page gutter | `clamp(22px, 4.4vw, 88px)` |
+| Display / body / code | Sora / Manrope / system monospace |
+| Short response | 180–320 ms |
+| Spatial input damping | 85 ms exponential time constant |
 
-Real controls have hover and visible keyboard focus states. Disabled install/launch previews do not react like active controls and have release-status text nearby. Do not add a fake URL to make them look functional.
+Display typography is fluid and closely spaced. The desktop home headline scales to 160 px, while product names can become much larger as artwork. Phone headlines fit the available width. Supporting copy stays readable and short. Small labels inside illustrated interfaces are not controls.
 
-The mobile menu is a disclosure, not a modal: its expanded state is exposed and Escape closes it. Native dialog behavior traps focus for enlarged screenshots; closing returns focus to the initiating screen button.
+## Layouts
 
-## Motion and accessibility
+- The homepage uses native sticky stages. The hero, each game and the app sequence have their own scroll distance; no wheel or touch-scroll events are intercepted.
+- Game worlds expand to the viewport. Their titles, backgrounds and device previews use distinct depth values.
+- App previews are layered planes. Their captions remain real links and the illustrations are labeled interface studies.
+- Collections use staggered columns on desktop and a single column on mobile.
+- Detail pages preserve the product's own artwork, release state, features and screenshots.
+- The studio page uses the same interactive a as the home, followed by concrete descriptions of the work.
+- The only intentional horizontal scroller is the mobile screenshot gallery.
 
-The hero and studio sculptures drift over 12–14 seconds. Small forms use similarly slow loops. The outer decorative orbit rotates over 75 seconds. Content reveals once, with 24 px maximum travel. Cards and arrows use small hover transforms.
+At 650 px and below, the header and footer show only the boxed a. The index becomes a large project list and its utility links wrap. Short landscape viewports use compressed scenes. Reduced motion removes the extra scroll distance entirely.
 
-The motion control pauses ambient animations and stores its preference in `sessionStorage`. Storage failure is harmless. System reduced motion takes priority, removes all animation/transitions, and keeps content visible. No cookies or remote services are used.
+## Index and controls
 
-Standards for additions:
+The Index button opens a native modal dialog. Five semantic project links are arranged around the central preview on desktop. Both pointer entry and keyboard focus select the preview. Escape or Close dismisses the dialog and restores focus to the opener. Native dialog behavior handles focus containment and background inertness.
 
-- Preserve a logical heading outline, one `h1` per page, and a clear main landmark.
-- Supply a unique page title and description.
-- Use actual links for navigation and actual buttons for local interaction.
-- Keep action targets at least 44 × 44 CSS px where space permits; inline prose links remain textual.
-- Keep focus visible against the active background and outside clipped artwork.
-- Provide meaningful image alternatives; hide purely decorative forms and icons.
-- Keep the content readable without JavaScript. The no-script mobile navigation is exposed.
-- Honor reduced motion and keep all content visible when ambient movement is paused.
-- Never depend on hover alone, color alone, or motion to convey information.
-- Recheck contrast when adding a color/surface pairing. Aim for WCAG AA: 4.5:1 for normal text and 3:1 for large text and meaningful non-text boundaries.
+The screenshot viewer is a separate native dialog. Closing it restores focus to the selected screenshot. Install and launch previews are disabled, with development status nearby. Do not substitute fake links for unavailable actions.
 
-## Content model
+## Input-led rendering
 
-`data/projects.toml` is the shared catalog. Each entry has an ID, category, platform, status, summary, accent, route, media, features, release label, source URL, and license. Each detail page identifies its catalog entry through `extra.project` and supplies the editorial headings in Markdown front matter.
+`static/js/site.js` owns one requestAnimationFrame scheduler. Scroll and pointer events update targets; damping lets them settle. Frames stop when targets settle, and hidden documents cancel the pending frame. There is no elapsed-time animation clock.
 
-Before changing a release state, verify the actual store or product destination. Link to a store only after there is a real listing. Keep source availability and open-source licensing distinct. The website's static iteration does not make an unreleased product available.
+The stylesheet consumes `--progress`, `--arrival`, `--depth`, `--pointer-x` and `--pointer-y`. These drive transforms and image crops. The WebGL module is imported only on pages with a visible scene host and when full motion is enabled.
 
-## Validation
+`assets/webgl/scene.js` builds the shared monogram contour with Three.js 0.186.0. It uses a physical saffron material, navy backing and a generated studio environment. Pixel ratio is capped at 1.7. The minified delivery bundle is committed so Zola remains the sole website build dependency. esbuild 0.28.2 and Three.js are pinned in the authoring package lock.
 
-Run `mise run check` before committing. Visually inspect the home, a collection, each detail layout type, and the brand guide at desktop and phone widths. Check menu, focus, gallery, motion pause, and reduced-motion behavior after changes to those components. Keep screenshots and temporary review artifacts in `.local/`, outside the public build.
+## Fallbacks and accessibility
+
+System reduced motion takes precedence over the session preference. The manual control appears in the index and footer. Reduced mode disposes WebGL, shows the Blender poster, removes spatial transforms and collapses long scene heights. Storage failure is harmless.
+
+Without JavaScript, the poster, all page content and a simple navigation fallback remain available; long scenes become normal sections. WebGL/module failure leaves the poster in place. A lost context restores the poster.
+
+Maintain one h1 and one main landmark per page, unique metadata, descriptive links, visible keyboard focus, image alternatives and 44 px action targets. Never require hover, color or motion to understand a product. Do not add autoplay media or loading gates. Recheck WCAG AA contrast for new combinations.
+
+## Content and validation
+
+`data/projects.toml` holds product facts. Detail Markdown selects a project and supplies editorial headings. Verify any new store destination before activating a release control. Source availability and open-source licensing must remain distinct.
+
+Run `mise run check` and `node --check static/js/site.js`. When scene code changes, rebuild its bundle and inspect desktop, tablet, phone and short landscape sizes. Exercise the index, focus restoration, galleries and motion control. Check actual changing transforms while scrolling, rather than relying solely on still images. Keep a factual record in `docs/VALIDATION.md`.

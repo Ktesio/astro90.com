@@ -2,26 +2,23 @@
 {% block content %}
 {% set catalog=load_data(path="data/projects.toml") %}
 <section class="page-intro container">
-<p class="eyebrow reveal">{{ section.extra.eyebrow }}</p>
 <h1 class="reveal">{{ section.title }} <em>{{ section.extra.title_accent }}</em>
 </h1>
 <div class="page-intro-bottom reveal">
 <p>{{ section.description }}</p>
-<span class="index-caption">{{ section.extra.caption }}</span>
 </div>
 </section>
 <section class="container catalog-section">
 <div class="catalog-bar">
 <span>{{ section.extra.label }}</span>
-<span class="micro">{{ section.extra.count }} {% if section.extra.kind == "code" %}PROJECT{% else %}PROJECTS{% endif %} / ALWAYS EXPLORING</span>
+<span class="micro">{{ section.extra.count }} {% if section.extra.kind == "code" %}project{% else %}projects{% endif %}</span>
 </div>
 <div class="project-grid">{% for project in catalog.projects %}
 {% if project.kind == section.extra.kind %}{{ <ui.card project={project} /> }}{% endif %}
 {% endfor %}</div>
 {% if section.extra.kind == "code" %}<div class="repository-list reveal">
 <div>
-<p class="eyebrow">MORE FROM THE WORKBENCH</p>
-<h2>Small tools.<br>Useful beginnings.</h2>
+<h2>More on<br>GitHub.</h2>
 </div>
 <div>
 <a href="https://github.com/iMagdy/homebrew-tap">
@@ -44,13 +41,6 @@
 </div>
 </div>
 <p class="license-note">Each repository carries its own license. Ktesio is source available under a non-commercial license.</p>{% endif %}
-{% if section.extra.kind == "games" %}<div class="quiet-note reveal">
-<span class="tiny-orbit">
-</span>
-<p>More little worlds are taking shape.<br>
-<strong>Curiosity rarely sits still.</strong>
-</p>
-</div>{% endif %}
 {{ <ui.next_chapter title={section.extra.next_title} path={section.extra.next_path} /> }}
 </section>
 {% endblock %}

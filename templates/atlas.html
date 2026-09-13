@@ -1,0 +1,21 @@
+<dialog id="project-index" class="atlas" aria-labelledby="index-title">
+  <div class="atlas-top"><h2 id="index-title">The studio index</h2><button class="index-close" type="button" data-index-close aria-label="Close index"><span>Close</span>{{ <ui.icon name="close" /> }}</button></div>
+  <div class="atlas-map" data-active-project="studio">
+    <svg class="atlas-routes" viewBox="0 0 1200 600" preserveAspectRatio="none" aria-hidden="true"><path d="M210 130H390V300H600M170 440H430V300H600M600 300H850V100H970M600 300H890V410H1030M600 300V530H730"/></svg>
+    <div class="atlas-preview" aria-hidden="true">
+      <img class="atlas-image atlas-image--studio" src="{{ get_url(path='media/monogram.webp') }}" alt="" width="1500" height="1500">
+      <img class="atlas-image atlas-image--lighthouse" src="{{ get_url(path='media/lighthouse-coast.webp') }}" alt="" width="1024" height="1536" loading="lazy">
+      <img class="atlas-image atlas-image--inkube" src="{{ get_url(path='media/inkube-game.webp') }}" alt="" width="395" height="860" loading="lazy">
+      <div class="atlas-image atlas-image--heronis"><span>h</span><p>Personal AI agents</p></div>
+      <div class="atlas-image atlas-image--yanando"><span>y</span><p>Tasks. Priorities. Teamwork.</p></div>
+      <div class="atlas-image atlas-image--ktesio"><span>kt<span>_</span></span><p>Agent infrastructure in Rust</p></div>
+    </div>
+    <nav class="atlas-projects" aria-label="Projects">
+      {% set catalog=load_data(path="data/projects.toml") %}
+      {% for project in catalog.projects %}
+      <a class="atlas-project atlas-project--{{ project.id }}" href="{{ get_url(path=project.url) }}" data-project="{{ project.id }}"><span class="atlas-project-type">{{ project.platform }}</span><span class="atlas-project-name">{{ project.title }}{{ <ui.icon name="diagonal" /> }}</span></a>
+      {% endfor %}
+    </nav>
+  </div>
+  <div class="atlas-bottom"><nav aria-label="Studio pages"><a href="{{ get_url(path='games/') }}">Games</a><a href="{{ get_url(path='apps/') }}">Apps</a><a href="{{ get_url(path='open-source/') }}">Code</a><a href="{{ get_url(path='studio/') }}">Studio</a><a href="{{ get_url(path='brand/') }}">Identity</a><a href="https://github.com/iMagdy">GitHub{{ <ui.icon name="diagonal" /> }}</a></nav><button class="motion-switch" type="button" aria-label="Reduce motion" aria-pressed="false" data-motion-toggle>{{ <ui.icon name="pause" /> }}<span>Reduce motion</span></button></div>
+</dialog>

@@ -1,50 +1,17 @@
 {% extends "base.html" %}
 {% block content %}
-<div class="studio-hero">
-<section class="page-intro container">
-<p class="eyebrow reveal">A STUDIO WITH A WIDE-OPEN MIND</p>
-<h1 class="reveal">Different ideas. <em>Shared curiosity.</em>
-</h1>
-<div class="page-intro-bottom reveal">
-<p>Games. Agentic AI. Open source.<br>A few of the places our curiosity takes us.</p>
-<span class="index-caption">HELLO, WE'RE ASTRO90.</span>
-</div>
+<section class="identity-scene studio-scene" data-scene="identity"><div class="identity-stage studio-intro">
+  <div class="identity-object" data-brand-scene data-scene-module="{{ get_url(path='js/scene.js') }}"><img class="brand-poster" src="{{ get_url(path='media/monogram.webp') }}" width="1500" height="1500" alt="Astro90's sculpted saffron a" fetchpriority="high"></div>
+  <div class="page-intro container"><h1>We are<br><em>Astro90.</em></h1><div class="page-intro-bottom"><p>An independent development studio building mobile games, agentic AI software and tools for developers.</p></div></div>
+</div></section>
+<section class="studio-text container">
+  <p>Our work runs from a puzzle on your phone to an agent on your machine. <span>We design and build the whole experience.</span></p>
+  <div class="studio-lines">
+    <article class="studio-line"><h2>Games</h2><p>Lighthouse explores logic through a coastal world. Inkube turns swipes into merging ink and chain reactions. Both are being built for iOS.</p></article>
+    <article class="studio-line"><h2>Agentic AI</h2><p>Heronis brings conversations, agent runs and results into one place. Yanando uses AI to help organize tasks, priorities and shared work.</p></article>
+    <article class="studio-line"><h2>Public code</h2><p>Ktesio gives developers lifecycle controls and budgets for their AI agents. We also share tools and experiments on GitHub, with license terms stated for each project.</p></article>
+  </div>
 </section>
-<img src="{{ get_url(path='media/orbit.webp') }}" width="1680" height="1540" alt="" aria-hidden="true">
-</div>
-<section class="container section">
-<p class="studio-statement reveal">We're an independent development studio making <strong>things we'd want to spend time with.</strong> A game that makes you pause. Software that helps you move forward. A tool that gives another idea a place to start.</p>
-<div class="studio-values">
-<article class="studio-value reveal">{{ <ui.icon name="spark" /> }}<h2>Play is a good place to start.</h2>
-<p>We follow the small, interesting ideas. A satisfying interaction. An unexpected color. A question that won't leave us alone.</p>
-</article>
-<article class="studio-value reveal">{{ <ui.icon name="grid" /> }}<h2>Care lives in the details.</h2>
-<p>The way a screen feels. The clarity of a sentence. The moment something makes sense. Those little things are the work.</p>
-</article>
-<article class="studio-value reveal">{{ <ui.icon name="code" /> }}<h2>Build something to build on.</h2>
-<p>We learn from the people who share their work. Open tools and public code are part of how we keep that conversation going.</p>
-</article>
-</div>
-</section>
-<section class="container">
-<figure class="studio-quote reveal">
-<blockquote>“What could<br>
-<em>this become?</em>”</blockquote>
-<figcaption>
-<p>That question connects a coastal puzzle, a pocketful of ink, and an agent that helps an idea along. Different products, made with the same care.</p>
-<span>THE QUESTION WE KEEP COMING BACK TO</span>
-</figcaption>
-</figure>
-</section>
-<section class="studio-band" style="margin-top:100px">
-<div class="container studio-band-inner">
-<div class="reveal">
-<p class="eyebrow">A LITTLE OF OUR PERSONALITY</p>
-<h2>A dark sky.<br>A bright <em>possibility.</em>
-</h2>
-<p>Deep navy gives our worlds room to breathe. A little saffron brings the spark. Our identity is built around the same balance as our products: thoughtful, warm, and curious.</p>{{ <ui.button label="Explore our identity" path="brand/" secondary={true} /> }}</div>
-<img class="studio-sculpture" src="{{ get_url(path='media/studio-sculpture.webp') }}" width="1440" height="1000" alt="Interlocking sculptural forms in gold and deep navy" loading="lazy">
-</div>
-</section>
-<div class="container">{{ <ui.next_chapter title="Find your next little world." path="games/" /> }}</div>
+<section class="studio-identity"><div class="container"><h2>One studio.<br><em>Its own signature.</em></h2><p>Our rounded “a” becomes a physical object. The dark core and saffron face carry the studio identity; each product keeps its own visual world.</p><a class="world-link" href="{{ get_url(path='brand/') }}">The Astro90 identity{{ <ui.icon name="diagonal" /> }}</a></div><img src="{{ get_url(path='media/monogram.webp') }}" alt="" width="1500" height="1500" loading="lazy"></section>
+<div class="container">{{ <ui.next_chapter title="Explore the games." path="games/" /> }}</div>
 {% endblock %}

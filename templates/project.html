@@ -52,7 +52,6 @@
 <section class="section container">
 <div class="section-heading reveal">
 <div>
-<p class="eyebrow">THE SMALL DETAILS MAKE IT</p>
 <h2>{{ page.extra.feature_title }}<br>
 <em>{{ page.extra.feature_accent }}</em>
 </h2>
@@ -69,38 +68,35 @@
 <div class="container">
 <div class="section-heading reveal">
 <div>
-<p class="eyebrow">STEP INTO {{ project.title | upper }}</p>
-<h2>Take a <em>closer look.</em>
+<h2>Inside <em>{{ project.title }}.</em>
 </h2>
 </div>
-<p class="section-heading-aside">A few moments from the world.<br>Select a screen to explore.</p>
+<p class="section-heading-aside">Select a screen to enlarge.</p>
 </div>
 <div class="screenshot-gallery">{% for shot in project.screenshots %}<button class="screenshot reveal" type="button" data-gallery-src="{{ get_url(path='media/' ~ shot) }}" data-gallery-title="{{ project.title }} — screen {{ loop.index }}" aria-label="Enlarge {{ project.title }} screen {{ loop.index }}">
 <img src="{{ get_url(path='media/' ~ shot) }}" width="1206" height="2622" loading="lazy" alt="{{ project.title }} {% if loop.index == 1 %}home screen{% elif loop.index == 2 %}world and gameplay view{% else %}gameplay preview{% endif %}">
 <span>{{ <ui.icon name="plus" /> }}</span>
 </button>{% endfor %}</div>
-<p class="gallery-note">Development screenshots. The worlds are still taking shape.</p>
+<p class="gallery-note">Development screenshots.</p>
 </div>
 </section>{% endif %}
 {% if project.kind == "apps" %}<section class="section container app-story">
-<p class="eyebrow reveal">THOUGHTFUL BY DESIGN</p>
 <h2 class="reveal">{{ page.extra.story_title }}</h2>
 <div class="app-story-copy reveal">{{ page.content | safe }}</div>
 <div class="app-story-line" aria-hidden="true">
-<span>AN IDEA</span>
+<span>CONVERSATION</span>
 <i>
 </i>
-<span>A LITTLE HELP</span>
+<span>WORK</span>
 <i>
 </i>
-<span>SOMETHING POSSIBLE</span>
+<span>REVIEW</span>
 </div>
 </section>{% endif %}
 {% if project.kind == "code" %}<section class="section container code-story">
 <div class="reveal">
-<p class="eyebrow">TOOLS WITH CLEAR BOUNDARIES</p>
-<h2>Read it.<br>
-<em>Understand it.</em>
+<h2>Source<br>
+<em>and license.</em>
 </h2>
 </div>
 <div class="prose reveal">{{ page.content | safe }}<a class="text-link" href="{{ project.source }}">Read the repository{{ <ui.icon name="diagonal" /> }}</a>

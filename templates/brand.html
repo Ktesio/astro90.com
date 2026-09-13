@@ -1,119 +1,12 @@
 {% extends "base.html" %}
 {% block content %}
-<section class="page-intro brand-intro container">
-<p class="eyebrow reveal">THE ASTRO90 IDENTITY / 01</p>
-<h1 class="reveal">A dark sky. <em>A bright possibility.</em>
-</h1>
-<div class="page-intro-bottom reveal">
-<p>Warmth in the details. Confidence in the quiet.<br>A visual identity for a studio built from curiosity.</p>
-<span class="index-caption">DARK BY DEFAULT. SAFFRON AT HEART.</span>
-</div>
-</section>
+<section class="page-intro brand-intro container"><h1>The Astro90<br><em>identity.</em></h1><div class="page-intro-bottom"><p>Dark by default. Saffron for emphasis.<br>A rounded signature with a physical presence.</p></div></section>
 <div class="container">
-<section class="brand-chapter reveal">
-<div>
-<p class="eyebrow">01 / OUR SIGNATURE</p>
-<h2>Simple. Rounded.<br>Unmistakably us.</h2>
-<p class="brand-chapter-description">The lowercase studio wordmark is our signature. Keep its shape intact and give it room to breathe.</p>
-</div>
-<div>
-<div class="brand-logo-stage">{{ <ui.wordmark /> }}</div>
-<div class="brand-rules">
-<p>
-<strong>One mark. Consistent proportions.</strong>Always use the supplied artwork. Never retype, stretch, outline, or add effects to the wordmark.</p>
-<p>
-<strong>A little breathing room.</strong>Keep at least half the wordmark's height clear on every side. Use saffron against a quiet navy field.</p>
-</div>
-</div>
-</section>
-<section class="brand-chapter reveal">
-<div>
-<p class="eyebrow">02 / OUR COLORS</p>
-<h2>Night is the canvas.<br>Gold is the spark.</h2>
-<p class="brand-chapter-description">Dark surfaces carry the identity. Saffron marks what matters: our signature, an action, a moment of emphasis. Product worlds keep their own colors.</p>
-</div>
-<div>
-<div class="brand-token-grid">{% for color in [["Midnight","#0B101A"],["Studio navy","#1E293B"],["Saffron","#F4C84C"],["Warm white","#F0F1EE"]] %}<div class="brand-token">
-<div class="brand-swatch" style="background:{{ color[1] }}">
-</div>
-<div class="brand-token-info">
-<strong>{{ color[0] }}</strong>
-<code>{{ color[1] }}</code>
-</div>
-</div>{% endfor %}</div>
-<div class="brand-rules">
-<p>
-<strong>A dark-first balance.</strong>Let dark fields dominate. Reserve gold for a few meaningful moments in each composition.</p>
-<p>
-<strong>Clarity comes first.</strong>Use navy text on saffron buttons. Keep body copy warm white or muted slate on dark surfaces.</p>
-</div>
-</div>
-</section>
-<section class="brand-chapter reveal">
-<div>
-<p class="eyebrow">03 / OUR TYPE</p>
-<h2>A little character.<br>A lot of clarity.</h2>
-<p class="brand-chapter-description">Generous headlines, readable paragraphs, and small technical details. Three roles, each with a purpose.</p>
-</div>
-<div>
-<div class="font-specimen">
-<p class="micro">SORA / THE BIG IDEAS</p>
-<h3>Built from curiosity.</h3>
-<p>Rounded geometry for headlines. Confident scale, considered spacing, and room to breathe.</p>
-</div>
-<div class="font-specimen font-specimen--body">
-<p class="micro">MANROPE / THE CONVERSATION</p>
-<h3>Make a little room.</h3>
-<p>Clear, warm, and easy to spend time with. Our everyday voice for descriptions, navigation, and supporting copy.</p>
-</div>
-<div class="font-specimen font-specimen--mono">
-<p class="micro">SYSTEM MONO / THE SMALL DETAILS</p>
-<h3>01 — ALWAYS EXPLORING</h3>
-<p>Labels, code, and small points of orientation. Used sparingly.</p>
-</div>
-</div>
-</section>
-<section class="brand-chapter reveal">
-<div>
-<p class="eyebrow">04 / OUR MOVEMENT</p>
-<h2>A gentle sense<br>of possibility.</h2>
-<p class="brand-chapter-description">Objects drift. Details respond. Content arrives with care. Motion should support the experience and always respect a preference for less.</p>
-</div>
-<div>
-<div class="motion-specimens">
-<div class="motion-specimen">
-<span class="circle-arrow">{{ <ui.icon name="diagonal" /> }}</span>
-<h3>Respond with purpose.</h3>
-<p>Small movements acknowledge a hover or focus. Interactions respond in 180–320 ms.</p>
-</div>
-<div class="motion-specimen">
-<span class="tiny-orbit">
-</span>
-<h3>Give ideas some space.</h3>
-<p>Ambient forms drift over 10–18 seconds. The pause control and reduced-motion preference keep it optional.</p>
-</div>
-</div>
-<div class="brand-rules">
-<p>
-<strong>Let people set the pace.</strong>Keep scrolling natural. Pause background motion. Avoid flashing, forced transitions, and autoplay video.</p>
-<p>
-<strong>Make every path usable.</strong>Visible keyboard focus, clear labels, generous targets, and layouts that work on small screens.</p>
-</div>
-</div>
-</section>
-<section class="brand-chapter reveal">
-<div>
-<p class="eyebrow">05 / OUR VOICE</p>
-<h2>Curious.<br>Considered. Human.</h2>
-<p class="brand-chapter-description">Speak like the people making the thing. Say what it does, why it matters, and where it stands.</p>
-</div>
-<ul class="brand-list">
-<li>{{ <ui.icon name="check" /> }}Use plain words and concrete descriptions. Let the product bring the personality.</li>
-<li>{{ <ui.icon name="check" /> }}Be playful where it fits. Be clear where someone needs to make a decision.</li>
-<li>{{ <ui.icon name="check" /> }}Make release status and license terms easy to find. A preview should feel like a preview.</li>
-<li>{{ <ui.icon name="check" /> }}Respect each product's identity. Astro90 is the signature that connects the worlds.</li>
-</ul>
-</section>
-{{ <ui.next_chapter title="See the identity in its element." path="/" /> }}
+  <section class="brand-chapter"><div><p class="eyebrow">Signature</p><h2>The wordmark<br>and the “a.”</h2><p class="brand-chapter-description">The selected Studio Wordmark is the master signature. Its first letter becomes the compact mark and the studio's 3D object.</p></div><div><div class="brand-logo-stage brand-logo-pair">{{ <ui.wordmark /> }}<img class="brand-monogram" src="{{ get_url(path='brand/monogram.svg') }}" width="74" height="74" alt="Boxed Astro90 a"></div><div class="brand-rules"><p><strong>Keep the shape.</strong>Use the supplied artwork. Preserve the proportions and letter spacing. Leave at least half the wordmark's height clear around it.</p><p><strong>Adapt to the space.</strong>Use the full signature on desktop. At 650 px and below, the header uses only the boxed “a,” with a minimum 44 px touch target.</p></div></div></section>
+  <section class="brand-chapter"><div><p class="eyebrow">Color</p><h2>Midnight<br>and saffron.</h2><p class="brand-chapter-description">Dark surfaces form the canvas. Golden yellow identifies Astro90, primary actions and active paths. Product artwork retains its own palette.</p></div><div><div class="brand-token-grid">{% for color in [["Midnight","#090E17"],["Studio navy","#1E293B"],["Saffron","#F4C84C"],["Warm white","#F0F1EE"]] %}<div class="brand-token"><div class="brand-swatch" style="background:{{ color[1] }}"></div><div class="brand-token-info"><strong>{{ color[0] }}</strong><code>{{ color[1] }}</code></div></div>{% endfor %}</div><div class="brand-rules"><p><strong>Control the accent.</strong>Reserve saffron for the signature and a few points of emphasis. Avoid large gold panels behind ordinary content.</p><p><strong>Protect readability.</strong>Set dark text on saffron. Use warm white for headings and slate for body text on the dark canvas.</p></div></div></section>
+  <section class="brand-chapter"><div><p class="eyebrow">Typography</p><h2>Scale carries<br>the hierarchy.</h2><p class="brand-chapter-description">Sora gives the studio its rounded geometry. Manrope handles paragraphs and navigation. Monospace belongs to code and technical values.</p></div><div><div class="font-specimen"><p class="micro">Sora · Display</p><h3>Built from curiosity.</h3><p>Large, closely spaced headlines. Weight 450–550. One clear idea per composition.</p></div><div class="font-specimen font-specimen--body"><p class="micro">Manrope · Body</p><h3>Explore the work.</h3><p>Readable descriptions and direct navigation. Comfortable line lengths and generous line spacing.</p></div><div class="font-specimen font-specimen--mono"><p class="micro">System mono · Code</p><h3>cargo install ktesio</h3><p>Use technical type where it conveys technical information.</p></div></div></section>
+  <section class="brand-chapter"><div><p class="eyebrow">Form and movement</p><h2>The visitor<br>sets the pace.</h2><p class="brand-chapter-description">The physical “a” gives depth a recognizable source. The project index connects five products to the same studio through right-angle paths.</p></div><div><div class="motion-specimens"><div class="motion-specimen"><img src="{{ get_url(path='brand/monogram.svg') }}" alt="" width="44" height="44"><h3>Pointer → perspective</h3><p>The letter turns and its light moves with the pointer. Project previews respond to hover and keyboard focus.</p></div><div class="motion-specimen">{{ <ui.icon name="down" /> }}<h3>Scroll → composition</h3><p>Scrolling changes camera distance, image framing and the arrangement of product screens. Scenes stay still when input stops.</p></div></div><div class="brand-rules"><p><strong>Keep scrolling native.</strong>Use sticky stages and visible links. Never intercept the wheel, hide the cursor or require visitors to finish an animation.</p><p><strong>Offer a quieter view.</strong>Honor reduced motion and provide a manual control. The Blender poster replaces WebGL and the extra scroll distance is removed.</p></div></div></section>
+  <section class="brand-chapter"><div><p class="eyebrow">Voice</p><h2>Let the work<br>do the talking.</h2><p class="brand-chapter-description">Say what a product does and where it stands. The imagery supplies the atmosphere.</p></div><ul class="brand-list"><li>{{ <ui.icon name="check" /> }}Use concrete descriptions: coastal logic puzzles, personal AI agents, token budgets.</li><li>{{ <ui.icon name="check" /> }}Give each heading a job. Avoid stacked slogans, decorative chips and repeated subtitles.</li><li>{{ <ui.icon name="check" /> }}State development status and license terms. Label interface studies and previews.</li><li>{{ <ui.icon name="check" /> }}Keep each product recognizable. Astro90 is the shared signature.</li></ul></section>
+  {{ <ui.next_chapter title="See the identity in use." path="/" /> }}
 </div>
 {% endblock %}
