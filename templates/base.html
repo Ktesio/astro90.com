@@ -4,7 +4,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#0B101A">
+<meta name="theme-color" content="#090E17">
 {% if page is defined %}
 {% set meta_title=page.title ~ " — Astro90" %}
 {% set meta_description=page.description | default(value=config.description) %}
@@ -28,6 +28,7 @@
 <link rel="stylesheet" href="{{ get_url(path='site.css', cachebust=true) }}">
 <script src="{{ get_url(path='js/site.js', cachebust=true) }}" defer>
 </script>
+<script src="{{ get_url(path='js/feedback.js', cachebust=true) }}" defer></script>
 <noscript>
 <style>[data-index-open],[data-motion-toggle]{display:none!important}.no-script-nav{display:flex!important}</style>
 </noscript>
@@ -50,7 +51,7 @@
 <a class="brand" href="{{ get_url(path='/') }}" aria-label="Astro90 home">{{ <ui.wordmark /> }}<img class="brand-monogram" src="{{ get_url(path='brand/monogram.svg') }}" alt="" width="48" height="48"></a>
 <button class="index-trigger" type="button" aria-haspopup="dialog" aria-controls="project-index" data-index-open><span>Index</span><span class="index-glyph" aria-hidden="true"><i></i><i></i><i></i><i></i></span></button>
 </div>
-<nav class="no-script-nav" aria-label="Main navigation"><a href="{{ get_url(path='games/') }}">Games</a><a href="{{ get_url(path='apps/') }}">Apps</a><a href="{{ get_url(path='open-source/') }}">Code</a><a href="{{ get_url(path='studio/') }}">Studio</a></nav>
+<nav class="no-script-nav" aria-label="Main navigation"><a href="{{ get_url(path='games/') }}">Games</a><a href="{{ get_url(path='apps/') }}">Apps</a><a href="{{ get_url(path='open-source/') }}">Code</a><a href="{{ get_url(path='about/') }}">About</a><a href="{{ get_url(path='contact/') }}">Contact</a></nav>
 </header>
 <main id="main">{% block content %}
 {% endblock content %}</main>
@@ -62,8 +63,10 @@
 <a href="{{ get_url(path='games/') }}">Games</a>
 <a href="{{ get_url(path='apps/') }}">Apps</a>
 <a href="{{ get_url(path='open-source/') }}">Open source</a>
-<a href="{{ get_url(path='studio/') }}">Studio</a>
+<a href="{{ get_url(path='about/') }}">About</a>
+<a href="{{ get_url(path='contact/') }}">Contact</a>
 <a href="{{ get_url(path='brand/') }}">Brand</a>
+<a href="{{ get_url(path='accessibility/') }}">Accessibility</a>
 <a href="https://github.com/iMagdy">GitHub{{ <ui.icon name="diagonal" /> }}</a>
 </div>
 </div>
@@ -78,9 +81,14 @@
 <dialog class="gallery-dialog" aria-labelledby="gallery-title">
 <div class="gallery-dialog-bar">
 <p id="gallery-title">A closer look</p>
-<button type="button" data-gallery-close aria-label="Close screenshot">{{ <ui.icon name="close" /> }}</button>
+<a class="gallery-original" data-gallery-original target="_blank" rel="noopener" hidden>Open image{{ <ui.icon name="diagonal" /> }}</a>
+<button type="button" data-gallery-close aria-label="Close screenshot" autofocus>{{ <ui.icon name="close" /> }}</button>
 </div>
-<img alt="" class="gallery-large">
+<div class="gallery-media media-frame" data-gallery-media>
+<img alt="" class="gallery-large" data-media-image width="1206" height="2622">
+{{ <ui.media_status /> }}
+</div>
+<div class="gallery-dialog-nav"><button class="quiet-button" type="button" data-gallery-prev aria-label="Previous screenshot">{{ <ui.icon name="arrow" class="reverse-arrow" /> }}<span>Previous</span></button><p data-gallery-count aria-live="polite"></p><button class="quiet-button" type="button" data-gallery-next aria-label="Next screenshot"><span>Next</span>{{ <ui.icon name="arrow" /> }}</button></div>
 </dialog>
 </body>
 </html>

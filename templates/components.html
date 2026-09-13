@@ -1,4 +1,4 @@
-{% component ui.icon(name, class="") %}<svg class="icon {{ class }}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">{% if name == "arrow" %}<path d="M5 12h14M13 6l6 6-6 6"/>{% elif name == "diagonal" %}<path d="M6 18 18 6M6 6h12v12"/>{% elif name == "down" %}<path d="M12 4v16m-6-6 6 6 6-6"/>{% elif name == "play" %}<path d="m9 5 11 7-11 7V5Z"/>{% elif name == "pause" %}<path d="M8 5v14M16 5v14"/>{% elif name == "plus" %}<path d="M12 5v14M5 12h14"/>{% elif name == "close" %}<path d="m6 6 12 12M6 18 18 6"/>{% elif name == "menu" %}<path d="M4 8h16M4 16h16"/>{% elif name == "phone" %}<rect x="6" y="2" width="12" height="20" rx="3"/>
+{% component ui.icon(name, class="") %}<svg class="icon {{ class }}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">{% if name == "arrow" %}<path d="M5 12h14M13 6l6 6-6 6"/>{% elif name == "diagonal" %}<path d="M6 18 18 6M6 6h12v12"/>{% elif name == "down" %}<path d="M12 4v16m-6-6 6 6 6-6"/>{% elif name == "copy" %}<rect x="8" y="8" width="12" height="12" rx="2"/><path d="M16 8V4H4v12h4"/>{% elif name == "retry" %}<path d="M20 7v5h-5M4 17a8 8 0 1 0 1-11"/>{% elif name == "play" %}<path d="m9 5 11 7-11 7V5Z"/>{% elif name == "pause" %}<path d="M8 5v14M16 5v14"/>{% elif name == "plus" %}<path d="M12 5v14M5 12h14"/>{% elif name == "close" %}<path d="m6 6 12 12M6 18 18 6"/>{% elif name == "menu" %}<path d="M4 8h16M4 16h16"/>{% elif name == "phone" %}<rect x="6" y="2" width="12" height="20" rx="3"/>
 <path d="M10 18h4"/>{% elif name == "code" %}<path d="m8 6-6 6 6 6m8-12 6 6-6 6m-3-15-2 18"/>{% elif name == "grid" %}<rect x="3" y="3" width="7" height="7" rx="1.6"/>
 <rect x="14" y="3" width="7" height="7" rx="1.6"/>
 <rect x="3" y="14" width="7" height="7" rx="1.6"/>
@@ -142,9 +142,9 @@
 
 {% component ui.card(project) %}
 <article class="project-card project-card--{{ project.id }} reveal" style="--project-accent:{{ project.accent }}">
-<a class="project-art" href="{{ get_url(path=project.url) }}" aria-label="Explore {{ project.title }}">
+<a class="project-art" href="{{ get_url(path=project.url) }}" aria-label="Explore {{ project.title }}"{% if project.kind == "games" %} data-media{% endif %}>
 {% if project.id == "lighthouse" %}
-<img class="coast-art" src="{{ get_url(path='media/lighthouse-coast.webp') }}" alt="Lighthouse's illustrated islands at dusk, surrounded by deep blue sea" width="1024" height="1536" loading="lazy">
+<img data-media-image class="coast-art" src="{{ get_url(path='media/lighthouse-coast.webp') }}" alt="Lighthouse's illustrated islands at dusk, surrounded by deep blue sea" width="1024" height="1536" loading="lazy">
 <div class="coast-light" aria-hidden="true">
 </div>
 <span class="art-name art-name--lighthouse">Lighthouse
@@ -161,13 +161,14 @@
 <span class="art-name art-name--inkube">inkube
 </span>
 <div class="mini-phone">
-<img src="{{ get_url(path='media/inkube-game.webp') }}" alt="Inkube game screen with colorful merging ink blots" width="1170" height="2532" loading="lazy">
+<img data-media-image src="{{ get_url(path='media/inkube-game.webp') }}" alt="Inkube game screen with colorful merging ink blots" width="395" height="860" loading="lazy">
 </div>
 {% elif project.kind == "apps" %}
 {{ <ui.app_visual id={project.id} /> }}
 {% else %}
 {{ <ui.terminal /> }}
 {% endif %}
+{% if project.kind == "games" %}{{ <ui.media_status retry={false} /> }}{% endif %}
 <span class="art-link" aria-hidden="true">{{ <ui.icon name="diagonal" /> }}</span>
 </a>
 <div class="project-info">
@@ -194,3 +195,7 @@
 <span class="circle-arrow">{{ <ui.icon name="diagonal" /> }}</span>
 </a>
 {% endcomponent %}
+
+{% component ui.media_status(retry=true) %}<div class="media-status" data-media-status hidden><span class="media-trace" aria-hidden="true"><i></i><i></i><i></i><i></i></span><p data-media-label role="status" aria-live="polite">Loading preview…</p>{% if retry %}<button class="quiet-button" type="button" data-media-retry hidden>{{ <ui.icon name="retry" /> }}<span>Try again</span></button>{% endif %}</div>{% endcomponent %}
+
+{% component ui.empty_state(title="Nothing here yet.", description="We’ll add projects here as we share more of our work.", nested=false) %}<div class="empty-state"><span class="empty-mark" aria-hidden="true">{{ <ui.icon name="grid" /> }}</span>{% if nested %}<h3>{{ title }}</h3>{% else %}<h2>{{ title }}</h2>{% endif %}<p>{{ description }}</p><a class="world-link" href="{{ get_url(path='about/') }}">Meet the studio{{ <ui.icon name="diagonal" /> }}</a></div>{% endcomponent %}

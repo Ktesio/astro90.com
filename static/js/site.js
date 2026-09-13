@@ -335,37 +335,4 @@
     });
   }
 
-  const gallery = document.querySelector(".gallery-dialog");
-  if (gallery && typeof gallery.showModal === "function") {
-    const image = gallery.querySelector(".gallery-large");
-    const title = gallery.querySelector("#gallery-title");
-    let opener;
-    document.querySelectorAll("[data-gallery-src]").forEach((button) => {
-      button.addEventListener("click", () => {
-        opener = button;
-        image.src = button.dataset.gallerySrc;
-        image.alt = button.querySelector("img").alt;
-        title.textContent = button.dataset.galleryTitle;
-        gallery.showModal();
-        gallery.scrollTop = 0;
-      });
-    });
-    gallery
-      .querySelector("[data-gallery-close]")
-      .addEventListener("click", () => gallery.close());
-    gallery.addEventListener("click", (event) => {
-      if (event.target !== gallery) return;
-      const bounds = gallery.getBoundingClientRect();
-      if (
-        event.clientX < bounds.left ||
-        event.clientX > bounds.right ||
-        event.clientY < bounds.top ||
-        event.clientY > bounds.bottom
-      )
-        gallery.close();
-    });
-    gallery.addEventListener("close", () =>
-      opener?.focus({ preventScroll: true }),
-    );
-  }
 })();

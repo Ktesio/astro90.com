@@ -10,5 +10,5 @@ run = "zola build"
 description = "Build the static website"
 
 [tasks.check]
-run = "zola check --skip-external-links && zola build && python3 scripts/check_site.py"
+run = "zola check --skip-external-links && zola build --output-dir .local/check-public --force && python3 scripts/check_site.py .local/check-public"
 description = "Check templates, content, and generated routes"

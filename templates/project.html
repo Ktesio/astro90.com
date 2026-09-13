@@ -29,10 +29,11 @@
 </div>{% if project.id == "lighthouse" %}<img class="detail-coast" src="{{ get_url(path='media/lighthouse-coast.webp') }}" alt="" aria-hidden="true" width="1024" height="1536">{% else %}<div class="ink-blob ink-blob--one" aria-hidden="true">
 </div>
 <div class="ink-blob ink-blob--two" aria-hidden="true">
-</div>{% endif %}<div class="hero-phone">
+</div>{% endif %}<div class="hero-phone media-frame" data-media>
 <span class="phone-camera" aria-hidden="true">
 </span>
-<img src="{{ get_url(path='media/' ~ project.hero) }}" alt="{{ project.title }} home screen preview" width="1206" height="2622" fetchpriority="high">
+<img data-media-image src="{{ get_url(path='media/' ~ project.hero) }}" alt="{{ project.title }} home screen preview" width="{{ project.screen_width }}" height="{{ project.screen_height }}" fetchpriority="high">
+{{ <ui.media_status /> }}
 </div>
 <span class="preview-label">A LOOK INSIDE / {{ project.platform }}</span>{% elif project.kind == "apps" %}{{ <ui.app_visual id={project.id} /> }}{% else %}{{ <ui.terminal /> }}{% endif %}</div>
 </div>
@@ -73,10 +74,12 @@
 </div>
 <p class="section-heading-aside">Select a screen to enlarge.</p>
 </div>
-<div class="screenshot-gallery">{% for shot in project.screenshots %}<button class="screenshot reveal" type="button" data-gallery-src="{{ get_url(path='media/' ~ shot) }}" data-gallery-title="{{ project.title }} — screen {{ loop.index }}" aria-label="Enlarge {{ project.title }} screen {{ loop.index }}">
-<img src="{{ get_url(path='media/' ~ shot) }}" width="1206" height="2622" loading="lazy" alt="{{ project.title }} {% if loop.index == 1 %}home screen{% elif loop.index == 2 %}world and gameplay view{% else %}gameplay preview{% endif %}">
+{% if project.screenshots | length > 0 %}
+<div class="screenshot-gallery">{% for shot in project.screenshots %}<div class="screenshot-item media-frame" data-media><a class="screenshot reveal" href="{{ get_url(path='media/' ~ shot) }}" data-gallery-src="{{ get_url(path='media/' ~ shot) }}" data-gallery-title="{{ project.title }} — screen {{ loop.index }}" aria-label="Enlarge {{ project.title }} screen {{ loop.index }}">
+<img data-media-image src="{{ get_url(path='media/' ~ shot) }}" width="{{ project.screen_width }}" height="{{ project.screen_height }}" loading="lazy" alt="{{ project.title }} {% if loop.index == 1 %}home screen{% elif loop.index == 2 %}world and gameplay view{% else %}gameplay preview{% endif %}">
 <span>{{ <ui.icon name="plus" /> }}</span>
-</button>{% endfor %}</div>
+</a>{{ <ui.media_status /> }}</div>{% endfor %}</div>
+{% else %}{{ <ui.empty_state title="More to show soon." description="We’re still preparing screenshots for this project." nested={true} /> }}{% endif %}
 <p class="gallery-note">Development screenshots.</p>
 </div>
 </section>{% endif %}

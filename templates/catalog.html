@@ -1,6 +1,8 @@
 {% extends "base.html" %}
 {% block content %}
 {% set catalog=load_data(path="data/projects.toml") %}
+{% set_global project_count=0 %}
+{% for project in catalog.projects %}{% if project.kind == section.extra.kind %}{% set_global project_count=project_count + 1 %}{% endif %}{% endfor %}
 <section class="page-intro container">
 <h1 class="reveal">{{ section.title }} <em>{{ section.extra.title_accent }}</em>
 </h1>
@@ -11,11 +13,9 @@
 <section class="container catalog-section">
 <div class="catalog-bar">
 <span>{{ section.extra.label }}</span>
-<span class="micro">{{ section.extra.count }} {% if section.extra.kind == "code" %}project{% else %}projects{% endif %}</span>
+<span class="micro">{{ project_count }} {% if project_count == 1 %}project{% else %}projects{% endif %}</span>
 </div>
-<div class="project-grid">{% for project in catalog.projects %}
-{% if project.kind == section.extra.kind %}{{ <ui.card project={project} /> }}{% endif %}
-{% endfor %}</div>
+{% if project_count > 0 %}<div class="project-grid">{% for project in catalog.projects %}{% if project.kind == section.extra.kind %}{{ <ui.card project={project} /> }}{% endif %}{% endfor %}</div>{% else %}{{ <ui.empty_state /> }}{% endif %}
 {% if section.extra.kind == "code" %}<div class="repository-list reveal">
 <div>
 <h2>More on<br>GitHub.</h2>

@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="page-intro container"><a class="breadcrumb" href="{{ get_url(path='brand/') }}">{{ <ui.icon name="arrow" class="reverse-arrow" /> }}The identity</a><h1>Interface<br><em>states.</em></h1><div class="page-intro-bottom"><p>Interface states for the Astro90 website. These examples show what visitors see while waiting, when a preview fails, and before a collection has work to show.</p></div></section>
+<section class="state-specimens container" aria-label="Interface state examples">
+  <article class="state-specimen"><div><h2>Loading</h2><p>Keep the image’s space and show a quiet trace while it loads. Text and navigation stay available.</p></div><div class="state-canvas" data-media-state="pending"><div class="media-status"><span class="media-trace" aria-hidden="true"><i></i><i></i><i></i><i></i></span><p>Loading preview…</p></div></div></article>
+  <article class="state-specimen"><div><h2>Unavailable</h2><p>Explain what failed in the image area. Offer a retry there; don’t cover the rest of the page.</p></div><div class="state-canvas" data-media-state="error"><div class="media-status"><span class="media-trace" aria-hidden="true"><i></i><i></i><i></i><i></i></span><p>Preview unavailable.</p><span class="quiet-button state-control" aria-hidden="true">{{ <ui.icon name="retry" /> }}Try again</span></div></div></article>
+  <article class="state-specimen"><div><h2>Empty</h2><p>Say what belongs here and give the visitor somewhere useful to go.</p></div>{{ <ui.empty_state nested={true} /> }}</article>
+  <article class="state-specimen"><div><h2>Confirmation</h2><p>Confirm the action beside its control. Reserve success messages for completed actions.</p></div><div class="state-confirmation">{{ <ui.icon name="check" /> }}<p>Email address copied.</p><a class="text-link" href="{{ get_url(path='contact/') }}">Try it on Contact{{ <ui.icon name="diagonal" /> }}</a></div></article>
+  <article class="state-specimen"><div><h2>Not yet available</h2><p>Keep release status beside a disabled action. Activate it only when a verified destination is ready.</p></div><div class="state-release"><button class="button button--preview" type="button" disabled><span>Launch Heronis</span>{{ <ui.icon name="diagonal" /> }}</button><p>In development · Release details coming soon</p></div></article>
+</section>
+<div class="container">{{ <ui.next_chapter title="The page not found view." path="404.html" /> }}</div>
+{% endblock %}

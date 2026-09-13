@@ -8,7 +8,7 @@ import tomllib
 from urllib.parse import unquote, urljoin, urlsplit
 
 ROOT = Path(__file__).resolve().parents[1]
-PUBLIC = ROOT / "public"
+PUBLIC = (ROOT / (sys.argv[1] if len(sys.argv) > 1 else "public")).resolve()
 CONFIG = tomllib.loads((ROOT / "zola.toml").read_text())
 ORIGIN = urlsplit(CONFIG["base_url"])
 INTERNAL_HOSTS = {ORIGIN.hostname, "127.0.0.1", "localhost"}
@@ -17,8 +17,10 @@ EXPECTED = {
     "index.html", "404.html", "games/index.html", "games/lighthouse/index.html",
     "games/inkube/index.html", "apps/index.html", "apps/heronis/index.html",
     "apps/yanando/index.html", "open-source/index.html", "open-source/ktesio/index.html",
-    "studio/index.html", "brand/index.html",
+    "studio/index.html", "about/index.html", "contact/index.html",
+    "accessibility/index.html", "brand/index.html", "brand/states/index.html",
 }
+REDIRECTS = {"studio/index.html": "about/index.html"}
 
 
 class Document(HTMLParser):
@@ -33,6 +35,7 @@ class Document(HTMLParser):
         self.title = ""
         self.description = ""
         self.canonical = ""
+        self.redirect = ""
         self.feed(path.read_text())
 
     def handle_starttag(self, tag, attrs):
@@ -47,6 +50,10 @@ class Document(HTMLParser):
             self.in_title = True
         if tag == "meta" and attrs.get("name") == "description":
             self.description = attrs.get("content", "")
+        if tag == "meta" and attrs.get("http-equiv", "").lower() == "refresh":
+            match = re.search(r"url=(.+)$", attrs.get("content", ""), re.I)
+            if match:
+                self.redirect = match[1].strip()
         if tag == "link" and attrs.get("rel") == "canonical":
             self.canonical = attrs.get("href", "")
         if tag == "img" and "alt" not in attrs:
@@ -99,6 +106,13 @@ titles = Counter()
 references = 0
 for path, doc in documents.items():
     relative = path.relative_to(PUBLIC)
+    if relative.as_posix() in REDIRECTS:
+        target, _ = resolve_reference(doc.redirect, path) if doc.redirect else (None, "")
+        expected_target = PUBLIC / REDIRECTS[relative.as_posix()]
+        if target != expected_target or doc.redirect not in doc.refs:
+            ERRORS.append(f"{relative}: expected a redirect and fallback link to {expected_target.relative_to(PUBLIC)}")
+        references += len(doc.refs)
+        continue
     if doc.h1 != 1 or doc.main != 1:
         ERRORS.append(f"{relative}: expected one h1 and one main, got {doc.h1}/{doc.main}")
     if not doc.title.strip() or not doc.description.strip():

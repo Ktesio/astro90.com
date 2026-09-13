@@ -12,6 +12,7 @@ smart_punctuation = true
 
 [extra]
 site_name = "Astro90"
+email = "hello@astro90.com"
 accent = "#F4C84C"
 github = "https://github.com/iMagdy/astro90.com"
 preview = true

@@ -1,6 +1,6 @@
 # Astro90 website system
 
-The executable styles are `sass/site.scss` and its imported `sass/_spatial.scss` and `sass/_night.scss`. Tera 2 components live in `templates/components.html`; `templates/atlas.html` provides the global project index.
+The executable styles are `sass/site.scss` and its imported `sass/_spatial.scss`, `sass/_night.scss` and `sass/_completion.scss`. Tera 2 components live in `templates/components.html`; `templates/atlas.html` provides the global project index.
 
 ## Foundations
 
@@ -25,7 +25,7 @@ Display typography is fluid and closely spaced. The desktop home headline scales
 - App previews are layered planes. Their captions remain real links and the illustrations are labeled interface studies.
 - Collections use staggered columns on desktop and a single column on mobile.
 - Detail pages preserve the product's own artwork, release state, features and screenshots.
-- The homepage uses a full-bleed painting, responsive crops and a light anchored to the painted lantern. The studio page retains the Blender construction, followed by concrete descriptions of the work.
+- The homepage uses a full-bleed painting, responsive crops and a light anchored to the painted lantern. About uses a wide crop of the same coast between the introduction and project disciplines. Contact puts the public email in the first view. The 404 reuses the coast with a readable recovery area.
 - The only intentional horizontal scroller is the mobile screenshot gallery.
 
 At 650 px and below, the header and footer show only the boxed a. The index becomes a large project list and its utility links wrap. Short landscape viewports use compressed scenes. Reduced motion removes the extra scroll distance entirely.
@@ -40,7 +40,7 @@ The screenshot viewer is a separate native dialog. Closing it restores focus to 
 
 The homepage uses a static 1643 × 957 painting with a smaller 960 px delivery. CSS object-fit fills the stage; responsive horizontal focus keeps the lighthouse in frame. The image loads at high priority and has intrinsic dimensions. A separate blurred light cone pivots around the painted lantern. The shared scheduler damps its response to pointer input, while touch scrolling guides it toward the water. A tap on the landscape can also aim it. No idle timeline, startup sequence or hidden content is involved.
 
-The studio-page brand entrance is an authored Blender render. Its physical filaments trace the logo and join into the solid object over 3.2 seconds. Camera and object scale stay fixed throughout. `static/js/site.js` inserts the transparent animated WebP once when full motion is enabled. The encoded repeat count is one; there is no idle loop and scrolling cannot restart it. The page remains usable during the entrance. After playback, the animation is replaced by the identically framed higher-resolution still and its decoded frames can be released.
+The earlier Blender construction is retained as an identity study. No current page requests the animated WebP. If it is used again, retain its fixed scale, 3.2-second single play and finished still for reduced motion; it must never gate the page.
 
 For product scenes, `static/js/site.js` owns one requestAnimationFrame scheduler. Scroll and pointer events update targets; 85 ms damping lets depth effects settle. Frames stop when targets settle, and hidden documents cancel the pending frame.
 
@@ -50,9 +50,9 @@ The landscape begins handing off after 25 svh of scrolling on desktop or 20 svh 
 
 ## Fallbacks and accessibility
 
-System reduced motion takes precedence over the session preference. The manual control appears in the index and footer. Reduced mode removes the landscape's light overlays, retains the full painting, removes spatial transforms and collapses scene heights and overlaps. On the studio page it removes the animated image and shows the completed Blender still. Returning to full motion on the same page does not replay an entrance that already started. Storage failure is harmless.
+System reduced motion takes precedence over the session preference. The manual control appears in the index and footer. Reduced mode removes the landscape's light overlays, retains the full painting, removes spatial transforms and collapses scene heights and overlaps. Storage failure is harmless.
 
-Without JavaScript, the landscape, studio poster, all page content and a simple navigation fallback remain available; long scenes become normal sections. A failed studio animation image request restores the still.
+Without JavaScript, the landscape, all page content and a simple navigation fallback remain available; long scenes become normal sections. Screenshot anchors open their image directly.
 
 Maintain one h1 and one main landmark per page, unique metadata, descriptive links, visible keyboard focus, image alternatives and 44 px action targets. Never require hover, color or motion to understand a product. Do not add loading gates, audio or repeating autoplay media. The finite brand entrance never blocks content or navigation. Recheck WCAG AA contrast for new combinations.
 
@@ -60,4 +60,22 @@ Maintain one h1 and one main landmark per page, unique metadata, descriptive lin
 
 `data/projects.toml` holds product facts. Detail Markdown selects a project and supplies editorial headings. Verify any new store destination before activating a release control. Source availability and open-source licensing must remain distinct.
 
-Run `mise run check` and `node --check static/js/site.js`. When the Blender scene changes, render and encode it again. The encoder checks every frame for a clear margin, the 3.2-second duration and single repeat count. Inspect desktop, tablet, phone and short landscape sizes. Exercise the index, focus restoration, galleries and motion control. Check actual changing transforms while scrolling, rather than relying solely on still images. Keep a factual record in `docs/VALIDATION.md`.
+Run `mise run check`, `node --check static/js/site.js` and `node --check static/js/feedback.js`. When the Blender scene changes, render and encode it again. The encoder checks every frame for a clear margin, the 3.2-second duration and single repeat count. Inspect desktop, tablet, phone and short landscape sizes. Exercise the index, focus restoration, galleries and motion control. Check actual changing transforms while scrolling, rather than relying solely on still images. Keep a factual record in `docs/VALIDATION.md`.
+
+
+## Image and action states
+
+`static/js/feedback.js` enhances `[data-media]` wrappers through `ui.media_status`. Preserve intrinsic image dimensions or an explicit aspect ratio. The viewer has a fixed image area so pending, error and loaded states do not move its controls.
+
+- **Pending:** four small outlined squares echo the index, with one saffron square. Only real pending requests animate. An image can render as soon as its load event fires; there is no minimum delay or page-wide loading overlay.
+- **Ready:** show the loaded image with a 240 ms fade. Cached images do not wait for an artificial entrance.
+- **Unavailable:** show “Preview unavailable.” and a 44 px retry control. A visible request that takes 20 seconds offers retry with different wording; a late successful response can still recover. Retry adds a cache-busting query only to the chosen image.
+- **Outside the viewport:** lazy images have no timeout until their frame approaches the viewport. Changing gallery selection replaces the pending image request and timeout. Closing the viewer clears its timer, releases its image source and restores focus.
+- **Empty:** `ui.empty_state` explains that projects or screenshots have not been shared yet and links to About. Collection totals derive from current catalog entries.
+- **Copying / copied / failed:** Contact confirms a successful clipboard write beside its button. A rejected write explains how to select the address or use the email link. The public address remains visible throughout.
+
+All state changes use text, rather than color alone. Loading traces and fades honor both system and manual reduced motion. The public `/brand/states/` page contains labeled static specimens; its retry appearance is an illustration, while its Contact link leads to the actual copy control.
+
+## Routes and recovery
+
+The Index and footer expose About and Contact. Accessibility is in the footer and includes a motion control using the shared session preference. `/studio/` redirects to `/about/` with a no-script fallback; the route audit verifies that target. `/404.html` includes a home action and links to the collections and Contact. Configure the eventual static host to serve it with HTTP 404 for missing paths. Email is a standard `mailto:` link, never a fake form or invented success screen.

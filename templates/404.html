@@ -1,8 +1,12 @@
 {% extends "base.html" %}
 {% block title %}Page not found — Astro90{% endblock title %}
 {% block head %}<meta name="robots" content="noindex">{% endblock head %}
-{% block content %}<section class="not-found container">
-<img src="{{ get_url(path='brand/monogram.svg') }}" width="64" height="64" alt="">
-<p class="eyebrow">404</p>
-<h1>Page<br>not found.</h1>
-<p>The address may have changed.</p>{{ <ui.button label="Back to the studio" path="/" /> }}</section>{% endblock %}
+{% block body_class %} class="error-page"{% endblock body_class %}
+{% block content %}
+<section class="error-scene">
+  <img class="error-landscape" src="{{ get_url(path='media/night-coast-1643.webp') }}" width="1643" height="957" alt="" fetchpriority="high">
+  <div class="error-shade" aria-hidden="true"></div>
+  <div class="error-copy container"><p class="error-code">404 / Page not found</p><h1>A little<br><em>off course.</em></h1><p>We couldn’t find a page at this address.<br>Let’s get you back to the studio.</p>{{ <ui.button label="Return home" path="/" /> }}</div>
+  <nav class="error-routes container" aria-label="Find your way"><a href="{{ get_url(path='games/') }}">Games{{ <ui.icon name="diagonal" /> }}</a><a href="{{ get_url(path='apps/') }}">Apps{{ <ui.icon name="diagonal" /> }}</a><a href="{{ get_url(path='open-source/') }}">Public code{{ <ui.icon name="diagonal" /> }}</a><a href="{{ get_url(path='contact/') }}">Contact{{ <ui.icon name="diagonal" /> }}</a></nav>
+</section>
+{% endblock %}

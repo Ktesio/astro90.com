@@ -1,5 +1,7 @@
 [[projects]]
 id = "lighthouse"
+screen_width = 1206
+screen_height = 2622
 title = "Lighthouse"
 kind = "games"
 category = "Coastal logic game"
@@ -21,6 +23,8 @@ license = ""
 
 [[projects]]
 id = "inkube"
+screen_width = 395
+screen_height = 860
 title = "Inkube"
 kind = "games"
 category = "Ink-splashed puzzle game"

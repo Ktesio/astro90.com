@@ -44,7 +44,7 @@ python3 scripts/encode_identity.py
 
 Use `--preview` instead of `--render` to inspect four smaller keyframes before rendering the sequence. Frames are written into ignored `.local/identity-frames/`. On other systems, replace the executable path with `blender`; the encoder requires Pillow. These are optional authoring tools, not website build dependencies.
 
-On the studio page, `static/js/site.js` inserts the animated image once per page load when full motion is enabled. The WebP itself ends on its final frame and never loops. After playback, the browser releases the animation and shows the identically framed 960 px still. Reduced motion uses the finished still and does not request the animation. A failed image request restores the still. No browser GPU renderer or video codec is required. The homepage does not request the Blender animation.
+The Blender entrance is retained as an identity study. No current page requests it: `/studio/` now redirects to the editorial About page. Its optional `data-brand-film` enhancement remains in `static/js/site.js`, with one playback, frame release and a reduced-motion still, for a future identity demonstration. The homepage uses the painted coast.
 
 Earlier orbital studies, the first static monogram scene and the WebGL experiment remain outside `static/` as design history. The WebGL authoring package writes only to `.local/`; its Three.js license is preserved beside the archived source. It is not used or delivered by the website.
 

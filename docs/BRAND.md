@@ -67,14 +67,18 @@ Actual development screens take priority over invented mockups. Label interface 
 
 On the homepage, the lighthouse's soft beam follows pointer input across the inlet. On touch devices it responds to taps and scroll position. Keep the light attached to the painted lantern as crops change; it must settle when input stops. The first scroll carries the night coast into Lighthouse's existing game artwork through a soft overlap. Do not animate the sky or stars on an idle loop.
 
-On the studio page, the letter is constructed once on page load: traced filaments, connected depth, then one rounded metal object. Use the authored 3.2-second Blender animation. Keep its camera and scale fixed; do not zoom it with scroll. Product scenes respond to scrolling through image crops, oversized titles and device positions. Give the outgoing scene a full viewport of overlap with the incoming scene. The index previews respond equally to pointer hover and keyboard focus.
+The archived Blender identity study constructs the letter once: traced filaments, connected depth, then one rounded metal object. The authored Blender animation lasts 3.2 seconds. No current page loads it. Keep its camera and scale fixed; do not zoom it with scroll. Product scenes respond to scrolling through image crops, oversized titles and device positions. Give the outgoing scene a full viewport of overlap with the incoming scene. The index previews respond equally to pointer hover and keyboard focus.
 
 Scenes settle when input stops. There is no autonomous rotation, floating loop, top progress line, scroll hijacking, loading gate, custom cursor or forced scene completion. Normal document scrolling and direct links remain available.
 
-Honor `prefers-reduced-motion`. The manual Reduce motion control in the index and footer uses a session preference. Reduced motion removes the extra pinned scroll distance and the landscape's light overlays. On the studio page it substitutes the finished Blender still for the construction animation. All content and links remain available.
+Honor `prefers-reduced-motion`. The manual Reduce motion control in the index and footer uses a session preference. Reduced motion removes the extra pinned scroll distance and the landscape's light overlays. All content and links remain available.
 
 ## Voice
 
 Describe what the product does and where it stands. Let artwork supply atmosphere. Use concrete language such as “coastal logic puzzles,” “personal AI agents” and “token budgets.” Keep technical detail where it helps a developer decide what to inspect.
 
 Astro90 is the shared signature, while Lighthouse, Inkube, Heronis, Yanando and Ktesio retain distinct names and product identities.
+
+## Feedback
+
+Use the index’s four-square motif for pending previews. Let images load in their reserved space and keep the rest of the page available. Pair unavailable states with plain language and a retry action. A copied address earns an inline confirmation only after the copy succeeds. See `/brand/states/` for specimens.

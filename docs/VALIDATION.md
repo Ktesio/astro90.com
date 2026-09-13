@@ -1,5 +1,21 @@
 # Validation record
 
+## September 13, 2026 · Studio pages and interface states
+
+- Added About, Contact, Accessibility and a public interface-state gallery under Brand. The existing Studio route redirects to About. Contact uses the owner-confirmed `hello@astro90.com`; no email was sent and no submission service was added.
+- Rebuilt the 404 around the approved night landscape. An actual unknown local URL served the custom recovery page, including working root-relative collection and Contact destinations. The static audit verifies the Studio redirect and its no-script fallback link.
+- Production validation passed for 16 HTML documents and 736 references. Zola checks, asset and link resolution, unique metadata, document structure and JavaScript syntax passed. `mise run check` now uses an isolated generated directory so it cannot replace the running local preview with production URLs.
+- An isolated content build exercised both an empty project collection and a project with no screenshots. Both compiled their intended fallback content, and the collection displayed a zero count. Current collection counts derive from the catalog.
+- Reviewed About and Contact at 1440 × 1000 and 390 × 844; reviewed the 404 at 1440 × 1000 and 320 × 740, and Accessibility and state specimens at 320 × 740. Reviewed the game collection at 768 × 1024. The checked pages had no document-level horizontal overflow. The compact a remains the mobile header/footer signature.
+- Email copy produced its inline confirmation. The clipboard rejection path retains the public address and explains manual selection; that path was reviewed in source rather than forcing a browser permission denial.
+- The screenshot viewer supports previous/next controls, arrow keys, an original-image link and Escape. Closing restored focus to the selected thumbnail. It also fit an 812 × 450 landscape viewport after retry. Its image area remains fixed across pending, unavailable and loaded states; the reviewed phone dialog measured 771.36 px before and after retry.
+- A temporary loopback fixture delayed images and returned failed responses. The viewer and an inline phone preview showed their pending/error states and recovered through Try again. Switching to a second screenshot while the first request was pending kept the second selection and preserved the dialog height. These fixtures are local QA only and do not ship.
+- Browser review caught a lazy-image decode wait that could strand a loaded preview in its pending state. The final implementation uses native image load events and current-image dimensions. Both game collection previews then reached the ready state, including the lazy Inkube image.
+- The new Accessibility motion control updated the shared preference; navigating to the state gallery retained it and removed the loading trace animation. Full motion was restored afterward. The no-JavaScript, operating-system preference and 20-second slow-request recovery paths were reviewed in source; system media emulation and JavaScript disabling are not exposed by the browser tool.
+- About now replaces the former Studio page. Blender sources remain as an archived identity study, and no current page requests the construction animation. The approved homepage landscape and game-scene geometry are preserved.
+
+This is still a static presentation iteration. It adds no forms, accounts, store installations, analytics or backend integrations. Deployment remains a separate step; the eventual host must serve `404.html` with HTTP 404 for missing routes.
+
 ## September 13, 2026 · Illustrated night opening
 
 - Replaced the homepage Blender object with a full-bleed 1643 × 957 painted coast. The original PNG and full built-in image-generation prompt are committed under `assets/source/studio/`.
