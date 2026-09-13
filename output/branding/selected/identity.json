@@ -1,0 +1,25 @@
+{
+  "brand": "Astro90",
+  "domain": "astro90.com",
+  "description": "Development studio building games, agentic AI software, and open-source software.",
+  "wordmark": {
+    "direction": "04 \u2014 Studio Wordmark",
+    "text": "astro90",
+    "case": "lowercase",
+    "character": "Bold rounded lettering with a matching standalone a",
+    "shapeReference": "wordmark-shape-reference.png"
+  },
+  "palette": {
+    "direction": "09 \u2014 Saffron",
+    "colors": {
+      "saffron": "#F4C84C",
+      "inkNavy": "#1E293B",
+      "midnight": "#0B101A"
+    },
+    "primary": "Saffron wordmark on midnight or ink navy; dark surfaces by default",
+    "reversed": "Ink navy wordmark on saffron; occasional supporting application",
+    "colorReference": "saffron-study.png"
+  },
+  "status": "Selected identity implemented for web. Original geometry is preserved in a bitmap-backed SVG treatment; production outline vector artwork remains a separate master-artwork step.",
+  "sourceNotes": "The generated color study has small letterform variations. Use the original Studio Wordmark for the final lettering geometry and the exact hex values in this file for flat color fills."
+}

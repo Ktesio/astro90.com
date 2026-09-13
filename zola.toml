@@ -1,0 +1,17 @@
+base_url = "https://astro90.com"
+title = "Astro90 — Built from curiosity."
+description = "An independent development studio making mobile games, agentic AI software, and tools for developers."
+default_language = "en"
+compile_sass = true
+minify_html = true
+build_search_index = false
+generate_feeds = false
+
+[markdown]
+smart_punctuation = true
+
+[extra]
+site_name = "Astro90"
+accent = "#F4C84C"
+github = "https://github.com/iMagdy/astro90.com"
+preview = true

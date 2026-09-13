@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block title %}Page not found — Astro90{% endblock title %}
+{% block head %}<meta name="robots" content="noindex">{% endblock head %}
+{% block content %}<section class="not-found container">
+<div class="error-orbit" aria-hidden="true">
+<span>
+</span>
+</div>
+<p class="eyebrow">404 / A LITTLE OFF-ORBIT</p>
+<h1>A world<br>yet to be found.</h1>
+<p>This page isn't here. There's plenty more to explore.</p>{{ <ui.button label="Back to the studio" path="/" /> }}</section>{% endblock %}

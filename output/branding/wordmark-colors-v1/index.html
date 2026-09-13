@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Astro90 — Wordmark color studies</title>
+<style>
+*{box-sizing:border-box}html{color-scheme:light}body{margin:0;padding:40px;background:#f1efeb;color:#20201e;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}main{max-width:1280px;margin:auto}
+.eyebrow{font:11px/1.5 ui-monospace,monospace;letter-spacing:.09em;text-transform:uppercase;color:#666;margin:0 0 9px}h1{font-size:36px;letter-spacing:-1.3px;line-height:1.1;margin:0 0 12px;font-weight:600}.intro{font-size:14px;line-height:1.6;color:#666;margin:0 0 28px}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}article{background:#fff;border:1px solid #dedbd5}.preview{display:block;width:100%;border:0;padding:0;background:#fff;cursor:zoom-in}.preview:focus-visible{outline:3px solid #3454f5;outline-offset:-3px}.preview img{display:block;width:100%;height:auto;background:#fff}
+.caption{padding:18px 20px;border-top:1px solid #e9e6e0}h2{margin:0 0 8px;font-size:16px;font-weight:600;letter-spacing:-.25px}h2 span{font:10px/1 ui-monospace,monospace;display:inline-block;margin-right:8px;color:#777}.caption p{margin:0;font-size:13px;line-height:1.5;color:#666}.swatches{display:flex;gap:6px;margin-top:13px}.swatch{height:10px;width:28px;border:1px solid rgb(0 0 0 / .12);border-radius:2px}
+footer{margin-top:22px;font-size:11px;line-height:1.6;color:#666;display:flex;gap:20px;justify-content:space-between}footer p{margin:0;max-width:650px}footer a{color:inherit;text-underline-offset:3px}
+dialog{width:min(1400px,96vw);max-height:94vh;padding:0;border:1px solid #ddd;background:#fff;color:#111}dialog::backdrop{background:rgb(0 0 0 / .7)}.bar{display:flex;align-items:center;justify-content:space-between;padding:16px 20px;border-bottom:1px solid #eee}.bar p{margin:0;font-weight:600}.bar button{padding:8px 14px;border:1px solid #ccc;background:#fff;color:#111;border-radius:4px;cursor:pointer}#large{display:block;width:100%;background:white}
+@media(max-width:700px){body{padding:20px 16px}h1{font-size:28px}.intro{font-size:12px;margin-bottom:20px}.grid{gap:12px}.caption{padding:12px}h2{font-size:13px}.caption p{font-size:12px}.swatches{margin-top:9px}footer{display:block}footer a{display:inline-block;margin-top:9px}}@media(max-width:440px){.grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body><main>
+<header><p class="eyebrow">Astro90 / Selected direction 04</p><h1>Studio Wordmark.</h1><p class="intro">Your selected logo, with three color treatments to explore.</p></header>
+<section class="grid" aria-label="Selected wordmark and color studies">
+<article><button class="preview" data-title="Selected wordmark — shape reference" aria-label="Enlarge selected wordmark"><img src="selected-wordmark.png" alt="The original selected lowercase astro90 wordmark and standalone a icon in black and white."></button><div class="caption"><h2>Selected wordmark</h2><p>The original lettering and standalone “a” remain the reference for refinement.</p></div></article>
+<article><button class="preview" data-title="01 — Graphite" aria-label="Enlarge Graphite treatment"><img src="01-graphite.png" alt="Graphite astro90 wordmark on ivory, with a reversed wordmark and a icon on a charcoal band."></button><div class="caption"><h2><span>01</span>Graphite</h2><p>Warm neutrals. Calm and close to the original direction.</p><div class="swatches" aria-label="Intended palette: graphite and ivory"><i class="swatch" style="background:#20201e"></i><i class="swatch" style="background:#f3f0e9"></i></div></div></article>
+<article><button class="preview" data-title="02 — Cobalt" aria-label="Enlarge Cobalt treatment"><img src="02-cobalt.png" alt="Cobalt blue astro90 wordmark on pale gray, with a reversed wordmark and a icon on a blue band."></button><div class="caption"><h2><span>02</span>Cobalt</h2><p>Bright and confident, with a clear software studio feel.</p><div class="swatches" aria-label="Intended palette: cobalt and pale gray"><i class="swatch" style="background:#3454f5"></i><i class="swatch" style="background:#f5f6fa"></i></div></div></article>
+<article><button class="preview" data-title="03 — Ember" aria-label="Enlarge Ember treatment"><img src="03-ember.png" alt="Orange astro90 wordmark on cream, with a cream wordmark and an orange a icon tile on charcoal."></button><div class="caption"><h2><span>03</span>Ember</h2><p>Warm and energetic, with more of a games studio character.</p><div class="swatches" aria-label="Intended palette: orange, cream and charcoal"><i class="swatch" style="background:#ea572b"></i><i class="swatch" style="background:#f5efe6"></i><i class="swatch" style="background:#20201e"></i></div></div></article>
+</section>
+<footer><p>These generated color studies include small letterform variations. The selected original remains the shape reference for final vector artwork. Click any image to inspect it.</p><a href="prompts.json">Prompts · Built-in ImageGen</a></footer>
+</main>
+<dialog aria-labelledby="detail-title"><div class="bar"><p id="detail-title"></p><button id="close">Close</button></div><img id="large" alt=""></dialog>
+<script>
+const dialog=document.querySelector('dialog'),large=document.querySelector('#large');
+document.querySelectorAll('.preview').forEach(button=>button.addEventListener('click',()=>{const image=button.querySelector('img');large.src=image.src;large.alt=image.alt;document.querySelector('#detail-title').textContent=button.dataset.title;dialog.showModal()}));
+document.querySelector('#close').addEventListener('click',()=>dialog.close());
+</script>
+</body></html>

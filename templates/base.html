@@ -1,0 +1,104 @@
+
+<!doctype html>
+<html lang="en" data-motion="running">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0B101A">
+{% if page is defined %}
+{% set meta_title=page.title ~ " — Astro90" %}
+{% set meta_description=page.description | default(value=config.description) %}
+{% elif section is defined and section.title %}
+{% set meta_title=(section.extra.meta_title | default(value=section.title)) ~ " — Astro90" %}
+{% set meta_description=section.description | default(value=config.description) %}
+{% else %}
+{% set meta_title=config.title %}
+{% set meta_description=config.description %}
+{% endif %}
+<title>{% block title %}{{ meta_title }}{% endblock title %}</title>
+<meta name="description" content="{{ meta_description }}">
+{% if current_url is defined %}<link rel="canonical" href="{{ current_url }}">{% endif %}
+<meta property="og:type" content="website">
+<meta property="og:title" content="{{ meta_title }}">
+<meta property="og:description" content="{{ meta_description }}">
+<meta property="og:image" content="{{ get_url(path='media/social-cover.png') }}">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" type="image/svg+xml" href="{{ get_url(path='brand/favicon.svg') }}">
+<link rel="preload" href="{{ get_url(path='fonts/sora.woff2') }}" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="{{ get_url(path='site.css', cachebust=true) }}">
+<script src="{{ get_url(path='js/site.js', cachebust=true) }}" defer>
+</script>
+<noscript>
+<style>.motion-toggle,.menu-toggle{display:none!important}@media(max-width:650px){ #mobile-nav[hidden]{display:flex!important}}</style>
+</noscript>
+{% block head %}
+{% endblock head %}
+</head>
+<body{% block body_class %}
+{% endblock body_class %}>
+<a class="skip-link" href="#main">Skip to content</a>
+<svg class="svg-defs" aria-hidden="true">
+<defs>
+<filter id="brand-fill" color-interpolation-filters="sRGB">
+<feFlood flood-color="#F4C84C" result="gold"/>
+<feComposite in="gold" in2="SourceGraphic" operator="in"/>
+</filter>
+</defs>
+</svg>
+<div class="reading-progress" aria-hidden="true">
+</div>
+<header class="site-header">
+<div class="header-inner">
+<a class="brand" href="{{ get_url(path='/') }}" aria-label="Astro90 home">{{ <ui.wordmark /> }}</a>
+<nav class="desktop-nav" aria-label="Main navigation">
+{% for nav in [["Games","games/"],["Apps","apps/"],["Open source","open-source/"],["Studio","studio/"]] %}
+<a href="{{ get_url(path=nav[1]) }}"{% if current_path is defined and current_path is starting_with(pat="/" ~ nav[1]) %} aria-current="page"{% endif %}>{{ nav[0] }}</a>
+{% endfor %}
+</nav>
+<div class="header-tools">
+<button class="motion-toggle" type="button" aria-label="Pause ambient motion" aria-pressed="false" data-motion-toggle>{{ <ui.icon name="pause" /> }}</button>
+<a class="header-cta" href="{{ get_url(path='games/') }}">Explore our worlds{{ <ui.icon name="diagonal" /> }}</a>
+<button class="menu-toggle" type="button" aria-label="Open navigation" aria-expanded="false" aria-controls="mobile-nav" data-menu-toggle>{{ <ui.icon name="menu" /> }}</button>
+</div>
+</div>
+<nav id="mobile-nav" class="mobile-nav" aria-label="Mobile navigation" hidden>
+<a href="{{ get_url(path='games/') }}">Games{{ <ui.icon name="diagonal" /> }}</a>
+<a href="{{ get_url(path='apps/') }}">Apps{{ <ui.icon name="diagonal" /> }}</a>
+<a href="{{ get_url(path='open-source/') }}">Open source{{ <ui.icon name="diagonal" /> }}</a>
+<a href="{{ get_url(path='studio/') }}">Studio{{ <ui.icon name="diagonal" /> }}</a>
+</nav>
+</header>
+<main id="main">{% block content %}
+{% endblock content %}</main>
+<footer class="site-footer">
+<div class="container">
+<div class="footer-top">
+<a class="brand" href="{{ get_url(path='/') }}" aria-label="Astro90 home">{{ <ui.wordmark /> }}</a>
+<p>Independent minds.<br>Unexpected possibilities.</p>
+<div class="footer-links">
+<a href="{{ get_url(path='games/') }}">Games</a>
+<a href="{{ get_url(path='apps/') }}">Apps</a>
+<a href="{{ get_url(path='open-source/') }}">Open source</a>
+<a href="{{ get_url(path='studio/') }}">Studio</a>
+<a href="{{ get_url(path='brand/') }}">Brand</a>
+<a href="https://github.com/iMagdy">GitHub{{ <ui.icon name="diagonal" /> }}</a>
+</div>
+</div>
+<div class="footer-bottom">
+<span>© 2026 Astro90. Made with curiosity.</span>
+<span class="footer-signoff">
+<i>
+</i> Games. Agentic AI. Open source.</span>
+<a href="#main" class="back-top">Back to top{{ <ui.icon name="diagonal" /> }}</a>
+</div>
+</div>
+</footer>
+<dialog class="gallery-dialog" aria-labelledby="gallery-title">
+<div class="gallery-dialog-bar">
+<p id="gallery-title">A closer look</p>
+<button type="button" data-gallery-close aria-label="Close screenshot">{{ <ui.icon name="close" /> }}</button>
+</div>
+<img alt="" class="gallery-large">
+</dialog>
+</body>
+</html>

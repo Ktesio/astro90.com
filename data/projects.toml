@@ -1,0 +1,104 @@
+[[projects]]
+id = "lighthouse"
+title = "Lighthouse"
+kind = "games"
+category = "Coastal logic game"
+platform = "iOS"
+status = "In development"
+tagline = "A little light. A whole sea of possibility."
+description = "Find your bearings in a world of quiet islands, living water, and beautifully thoughtful puzzles."
+accent = "#8FC8B8"
+url = "games/lighthouse/"
+cover = "lighthouse-coast.webp"
+icon = "lighthouse-icon.webp"
+hero = "lighthouse-home.webp"
+screenshots = ["lighthouse-home.webp", "lighthouse-world.webp", "lighthouse-game.webp"]
+features = ["A world to wander", "One thoughtful move at a time", "A moment of calm"]
+feature_descriptions = ["Follow a winding trail through an illustrated archipelago.", "Shape the water, place your lighthouses, and bring the coast into balance.", "Tactile details and a gentle coastal atmosphere make room to think."]
+release = "Coming to iOS"
+source = ""
+license = ""
+
+[[projects]]
+id = "inkube"
+title = "Inkube"
+kind = "games"
+category = "Ink-splashed puzzle game"
+platform = "iOS"
+status = "In development"
+tagline = "Make a little mess."
+description = "Swipe. Merge. Burst. A colorful little puzzle that keeps finding new ways to fill your world."
+accent = "#F9A8C6"
+url = "games/inkube/"
+cover = "inkube-game.webp"
+icon = ""
+hero = "inkube-home.webp"
+screenshots = ["inkube-home.webp", "inkube-game.webp", "inkube-gameover.webp"]
+features = ["Simple moves. Surprising turns.", "A fresh drop every day", "Find your kind of colorful"]
+feature_descriptions = ["Slide matching ink together. Grow a blot, set off a burst, and make room for the next move.", "Daily Ink puts a different spin on the same satisfying challenge.", "Discover palettes, boards, and a growing collection of curious little blots."]
+release = "Coming to iOS"
+source = ""
+license = ""
+
+[[projects]]
+id = "heronis"
+title = "Heronis"
+kind = "apps"
+category = "Personal AI agents"
+platform = "Web"
+status = "In development"
+tagline = "A little help. A lot more possible."
+description = "A home for personal AI agents. Turn conversations into work you can follow, understand, and make your own."
+accent = "#AFA7EA"
+url = "apps/heronis/"
+cover = ""
+icon = ""
+hero = ""
+screenshots = []
+features = ["Start with a conversation", "Keep the work in view", "Make it your own"]
+feature_descriptions = ["Bring an idea, a question, or a task to your personal agent.", "Follow runs, review their progress, and see the artifacts they produce.", "Shape an agent around the way you think and work."]
+release = "Product preview"
+source = ""
+license = ""
+
+[[projects]]
+id = "yanando"
+title = "Yanando"
+kind = "apps"
+category = "AI-assisted productivity"
+platform = "Web"
+status = "In development"
+tagline = "Less juggling. More doing."
+description = "An intelligent workspace for turning a busy mind into a clearer plan. Bring tasks, priorities, and teamwork together."
+accent = "#96D6CB"
+url = "apps/yanando/"
+cover = ""
+icon = ""
+hero = ""
+screenshots = []
+features = ["Make room to think", "Find the next right thing", "Move forward together"]
+feature_descriptions = ["Capture the work on your mind in one considered workspace.", "Bring clarity to priorities, tasks, and what needs your attention.", "Keep a shared view of the work so everyone can find their rhythm."]
+release = "Product preview"
+source = ""
+license = ""
+
+[[projects]]
+id = "ktesio"
+title = "Ktesio"
+kind = "code"
+category = "Agent infrastructure"
+platform = "Rust · CLI"
+status = "Source available"
+tagline = "Your agents. Under control."
+description = "Run AI agents like services. Supervise their lifecycle, meter token usage, and put real boundaries around spend."
+accent = "#F4C84C"
+url = "open-source/ktesio/"
+cover = ""
+icon = ""
+hero = ""
+screenshots = []
+features = ["Supervise the lifecycle", "See what runs consume", "Give autonomy a budget"]
+feature_descriptions = ["Start, stop, pause, and resume registered agents with consistent lifecycle controls.", "Follow token usage and costs through a durable usage ledger.", "Set token and cost ceilings so long-running agents stay within your limits."]
+release = "Explore the project"
+source = "https://github.com/iMagdy/ktesio"
+license = "Ktesio NC–Attribution 1.0.0"

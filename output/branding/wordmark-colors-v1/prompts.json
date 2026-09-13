@@ -1,0 +1,36 @@
+{
+  "brand": "Astro90",
+  "selectedDirection": "04 — Studio Wordmark",
+  "selectedSource": "output/branding/logo-options-v1/04-wordmark.png",
+  "mode": "Built-in image_gen",
+  "status": "Palette explorations; final color and production vector artwork not selected",
+  "palettes": [
+    {
+      "id": "01-graphite",
+      "name": "Graphite",
+      "foreground": "#20201E",
+      "background": "#F3F0E9",
+      "accent": "#DCD7CA",
+      "description": "Warm neutrals. A calm studio identity that lets individual products carry their own colors.",
+      "prompt": "Use case: logo-brand, color-treatment edit.\nInput image 1: EDIT TARGET, the selected Astro90 lowercase wordmark concept. It is a transparent PNG: interpret the black wordmark by compositing its alpha over a light background. The selected design is the large lowercase \"astro90\" wordmark and the matching standalone lowercase \"a\" below.\nPrimary request: preserve the selected identity and show one controlled color treatment on a finished brand presentation board. Preserve the original custom letterforms, shape of the single-storey a, rounded-square counters, lowercase lettering, letter spacing, bold weight, silhouette, and the original 9 and 0. Change only the colors and presentation layout. Do not redesign the typography, add an emblem, introduce extra cuts, or change the wording.\nExact wordmark: \"astro90\", seven characters a s t r o 9 0. The small icon is the exact same lowercase a extracted from the wordmark.\nComposition: 1536x1024 landscape. A generously sized wordmark across the middle of the upper two-thirds of the board. The lower third is a contrasting solid background band, with a smaller reversed version of the same wordmark and one standalone a icon in a simple square tile. Use generous margins and precise alignment. No extra text, slogans, mockups, textures, labels, swatches, shadows, gradients, bevels, grain, glow, or 3D.\nCRITICAL: this is an OPAQUE presentation board. Keep the solid background panels; do not remove backgrounds and do not export with transparency. Every pixel of the finished canvas must be opaque, including all blank margins and the counters of letters. The entire board should display correctly in both dark-mode and light-mode image viewers.\nColor treatment: warm monochrome. Upper panel background warm ivory #F3F0E9; main wordmark graphite #20201E. Lower band graphite #20201E; small wordmark ivory #F3F0E9. Icon tile ivory #F3F0E9 with graphite a. The result is warm, assured, and restrained."
+    },
+    {
+      "id": "02-cobalt",
+      "name": "Cobalt",
+      "foreground": "#3454F5",
+      "background": "#F5F6FA",
+      "accent": "#3454F5",
+      "description": "Bright blue with pale gray. More expressive, with a clear software studio feel.",
+      "prompt": "Use case: logo-brand, color-treatment edit.\nInput image 1: EDIT TARGET, the selected Astro90 lowercase wordmark concept. It is a transparent PNG: interpret the black wordmark by compositing its alpha over a light background. The selected design is the large lowercase \"astro90\" wordmark and the matching standalone lowercase \"a\" below.\nPrimary request: preserve the selected identity and show one controlled color treatment on a finished brand presentation board. Preserve the original custom letterforms, shape of the single-storey a, rounded-square counters, lowercase lettering, letter spacing, bold weight, silhouette, and the original 9 and 0. Change only the colors and presentation layout. Do not redesign the typography, add an emblem, introduce extra cuts, or change the wording.\nExact wordmark: \"astro90\", seven characters a s t r o 9 0. The small icon is the exact same lowercase a extracted from the wordmark.\nComposition: 1536x1024 landscape. A generously sized wordmark across the middle of the upper two-thirds of the board. The lower third is a contrasting solid background band, with a smaller reversed version of the same wordmark and one standalone a icon in a simple square tile. Use generous margins and precise alignment. No extra text, slogans, mockups, textures, labels, swatches, shadows, gradients, bevels, grain, glow, or 3D.\nCRITICAL: this is an OPAQUE presentation board. Keep the solid background panels; do not remove backgrounds and do not export with transparency. Every pixel of the finished canvas must be opaque, including all blank margins and the counters of letters. The entire board should display correctly in both dark-mode and light-mode image viewers.\nColor treatment: cobalt blue. Upper panel background very pale cool gray #F5F6FA; main wordmark saturated cobalt #3454F5. Lower band cobalt #3454F5; small wordmark pale gray #F5F6FA. Icon tile pale gray #F5F6FA with cobalt a. The result is bright, confident, and clear."
+    },
+    {
+      "id": "03-ember",
+      "name": "Ember",
+      "foreground": "#EA572B",
+      "background": "#F5EFE6",
+      "accent": "#EA572B",
+      "description": "Burnt orange and charcoal. More energetic, with a stronger games and creative studio character.",
+      "prompt": "Use case: logo-brand, color-treatment edit.\nInput image 1: EDIT TARGET, the selected Astro90 lowercase wordmark concept. It is a transparent PNG: interpret the black wordmark by compositing its alpha over a light background. The selected design is the large lowercase \"astro90\" wordmark and the matching standalone lowercase \"a\" below.\nPrimary request: preserve the selected identity and show one controlled color treatment on a finished brand presentation board. Preserve the original custom letterforms, shape of the single-storey a, rounded-square counters, lowercase lettering, letter spacing, bold weight, silhouette, and the original 9 and 0. Change only the colors and presentation layout. Do not redesign the typography, add an emblem, introduce extra cuts, or change the wording.\nExact wordmark: \"astro90\", seven characters a s t r o 9 0. The small icon is the exact same lowercase a extracted from the wordmark.\nComposition: 1536x1024 landscape. A generously sized wordmark across the middle of the upper two-thirds of the board. The lower third is a contrasting solid background band, with a smaller reversed version of the same wordmark and one standalone a icon in a simple square tile. Use generous margins and precise alignment. No extra text, slogans, mockups, textures, labels, swatches, shadows, gradients, bevels, grain, glow, or 3D.\nCRITICAL: this is an OPAQUE presentation board. Keep the solid background panels; do not remove backgrounds and do not export with transparency. Every pixel of the finished canvas must be opaque, including all blank margins and the counters of letters. The entire board should display correctly in both dark-mode and light-mode image viewers.\nColor treatment: warm ember orange and charcoal. Upper panel background warm pale cream #F5EFE6; main wordmark ember orange #EA572B. Lower band deep charcoal #20201E; small wordmark warm cream #F5EFE6. Icon tile ember orange #EA572B with warm cream a. The result feels energetic, warm, and creative, without distressing or retro decoration."
+    }
+  ]
+}

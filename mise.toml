@@ -1,0 +1,14 @@
+[tools]
+zola = "0.23.4"
+
+[tasks.dev]
+run = "zola serve --interface 127.0.0.1 --base-url http://127.0.0.1 --port 1111"
+description = "Serve the static design preview"
+
+[tasks.build]
+run = "zola build"
+description = "Build the static website"
+
+[tasks.check]
+run = "zola check --skip-external-links && zola build && python3 scripts/check_site.py"
+description = "Check templates, content, and generated routes"
