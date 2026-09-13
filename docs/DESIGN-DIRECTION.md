@@ -11,11 +11,11 @@ The requested references informed these choices:
 - [Pinterest: astronomy website design](https://www.pinterest.com/ideas/astronomy-website-design/926383071149/): full-bleed imagery, depth and dramatic scale relationships.
 - [Behance: astronomy websites](https://www.behance.net/search/projects/astronomy%20website): editorial layouts and exploratory navigation. [Nine Planets](https://www.behance.net/gallery/188110721/Nine-Planets-Space-and-Astronomy-Website) was examined for its composition and depth.
 
-No reference artwork or source code was copied. Astro90's mark, original Blender/WebGL geometry and the studio's product images supply the final visual material.
+[Hardik Gondhiya’s Figma logo effect](https://www.figma.com/@hardikgondhiya/riffs/a83d25d1-885e-42ab-84c0-d697abc7e5e2) informed the reflective material direction. The final object and construction animation were modeled, lit and rendered in Blender. No reference artwork or source code was copied. Astro90's mark, original Blender geometry and the studio's product images supply the final visual material.
 
 ## Composition
 
-The opening a is a recognizable studio object. Scrolling moves the camera closer before full-screen Lighthouse and Inkube scenes enter. Their artwork, names and phone screens move at different depths. Heronis and Yanando occupy overlapping interface planes. Ktesio returns the site to a restrained developer composition.
+The opening a is a cast-metal studio object. On page load, physical filaments trace its contour and connect its depth before the rounded surfaces form. The 3.2-second Blender render plays once. Its camera, position and scale remain fixed. Lighthouse and Inkube retain their entrances; each outgoing scene stays pinned beneath the incoming scene for one viewport, with receding artwork and an earlier fade of the title and phone. Their artwork, names and phone screens move at different depths. Heronis and Yanando occupy overlapping interface planes. Ktesio returns the site to a restrained developer composition.
 
 The Index control opens a spatial map of five projects. Hover and focus change the central preview. Right-angle paths connect the projects to the studio. On phones the map becomes a large, readable list with a preview behind it. The header and footer use the boxed a at mobile widths.
 

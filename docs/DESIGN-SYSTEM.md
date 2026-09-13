@@ -20,12 +20,12 @@ Display typography is fluid and closely spaced. The desktop home headline scales
 
 ## Layouts
 
-- The homepage uses native sticky stages. The hero, each game and the app sequence have their own scroll distance; no wheel or touch-scroll events are intercepted.
+- The homepage uses native sticky stages. Consecutive scenes overlap by one small viewport while full motion is enabled. The outgoing stage recedes and its title and phone fade before the incoming stage takes over. No wheel or touch-scroll events are intercepted; scene links use native smooth scrolling.
 - Game worlds expand to the viewport. Their titles, backgrounds and device previews use distinct depth values.
 - App previews are layered planes. Their captions remain real links and the illustrations are labeled interface studies.
 - Collections use staggered columns on desktop and a single column on mobile.
 - Detail pages preserve the product's own artwork, release state, features and screenshots.
-- The studio page uses the same interactive a as the home, followed by concrete descriptions of the work.
+- The studio page uses the same Blender construction as the home, followed by concrete descriptions of the work.
 - The only intentional horizontal scroller is the mobile screenshot gallery.
 
 At 650 px and below, the header and footer show only the boxed a. The index becomes a large project list and its utility links wrap. Short landscape viewports use compressed scenes. Reduced motion removes the extra scroll distance entirely.
@@ -36,24 +36,26 @@ The Index button opens a native modal dialog. Five semantic project links are ar
 
 The screenshot viewer is a separate native dialog. Closing it restores focus to the selected screenshot. Install and launch previews are disabled, with development status nearby. Do not substitute fake links for unavailable actions.
 
-## Input-led rendering
+## Rendering and motion
 
-`static/js/site.js` owns one requestAnimationFrame scheduler. Scroll and pointer events update targets; damping lets them settle. Frames stop when targets settle, and hidden documents cancel the pending frame. There is no elapsed-time animation clock.
+The brand entrance is an authored Blender render. Its physical filaments trace the logo and join into the solid object over 3.2 seconds. Camera and object scale stay fixed throughout. `static/js/site.js` inserts the transparent animated WebP once when full motion is enabled. The encoded repeat count is one; there is no idle loop and scrolling cannot restart it. The page remains usable during the entrance. After playback, the animation is replaced by the identically framed higher-resolution still and its decoded frames can be released.
 
-The stylesheet consumes `--progress`, `--arrival`, `--depth`, `--pointer-x` and `--pointer-y`. These drive transforms and image crops. The WebGL module is imported only on pages with a visible scene host and when full motion is enabled.
+For product scenes, `static/js/site.js` owns one requestAnimationFrame scheduler. Scroll and pointer events update targets; 85 ms damping lets depth effects settle. Frames stop when targets settle, and hidden documents cancel the pending frame.
 
-`assets/webgl/scene.js` builds the shared monogram contour with Three.js 0.186.0. It uses a physical saffron material, navy backing and a generated studio environment. Pixel ratio is capped at 1.7. The minified delivery bundle is committed so Zola remains the sole website build dependency. esbuild 0.28.2 and Three.js are pinned in the authoring package lock.
+The stylesheet consumes `--progress`, `--arrival`, `--outro`, `--outro-content`, `--depth`, `--pointer-x` and `--pointer-y`. Scene bounds are cached and invalidated on resize and font load. Overlap progress follows the native scroll position so the outgoing image stays aligned with the incoming section. The original game entrances keep their own progress range. Soft leading masks remove a hard cut between the images.
+
+The fixed-size hero begins handing off after a short scroll. Avoid adding scroll distance that exists only for a camera zoom. The application and project scenes retain their own editorial timing.
 
 ## Fallbacks and accessibility
 
-System reduced motion takes precedence over the session preference. The manual control appears in the index and footer. Reduced mode disposes WebGL, shows the Blender poster, removes spatial transforms and collapses long scene heights. Storage failure is harmless.
+System reduced motion takes precedence over the session preference. The manual control appears in the index and footer. Reduced mode removes the animated image, shows the completed Blender still, removes spatial transforms and collapses scene heights and overlaps. Returning to full motion on the same page does not replay an entrance that already started. Storage failure is harmless.
 
-Without JavaScript, the poster, all page content and a simple navigation fallback remain available; long scenes become normal sections. WebGL/module failure leaves the poster in place. A lost context restores the poster.
+Without JavaScript, the poster, all page content and a simple navigation fallback remain available; long scenes become normal sections. A failed animation image request restores the still.
 
-Maintain one h1 and one main landmark per page, unique metadata, descriptive links, visible keyboard focus, image alternatives and 44 px action targets. Never require hover, color or motion to understand a product. Do not add autoplay media or loading gates. Recheck WCAG AA contrast for new combinations.
+Maintain one h1 and one main landmark per page, unique metadata, descriptive links, visible keyboard focus, image alternatives and 44 px action targets. Never require hover, color or motion to understand a product. Do not add loading gates, audio or repeating autoplay media. The finite brand entrance never blocks content or navigation. Recheck WCAG AA contrast for new combinations.
 
 ## Content and validation
 
 `data/projects.toml` holds product facts. Detail Markdown selects a project and supplies editorial headings. Verify any new store destination before activating a release control. Source availability and open-source licensing must remain distinct.
 
-Run `mise run check` and `node --check static/js/site.js`. When scene code changes, rebuild its bundle and inspect desktop, tablet, phone and short landscape sizes. Exercise the index, focus restoration, galleries and motion control. Check actual changing transforms while scrolling, rather than relying solely on still images. Keep a factual record in `docs/VALIDATION.md`.
+Run `mise run check` and `node --check static/js/site.js`. When the Blender scene changes, render and encode it again. The encoder checks every frame for a clear margin, the 3.2-second duration and single repeat count. Inspect desktop, tablet, phone and short landscape sizes. Exercise the index, focus restoration, galleries and motion control. Check actual changing transforms while scrolling, rather than relying solely on still images. Keep a factual record in `docs/VALIDATION.md`.

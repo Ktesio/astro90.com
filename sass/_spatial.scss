@@ -1,6 +1,9 @@
-// Input-led spatial identity. No autonomous animation or scroll interception.
+// Native scrolling, overlapping scenes and a finite Blender entrance.
 html {
   scroll-behavior: auto;
+}
+html.spatial-ready[data-motion="running"] {
+  scroll-behavior: smooth;
 }
 *,
 *::before,
@@ -321,7 +324,8 @@ html:has(dialog[open]) {
 
 // Intro: a physical letter, cropped type, and one factual description.
 .identity-scene {
-  height: 215svh;
+  --story-length: 115svh;
+  height: var(--story-length);
   position: relative;
 }
 .identity-stage {
@@ -361,27 +365,24 @@ html:has(dialog[open]) {
 }
 .identity-object {
   position: absolute;
-  width: 65vw;
-  height: 94svh;
-  top: 5svh;
-  right: -8vw;
+  width: 60vw;
+  height: 88svh;
+  top: 8svh;
+  right: 1vw;
   z-index: 1;
+  opacity: calc(1 - var(--outro, 0));
 }
-.identity-object canvas {
-  width: 100%;
-  height: 100%;
-  display: block;
-}
-.brand-poster {
+.brand-poster,
+.brand-film {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
   object-fit: contain;
-  transform: rotate(-9deg) scale(1.1);
 }
-.is-rendered .brand-poster {
+.is-playing .brand-poster {
   opacity: 0;
+  visibility: hidden;
 }
 .identity-copy {
   position: absolute;
@@ -390,12 +391,8 @@ html:has(dialog[open]) {
   top: 29%;
   width: 62%;
   pointer-events: none;
-  transform: translate3d(
-    calc(var(--progress, 0) * -130px),
-    calc(var(--progress, 0) * -120px),
-    0
-  );
-  opacity: calc(1 - var(--progress, 0) * 1.35);
+  transform: translateY(calc(var(--outro, 0) * -42px));
+  opacity: calc(1 - var(--outro-content, 0));
 }
 .identity-copy h1 {
   font-size: clamp(76px, 8.9vw, 160px);
@@ -425,6 +422,7 @@ html:has(dialog[open]) {
   justify-content: space-between;
   align-items: center;
   z-index: 3;
+  opacity: calc(1 - var(--outro-content, 0));
 }
 .scene-bottom > span {
   font-size: 12px;
@@ -446,7 +444,8 @@ html:has(dialog[open]) {
 
 // The native scroll distance is the timeline of each product world.
 .world {
-  height: 195svh;
+  --story-length: 195svh;
+  height: var(--story-length);
   position: relative;
 }
 .world,
@@ -460,12 +459,14 @@ html:has(dialog[open]) {
   top: 0;
   overflow: hidden;
   isolation: isolate;
-  background: var(--canvas);
+  background: transparent;
 }
 .world-window {
   position: absolute;
   inset: 0;
   overflow: hidden;
+  transform: scale(calc(1 - var(--outro, 0) * 0.065));
+  opacity: calc(1 - var(--outro, 0) * 0.65);
   clip-path: inset(
     calc((1 - var(--arrival, 1)) * 10%) calc((1 - var(--arrival, 1)) * 7%) 0
   );
@@ -504,6 +505,8 @@ html:has(dialog[open]) {
   letter-spacing: -0.075em;
   transform: translate3d(calc(var(--progress, 0) * -12vw), 0, 0);
   white-space: nowrap;
+  opacity: calc(1 - var(--outro-content, 0));
+  translate: 0 calc(var(--outro, 0) * -40px);
 }
 .world--lighthouse .world-name {
   font-family: Georgia, serif;
@@ -522,6 +525,9 @@ html:has(dialog[open]) {
   border-radius: 36px;
   overflow: hidden;
   background: #0c1420;
+  opacity: calc(1 - var(--outro-content, 0));
+  scale: calc(1 - var(--outro, 0) * 0.12);
+  translate: 0 calc(var(--outro, 0) * -40px);
   box-shadow:
     0 32px 95px #0009,
     inset 0 0 0 1px #eff7ff88;
@@ -547,6 +553,8 @@ html:has(dialog[open]) {
   left: var(--gutter);
   z-index: 3;
   max-width: 46%;
+  opacity: calc(1 - var(--outro-content, 0));
+  translate: 0 calc(var(--outro, 0) * -20px);
   transform: translateY(calc((1 - var(--progress, 0)) * 25px));
 }
 .world-copy > p {
@@ -585,6 +593,7 @@ html:has(dialog[open]) {
   height: 65px;
   border-left: 1px solid #cbd6e059;
   z-index: 3;
+  opacity: calc(1 - var(--outro-content, 0));
 }
 .world-next:hover {
   color: var(--saffron);
@@ -647,7 +656,18 @@ html:has(dialog[open]) {
 .software-scene {
   height: 220svh;
   position: relative;
-  background: #090e17;
+  background: transparent;
+}
+.software-scene::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--canvas);
+  mask-image: linear-gradient(
+    to bottom,
+    transparent,
+    #000 calc((1 - var(--arrival, 1)) * 80px + 1px)
+  );
 }
 .software-stage {
   position: sticky;
@@ -1041,16 +1061,48 @@ html:has(dialog[open]) {
   border-radius: 7px;
 }
 
+// A full viewport of overlap holds the outgoing scene in place while the next
+// entrance plays over it. Negative margins preserve the existing page length.
+.home {
+  --scene-overlap: 0px;
+}
+html.spatial-ready[data-motion="running"] .home {
+  --scene-overlap: 100svh;
+}
+.home [data-next-scene] {
+  height: calc(var(--story-length) + var(--scene-overlap));
+}
+.home [data-scene] + [data-scene] {
+  margin-top: calc(-1 * var(--scene-overlap));
+}
+.home .identity-scene {
+  z-index: 1;
+}
+.home .world--lighthouse {
+  z-index: 2;
+}
+.home .world--inkube {
+  z-index: 3;
+}
+.home .software-scene {
+  z-index: 4;
+}
+html.spatial-ready[data-motion="running"] .home .world-window {
+  mask-image: linear-gradient(
+    to bottom,
+    transparent calc((1 - var(--arrival, 1)) * 10%),
+    #000 calc((1 - var(--arrival, 1)) * 20% + 1px)
+  );
+}
+
 // Studio: the monogram is the studio object, products remain distinct.
 .studio-intro {
   min-height: 100svh;
-  position: sticky;
-  top: 0;
+  position: relative;
   overflow: hidden;
 }
 .studio-intro .identity-object {
-  right: -10vw;
-  opacity: 0.85;
+  right: 0;
   top: 12%;
 }
 .studio-intro .page-intro {
@@ -1059,11 +1111,7 @@ html:has(dialog[open]) {
   padding-top: 25svh;
 }
 .studio-scene {
-  height: 185svh;
-}
-.studio-intro .page-intro {
-  transform: translateY(calc(var(--progress, 0) * -130px));
-  opacity: calc(1 - var(--progress, 0));
+  height: auto;
 }
 .studio-intro h1 {
   max-width: 850px;
@@ -1154,8 +1202,8 @@ html:has(dialog[open]) {
     font-size: 11vw;
   }
   .identity-object {
-    width: 80vw;
-    right: -25vw;
+    width: 58vw;
+    right: 0;
     top: 2%;
   }
   .world-name {
@@ -1295,18 +1343,17 @@ html:has(dialog[open]) {
     font-size: 12px;
   }
   .identity-scene {
-    height: 180svh;
+    --story-length: 112svh;
   }
   .identity-stage {
     min-height: 630px;
   }
   .identity-object {
-    width: 116vw;
-    height: 54svh;
-    min-height: 340px;
-    top: 8%;
-    right: -20vw;
-    opacity: 0.95;
+    width: calc(100% - var(--gutter) * 2);
+    height: 47svh;
+    min-height: 280px;
+    top: 11%;
+    right: var(--gutter);
   }
   .identity-copy {
     top: auto;
@@ -1338,7 +1385,7 @@ html:has(dialog[open]) {
     height: 28px;
   }
   .world {
-    height: 170svh;
+    --story-length: 170svh;
   }
   .world-stage {
     min-height: 700px;
@@ -1604,9 +1651,9 @@ html:has(dialog[open]) {
   }
   .studio-intro .identity-object {
     top: 7%;
-    right: -28vw;
-    height: 53svh;
-    min-height: 340px;
+    right: var(--gutter);
+    height: 46svh;
+    min-height: 280px;
   }
   .studio-intro .page-intro {
     padding-top: 55svh;
@@ -1657,10 +1704,10 @@ html:has(dialog[open]) {
 }
 @media (min-width: 651px) and (max-width: 900px) and (min-height: 700px) {
   .home .identity-object {
-    width: 100vw;
-    height: 58svh;
-    top: 5%;
-    right: -14vw;
+    width: 82vw;
+    height: 54svh;
+    top: 8%;
+    right: 3vw;
   }
   .home .identity-copy {
     top: auto;
@@ -1738,7 +1785,8 @@ html:has(dialog[open]) {
 html:not(.spatial-ready) {
   .identity-scene,
   .world,
-  .software-scene {
+  .software-scene,
+  .home [data-next-scene] {
     height: auto;
   }
   .identity-stage,
@@ -1759,7 +1807,8 @@ html:not(.spatial-ready) {
 html[data-motion="paused"] {
   .identity-scene,
   .world,
-  .software-scene {
+  .software-scene,
+  .home [data-next-scene] {
     height: auto;
   }
   .identity-stage,
@@ -1792,6 +1841,17 @@ html[data-motion="paused"] {
   .identity-copy {
     opacity: 1;
   }
+  .identity-object,
+  .world-name,
+  .world-phone,
+  .world-copy,
+  .world-window,
+  .world-next,
+  .scene-bottom {
+    opacity: 1;
+    translate: none;
+    scale: none;
+  }
   .studio-intro .page-intro {
     opacity: 1;
     transform: none;
@@ -1818,9 +1878,13 @@ html[data-motion="paused"] {
   }
 }
 @media (prefers-reduced-motion: reduce) {
+  html.spatial-ready[data-motion="running"] .home {
+    --scene-overlap: 0px;
+  }
   .identity-scene,
   .world,
-  .software-scene {
+  .software-scene,
+  .home [data-next-scene] {
     height: auto;
   }
   .identity-stage,

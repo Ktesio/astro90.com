@@ -1,16 +1,16 @@
 {% extends "base.html" %}
 {% block body_class %} class="home"{% endblock body_class %}
 {% block content %}
-<section class="identity-scene" data-scene="identity">
+<section class="identity-scene" data-scene="identity" data-next-scene="lighthouse">
   <div class="identity-stage">
     <div class="scene-axis" aria-hidden="true"></div>
-    <div class="identity-object" data-brand-scene data-scene-module="{{ get_url(path='js/scene.js') }}"><img class="brand-poster" src="{{ get_url(path='media/monogram.webp') }}" width="1500" height="1500" alt="The Astro90 a, sculpted in saffron metal with a navy core" fetchpriority="high"></div>
+    <div class="identity-object" data-brand-film="{{ get_url(path='media/monogram-build.webp') }}"><img class="brand-poster" src="{{ get_url(path='media/monogram.webp') }}" width="960" height="960" alt="The Astro90 a, sculpted in saffron metal with a navy core" fetchpriority="high"></div>
     <div class="identity-copy"><h1><span>Built from</span><span>curiosity.</span></h1><p>A development studio for games,<br>agentic AI and open source.</p></div>
     <div class="scene-bottom"><a href="#lighthouse" class="scene-scroll">Explore the work{{ <ui.icon name="down" /> }}</a></div>
   </div>
 </section>
 
-<section class="world world--lighthouse" id="lighthouse" data-scene="world">
+<section class="world world--lighthouse" id="lighthouse" data-scene="world" data-next-scene="inkube">
   <div class="world-stage">
     <div class="world-window"><img class="world-landscape" src="{{ get_url(path='media/lighthouse-coast.webp') }}" alt="The islands and illuminated lighthouse of Lighthouse's coastal puzzle world" width="1024" height="1536" loading="lazy"></div>
     <h2 class="world-name">Lighthouse</h2>
@@ -20,7 +20,7 @@
   </div>
 </section>
 
-<section class="world world--inkube" id="inkube" data-scene="world">
+<section class="world world--inkube" id="inkube" data-scene="world" data-next-scene="software">
   <div class="world-stage">
     <div class="world-window ink-field"><div class="ink-form ink-form--pink"></div><div class="ink-form ink-form--yellow"></div><div class="ink-form ink-form--lime"></div><div class="ink-form ink-form--violet"></div></div>
     <h2 class="world-name">inkube</h2>

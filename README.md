@@ -14,7 +14,7 @@ mise install
 mise run dev
 ```
 
-Open <http://127.0.0.1:1111>. Zola compiles the Sass and Tera 2 components directly. Normal builds need no Node step or application server. Fonts, artwork and the compiled 3D scene are served locally.
+Open <http://127.0.0.1:1111>. Zola compiles the Sass and Tera 2 components directly. Normal builds need no Node step or application server. Fonts, artwork and the Blender animation are served locally.
 
 With Zola already installed:
 
@@ -55,7 +55,7 @@ The generated site is in `public/`. Upload that directory to a static host when 
 
 The site is a **static UI/UX iteration**. The spatial project index, screenshot viewer and pointer/scroll-driven scenes are presentation features. App Store and app-launch actions are visibly unavailable while products are in development. No store URLs, account flows, forms, payments, analytics, API integrations, or product installations are connected.
 
-The homepage moves from a physical version of the selected “a” into full-screen game worlds and layered app previews. Motion follows input and stops when the input settles. System reduced motion and the manual control remove the extra scroll distance and use the Blender poster. The header and footer use only the boxed “a” on mobile.
+The homepage moves from a physical version of the selected “a” into full-screen game worlds and layered app previews. The letter is constructed once on page load in a 3.2-second Blender animation; its camera and scale stay fixed. Game sections overlap as one recedes and the next enters. System reduced motion and the manual control remove the extra scroll distance and show the finished Blender still. The header and footer use only the boxed “a” on mobile.
 
 Lighthouse and Inkube use actual development screenshots. Heronis and Yanando use labeled interface studies. Ktesio is source available under its own non-commercial license; it is not presented as an OSI-licensed open-source project. No download counts, ratings, customer testimonials, or release dates are invented.
 
@@ -66,12 +66,12 @@ Lighthouse and Inkube use actual development screenshots. Heronis and Yanando us
 - `templates/`: Tera 2 page templates and the shared components in `components.html`.
 - `sass/site.scss`: shared tokens and product components; imports `sass/_spatial.scss` for the spatial compositions and responsive rules.
 - `static/`: optimized delivery assets, self-hosted fonts, brand artwork, and presentation JavaScript.
-- `assets/`: Blender scenes/scripts, shared monogram geometry, WebGL source, render masters and product marketing image sources.
+- `assets/`: Blender scenes/scripts, shared monogram geometry, archived WebGL studies, render masters and product marketing image sources.
 - `output/branding/`: the original logo and color explorations, preserved as design history. These are not published by Zola.
 
 Use the existing components and semantic tokens when extending the site. Product facts belong in the catalog, so a status or description stays consistent across the home, collection, and detail pages.
 
-To edit the 3D scene, work in `assets/webgl/scene.js`, then run `npm ci` and `npm run build` from `assets/webgl/`. The exact Three.js and esbuild versions are locked. Commit the regenerated `static/js/scene.js` bundle with the source. This authoring step is separate from Zola. See the asset guide for Blender regeneration.
+To edit the letter and its animation, open `assets/blender/astro90-identity.blend` in Blender. The reproducible scene builder is `assets/blender/build_identity.py`; `scripts/encode_identity.py` exports its frames as a transparent WebP that plays once. See the [asset guide](docs/ASSETS.md) for the render and encoding commands. Blender and Pillow are authoring dependencies; the website build remains Zola-only.
 
 ## Identity and design standards
 

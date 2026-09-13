@@ -8,7 +8,7 @@ Astro90 is a development studio for games, agentic AI software and open source. 
 
 Use the supplied lowercase wordmark with its original rounded letterforms. The reference is `output/branding/logo-options-v1/04-wordmark.png`. The website uses an exact lossless WebP conversion, cropped through an SVG viewport at `108 289 1320 244` and filled saffron through its alpha channel. It remains a bitmap-backed web treatment; the full wordmark is not yet an outlined print master. Do not use the slightly different lettering in the generated color studies.
 
-The compact **a** is an optical vector reconstruction of the selected first letter. `assets/brand/monogram.json` holds its path and sampled contour. `scripts/trace_monogram.py` regenerates that geometry and the boxed SVG. The SVG, WebGL object and Blender object share this contour.
+The compact **a** is an optical vector reconstruction of the selected first letter. `assets/brand/monogram.json` holds its path and sampled contour. `scripts/trace_monogram.py` regenerates that geometry and the boxed SVG. The SVG, Blender object and its construction filaments share this contour.
 
 | Use | Standard |
 | --- | --- |
@@ -61,11 +61,11 @@ Actual development screens take priority over invented mockups. Label interface 
 
 ## Motion
 
-Input controls the composition. The pointer changes the letter's rotation and lighting. Scrolling changes camera distance, image crops, oversized titles and the position of product screens. The index previews respond equally to pointer hover and keyboard focus.
+The letter is constructed once on page load: traced filaments, connected depth, then one rounded metal object. Use the authored 3.2-second Blender animation. Keep its camera and scale fixed; do not zoom it with scroll. Product scenes respond to scrolling through image crops, oversized titles and device positions. Give the outgoing scene a full viewport of overlap with the incoming scene. The index previews respond equally to pointer hover and keyboard focus.
 
 Scenes settle when input stops. There is no autonomous rotation, floating loop, top progress line, scroll hijacking, loading gate, custom cursor or forced scene completion. Normal document scrolling and direct links remain available.
 
-Honor `prefers-reduced-motion`. The manual Reduce motion control in the index and footer uses a session preference. Reduced motion removes the extra pinned scroll distance and substitutes the Blender poster for WebGL. All content and links remain available.
+Honor `prefers-reduced-motion`. The manual Reduce motion control in the index and footer uses a session preference. Reduced motion removes the extra pinned scroll distance and substitutes the finished Blender still for the construction animation. All content and links remain available.
 
 ## Voice
 

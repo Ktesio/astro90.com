@@ -8,31 +8,33 @@ Selected shape: `logo-options-v1/04-wordmark.png`. Selected palette: `wordmark-c
 
 The website uses the original raster alpha through a cropped SVG viewport and a solid saffron filter. The full wordmark is not a production outline vector. The boxed a is an optically reconstructed vector from the selected first letter, shared by the favicon and mobile signature.
 
-## Original 3D artwork
+## Blender identity animation
 
-`scripts/trace_monogram.py` writes the shared a contour and SVG. `assets/blender/make_monogram.py` extrudes it with a saffron face and navy backing, producing the fallback poster and sharing card. Geometry, camera placement, materials and lighting were authored for Astro90 in Blender 5.2.1 LTS. No external model packs or HDRIs are used.
+`scripts/trace_monogram.py` supplies the selected a contour. `assets/blender/build_identity.py` models a rounded, crowned saffron shell, a recessed titanium core and eight physical contour filaments with depth connections. A locked orthographic camera and four rectangular studio lights produce the reflections. All geometry, materials, lights and animation keyframes are included in the native Blender 5.2.1 LTS scene. No external model packs, textures or HDRIs are required.
+
+The 96-frame timeline is 3.2 seconds at 30 fps: contours are traced, depth connections form, then the cast surfaces become solid and the filaments disappear. Camera position, object position and scale remain fixed. The final 14 frames hold the completed object. Cycles renders 960 × 960 RGBA frames with denoising; the authoring script selects Metal when available and can also render on CPU.
 
 - `assets/brand/monogram.json`: optical path and sampled contour.
-- `assets/blender/astro90-monogram.blend`: editable physical letter scene.
-- `assets/renders/monogram.png`: transparent 1500 × 1500 master.
-- `static/media/monogram.webp`: optimized poster.
-- `static/media/social-cover.png`: opaque sharing image, 1200 × 630.
-
-Earlier orbital and interlocking studies remain in `assets/blender/` and `assets/renders/` as design history. They are retired from live page compositions.
+- `assets/blender/astro90-identity.blend`: editable current model, lighting and animation.
+- `assets/blender/build_identity.py`: reproducible scene builder and renderer.
+- `assets/renders/monogram.png`: final transparent 960 × 960 frame.
+- `static/media/monogram.webp`: finished still for reduced motion and fallback.
+- `static/media/monogram-build.webp`: 720 × 720 transparent animation encoded to play once.
+- `scripts/encode_identity.py`: delivery encoding and checks for framing, duration and repeat count.
+- `static/media/social-cover.png`: 1200 × 630 sharing card from the earlier static letter scene.
 
 To regenerate on macOS:
 
 ```sh
-python3 scripts/trace_monogram.py
-/Applications/Blender.app/Contents/MacOS/Blender --background --python assets/blender/make_monogram.py
-python3 scripts/prepare_media.py
+/Applications/Blender.app/Contents/MacOS/Blender --background --python assets/blender/build_identity.py -- --render
+python3 scripts/encode_identity.py
 ```
 
-On other systems, replace the Blender executable path with `blender`. Image preparation requires Pillow and only converts delivery formats; it does not change the artwork. Blender and Pillow are optional authoring tools, not website build dependencies.
+Use `--preview` instead of `--render` to inspect four smaller keyframes before rendering the sequence. Frames are written into ignored `.local/identity-frames/`. On other systems, replace the executable path with `blender`; the encoder requires Pillow. These are optional authoring tools, not website build dependencies.
 
-## Real-time scene
+`static/js/site.js` inserts the animated image once per page load when full motion is enabled. The WebP itself ends on its final frame and never loops. After playback, the browser releases the animation and shows the identically framed 960 px still. Reduced motion uses the finished still and does not request the animation. A failed image request restores the still. No browser GPU renderer or video codec is required.
 
-`assets/webgl/scene.js` consumes the same contour. Its physical materials and studio lighting respond to pointer and scroll input through `static/js/site.js`. It uses Three.js 0.186.0 with the built-in RoomEnvironment. The pinned authoring package uses esbuild 0.28.2; run `npm ci` then `npm run build` in `assets/webgl/` to update the committed delivery bundle. Three.js's MIT license is included at `static/vendor/THREE-LICENSE.txt`; the generated bundle also carries linked license comments.
+Earlier orbital studies, the first static monogram scene and the WebGL experiment remain outside `static/` as design history. The WebGL authoring package writes only to `.local/`; its Three.js license is preserved beside the archived source. It is not used or delivered by the website.
 
 ## Product artwork
 

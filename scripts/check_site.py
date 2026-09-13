@@ -51,7 +51,7 @@ class Document(HTMLParser):
             self.canonical = attrs.get("href", "")
         if tag == "img" and "alt" not in attrs:
             ERRORS.append(f"{self.path}: image has no alt attribute")
-        for attr in ("href", "src", "data-gallery-src"):
+        for attr in ("href", "src", "data-gallery-src", "data-brand-film"):
             if attr in attrs:
                 value = attrs[attr]
                 if not value or value == "#":
@@ -120,6 +120,30 @@ for stylesheet in PUBLIC.rglob("*.css"):
     for value in re.findall(r'url\([\s\'\"]*([^\)\'\"]+)', stylesheet.read_text()):
         references += 1
         resolve_reference(value.strip(), stylesheet)
+
+# Protect the finite entrance from an accidental looping or truncated export.
+# RIFF fields: https://developers.google.com/speed/webp/docs/riff_container
+animation = PUBLIC / "media/monogram-build.webp"
+if animation.is_file():
+    data = animation.read_bytes()
+    offset, frames, duration, loops = 12, 0, 0, None
+    valid = data[:4] == b"RIFF" and data[8:12] == b"WEBP"
+    valid = valid and int.from_bytes(data[4:8], "little") + 8 == len(data)
+    while valid and offset + 8 <= len(data):
+        kind = data[offset:offset + 4]
+        length = int.from_bytes(data[offset + 4:offset + 8], "little")
+        payload = data[offset + 8:offset + 8 + length]
+        if len(payload) != length:
+            valid = False
+            break
+        if kind == b"ANIM" and length == 6:
+            loops = int.from_bytes(payload[4:6], "little")
+        elif kind == b"ANMF" and length >= 16:
+            frames += 1
+            duration += int.from_bytes(payload[12:15], "little")
+        offset += 8 + length + length % 2
+    if not valid or offset != len(data) or frames <= 40 or duration != 3200 or loops != 1:
+        ERRORS.append(f"Brand animation: expected a complete 3200 ms single-play WebP; got {frames} frames, {duration} ms, {loops} plays")
 
 if ERRORS:
     print("Static site check failed:")

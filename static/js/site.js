@@ -10,36 +10,99 @@
       "[data-depth], .project-card, .project-hero-art, .feature, .screenshot, .brand-chapter, .studio-line",
     ),
   ];
-  const host = document.querySelector("[data-brand-scene]");
+  const host = document.querySelector("[data-brand-film]");
   let manuallyPaused = false;
   try {
     manuallyPaused =
       sessionStorage.getItem("astro90-spatial-motion") === "paused";
   } catch {}
   let paused = false;
-  let brandScene = null;
-  let loadingScene = false;
+  let film = null;
+  let filmStarted = false;
   let frame = 0;
   let lastTime = 0;
+  let measurementsDirty = true;
+  let sceneMeasurements = [];
   const target = { x: 0, y: 0, scroll: scrollY };
   const current = { ...target };
   const clamp = (v, min = 0, max = 1) => Math.min(max, Math.max(min, v));
+  const ease = (value) => {
+    const t = clamp(value);
+    return t * t * (3 - 2 * t);
+  };
+
+  function measureScenes() {
+    // Scene containers never transform. Cache their document coordinates so
+    // scrolling does not interleave layout reads with style writes per scene.
+    sceneMeasurements = scenes.map((scene) => {
+      const bounds = scene.getBoundingClientRect();
+      const next =
+        scene.dataset.nextScene &&
+        document.getElementById(scene.dataset.nextScene);
+      const nextBounds = next?.getBoundingClientRect();
+      const overlap = nextBounds
+        ? Math.max(0, bounds.bottom - nextBounds.top)
+        : 0;
+      return {
+        scene,
+        top: bounds.top + scrollY,
+        nextTop: nextBounds ? nextBounds.top + scrollY : null,
+        distance: Math.max(1, bounds.height - innerHeight - overlap),
+      };
+    });
+    measurementsDirty = false;
+  }
+  function invalidateMeasurements() {
+    measurementsDirty = true;
+    schedule();
+  }
 
   function schedule() {
     if (!frame && !document.hidden) frame = requestAnimationFrame(render);
   }
-  async function loadScene() {
-    if (!host || brandScene || loadingScene || paused) return;
-    loadingScene = true;
-    try {
-      const { createBrandScene } = await import(host.dataset.sceneModule);
-      if (!paused) brandScene = createBrandScene(host);
-      schedule();
-    } catch {
-      // The authored Blender poster remains if the module or WebGL is unavailable.
-    } finally {
-      loadingScene = false;
+  function updateFilm() {
+    if (!host) return;
+    if (paused) {
+      film?.remove();
+      film = null;
+      host.classList.remove("is-playing");
+      return;
     }
+    if (filmStarted || !host.dataset.brandFilm) return;
+    filmStarted = true;
+    film = new Image(720, 720);
+    film.className = "brand-film";
+    film.alt = "";
+    film.setAttribute("aria-hidden", "true");
+    film.decoding = "async";
+    film.fetchPriority = "high";
+    const playingFilm = film;
+    film.addEventListener(
+      "load",
+      () => {
+        // The WebP plays once. Release its decoded frames after the sequence and
+        // leave the identically framed, higher-resolution Blender still in place.
+        setTimeout(() => {
+          if (film !== playingFilm) return;
+          film.remove();
+          film = null;
+          host.classList.remove("is-playing");
+        }, 3400);
+      },
+      { once: true },
+    );
+    film.addEventListener(
+      "error",
+      () => {
+        film?.remove();
+        film = null;
+        host.classList.remove("is-playing");
+      },
+      { once: true },
+    );
+    film.src = host.dataset.brandFilm;
+    host.append(film);
+    host.classList.add("is-playing");
   }
   function render(time) {
     frame = 0;
@@ -49,22 +112,33 @@
     current.x += (target.x - current.x) * damping;
     current.y += (target.y - current.y) * damping;
     current.scroll += (target.scroll - current.scroll) * damping;
+    if (measurementsDirty) measureScenes();
     const x = paused ? 0 : current.x;
     const y = paused ? 0 : current.y;
     root.style.setProperty("--pointer-x", x.toFixed(4));
     root.style.setProperty("--pointer-y", y.toFixed(4));
-    let identityProgress = 0;
-    for (const scene of scenes) {
-      const bounds = scene.getBoundingClientRect();
-      const top = bounds.top + scrollY - current.scroll;
-      const distance = Math.max(1, bounds.height - innerHeight);
-      const p = paused ? 0 : clamp(-top / distance);
+    for (const { scene, top, nextTop, distance } of sceneMeasurements) {
+      const p = paused ? 0 : clamp((current.scroll - top) / distance);
+      // Overlap follows the native scroll position, keeping the outgoing view
+      // registered with the next section while its contents ease out.
+      const handoff = paused
+        ? 0
+        : nextTop === null
+          ? clamp((p - 0.55) / 0.45)
+          : clamp((scrollY + innerHeight - nextTop) / innerHeight);
       scene.style.setProperty("--progress", p.toFixed(4));
+      scene.style.setProperty("--outro", ease(handoff).toFixed(4));
+      scene.style.setProperty(
+        "--outro-content",
+        ease(handoff / 0.6).toFixed(4),
+      );
       scene.style.setProperty(
         "--arrival",
-        clamp(1 - top / innerHeight).toFixed(4),
+        (paused
+          ? 1
+          : clamp((scrollY + innerHeight - top) / innerHeight)
+        ).toFixed(4),
       );
-      if (scene.dataset.scene === "identity") identityProgress = p;
     }
     for (const element of depthElements) {
       const bounds = element.getBoundingClientRect();
@@ -77,13 +151,6 @@
             1,
           );
       element.style.setProperty("--depth", depth.toFixed(4));
-    }
-    if (host && !paused) {
-      const bounds = host.getBoundingClientRect();
-      if (bounds.bottom > 0 && bounds.top < innerHeight) {
-        if (!brandScene) loadScene();
-        brandScene?.render({ x, y, progress: identityProgress });
-      }
     }
     const settling =
       Math.abs(current.x - target.x) + Math.abs(current.y - target.y) > 0.001 ||
@@ -113,11 +180,11 @@
         ?.setAttribute("d", paused ? "m9 5 11 7-11 7V5Z" : "M8 5v14M16 5v14");
     });
     if (paused) {
-      brandScene?.dispose();
-      brandScene = null;
       target.x = target.y = current.x = current.y = 0;
     }
+    updateFilm();
     target.scroll = current.scroll = scrollY;
+    measurementsDirty = true;
     schedule();
   }
   buttons.forEach((button) =>
@@ -160,14 +227,14 @@
     "resize",
     () => {
       target.scroll = scrollY;
-      schedule();
+      invalidateMeasurements();
     },
     { passive: true },
   );
   addEventListener("astro90:render", schedule);
   addEventListener("pageshow", () => {
     target.scroll = current.scroll = scrollY;
-    schedule();
+    invalidateMeasurements();
   });
   document.addEventListener("visibilitychange", () => {
     if (document.hidden) {
@@ -180,6 +247,9 @@
   });
   root.classList.add("spatial-ready");
   updateMotion();
+  const sceneObserver = new ResizeObserver(invalidateMeasurements);
+  scenes.forEach((scene) => sceneObserver.observe(scene));
+  document.fonts?.ready.then(invalidateMeasurements);
 
   const index = document.querySelector("#project-index");
   const indexOpener = document.querySelector("[data-index-open]");
