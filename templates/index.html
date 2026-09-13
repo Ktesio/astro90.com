@@ -1,12 +1,16 @@
 {% extends "base.html" %}
 {% block body_class %} class="home"{% endblock body_class %}
 {% block content %}
-<section class="identity-scene" data-scene="identity" data-next-scene="lighthouse">
-  <div class="identity-stage">
-    <div class="scene-axis" aria-hidden="true"></div>
-    <div class="identity-object" data-brand-film="{{ get_url(path='media/monogram-build.webp') }}"><img class="brand-poster" src="{{ get_url(path='media/monogram.webp') }}" width="960" height="960" alt="The Astro90 a, sculpted in saffron metal with a navy core" fetchpriority="high"></div>
-    <div class="identity-copy"><h1><span>Built from</span><span>curiosity.</span></h1><p>A development studio for games,<br>agentic AI and open source.</p></div>
-    <div class="scene-bottom"><a href="#lighthouse" class="scene-scroll">Explore the work{{ <ui.icon name="down" /> }}</a></div>
+<section class="night-scene" data-scene="night" data-next-scene="lighthouse">
+  <div class="night-stage" data-night-landscape>
+    <div class="night-art">
+      <img class="night-image" src="{{ get_url(path='media/night-coast-1643.webp') }}" srcset="{{ get_url(path='media/night-coast-960.webp') }} 960w, {{ get_url(path='media/night-coast-1643.webp') }} 1643w" sizes="max(100vw, 172svh)" width="1643" height="957" alt="A painted midnight coast: indigo mountains, pine-covered cliffs and the warm light of a distant lighthouse" fetchpriority="high" data-night-image>
+      <div class="night-beam" aria-hidden="true"></div>
+      <div class="night-lantern" aria-hidden="true"></div>
+    </div>
+    <div class="night-shade" aria-hidden="true"></div>
+    <div class="night-copy"><h1><span>Built from</span><em>curiosity.</em></h1></div>
+    <div class="night-footer"><p>A development studio for games,<br>agentic AI and open source.</p><a href="#lighthouse" class="night-explore"><span>Explore the work</span>{{ <ui.icon name="down" /> }}</a></div>
   </div>
 </section>
 

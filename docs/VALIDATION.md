@@ -1,5 +1,21 @@
 # Validation record
 
+## September 13, 2026 · Illustrated night opening
+
+- Replaced the homepage Blender object with a full-bleed 1643 × 957 painted coast. The original PNG and full built-in image-generation prompt are committed under `assets/source/studio/`.
+- The optimized landscape is 186,092 bytes at full resolution and 72,220 bytes at 960 px. The homepage has no brand-film host and does not request the 5.74 MiB construction animation; the studio page still uses it.
+- Zola's content/template check, production build and static audit passed: 12 pages, 517 references. The audit now includes responsive `srcset` destinations. JavaScript and Python syntax checks passed.
+- Reviewed the first fold at 1440 × 1000, 768 × 1024, 390 × 844, 320 × 740 and 812 × 450. The lighthouse remains visible, all hero copy and the work link fit, and the document has no horizontal overflow at these sizes.
+- Pointer input changed the light direction while its source remained attached to the lantern. Resize checks confirmed its position followed the same crop as the painting. The shared animation scheduler stops after input settles; no autonomous timeline was added.
+- Inspected the night-to-Lighthouse overlap on desktop and phone. Checked reverse scrolling after entering the game. A composited sticky stage fixes a WebKit alignment issue in which its absolute children could shift during reversal; the stage and painting both measured at viewport top zero in the reviewed midpoint.
+- The work link reaches `#lighthouse`. The index opens and closes, and Escape restores focus to its trigger.
+- The manual reduced-motion control hides the beam and glow, keeps the painting visible, makes the hero a single 844 px stage on the reviewed phone and removes scene overlap. The preference survived reload. Full motion was restored afterward.
+- The browser reported no console errors or warnings during review. System preference emulation and touch-device emulation are not exposed by the browser tool; their shared behavior was reviewed in source. Physical touch hardware and other browser engines were not tested.
+
+This update changes presentation and design documentation only. Product data, installation states, galleries and integrations remain as described below.
+
+## Previous revision
+
 September 13, 2026 · Blender construction and scene transitions
 
 ## Build and assets

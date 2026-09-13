@@ -58,6 +58,9 @@ class Document(HTMLParser):
                     ERRORS.append(f"{self.path}: empty {attr} on {tag}")
                 else:
                     self.refs.append(value)
+        for candidate in attrs.get("srcset", "").split(","):
+            if candidate.strip():
+                self.refs.append(candidate.split()[0])
 
     def handle_endtag(self, tag):
         if tag == "title":

@@ -1,6 +1,6 @@
 # Astro90 identity standards
 
-Version 1.1 · September 2026
+Version 1.2 · September 2026
 
 Astro90 is a development studio for games, agentic AI software and open source. The selected identity is **04 Studio Wordmark** with **09 Saffron**, used on dark surfaces by default. The signature line is **Built from curiosity.**
 
@@ -45,6 +45,8 @@ The earlier rings were intended to suggest products orbiting one studio. They di
 
 Let dark surfaces dominate. Reserve yellow for the signature and a few deliberate points of emphasis. The 3D letter can occupy a large part of a composition; ordinary content should not sit inside large gold panels. Metallic reflections naturally vary around saffron.
 
+The homepage uses saffron as a small source of light in a blue night landscape. Keep mountains, water and vegetation in subdued blues and indigo. Use warm windows and the lighthouse lantern as highlights. Preserve dark, quiet space around the signature and introductory text.
+
 Use dark text on saffron, warm white for headings on dark surfaces, and slate for supporting copy. Recheck contrast for new surface combinations. Color alone must not communicate a release state or an action.
 
 ## Typography
@@ -55,17 +57,21 @@ Use scale, alignment and spacing for hierarchy. Avoid decorative chips, numbered
 
 ## Product worlds
 
+The studio's opening is a painted coastal panorama with a small lighthouse. It establishes a setting for exploration and leads into the first game. It is editorial studio artwork, not a gameplay screenshot or a nautical theme to apply to every product. Keep the responsive crop focused on the lighthouse and maintain readable sky above it on phones. Source artwork and its generation prompt are preserved in `assets/source/studio/`.
+
 Lighthouse keeps its coastal illustration and nautical interfaces. Inkube keeps its colorful ink and dark puzzle board. Heronis uses violet and Yanando uses mint within clearly labeled interface studies. Ktesio uses technical typography and a terminal illustration.
 
 Actual development screens take priority over invented mockups. Label interface studies and unreleased products. Do not fabricate stores, dates, reviews, ratings, customers or usage metrics. Ktesio has a non-commercial source-available license, which is distinct from OSI open source.
 
 ## Motion
 
-The letter is constructed once on page load: traced filaments, connected depth, then one rounded metal object. Use the authored 3.2-second Blender animation. Keep its camera and scale fixed; do not zoom it with scroll. Product scenes respond to scrolling through image crops, oversized titles and device positions. Give the outgoing scene a full viewport of overlap with the incoming scene. The index previews respond equally to pointer hover and keyboard focus.
+On the homepage, the lighthouse's soft beam follows pointer input across the inlet. On touch devices it responds to taps and scroll position. Keep the light attached to the painted lantern as crops change; it must settle when input stops. The first scroll carries the night coast into Lighthouse's existing game artwork through a soft overlap. Do not animate the sky or stars on an idle loop.
+
+On the studio page, the letter is constructed once on page load: traced filaments, connected depth, then one rounded metal object. Use the authored 3.2-second Blender animation. Keep its camera and scale fixed; do not zoom it with scroll. Product scenes respond to scrolling through image crops, oversized titles and device positions. Give the outgoing scene a full viewport of overlap with the incoming scene. The index previews respond equally to pointer hover and keyboard focus.
 
 Scenes settle when input stops. There is no autonomous rotation, floating loop, top progress line, scroll hijacking, loading gate, custom cursor or forced scene completion. Normal document scrolling and direct links remain available.
 
-Honor `prefers-reduced-motion`. The manual Reduce motion control in the index and footer uses a session preference. Reduced motion removes the extra pinned scroll distance and substitutes the finished Blender still for the construction animation. All content and links remain available.
+Honor `prefers-reduced-motion`. The manual Reduce motion control in the index and footer uses a session preference. Reduced motion removes the extra pinned scroll distance and the landscape's light overlays. On the studio page it substitutes the finished Blender still for the construction animation. All content and links remain available.
 
 ## Voice
 

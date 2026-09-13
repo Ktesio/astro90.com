@@ -1,6 +1,6 @@
 # Creative direction
 
-The approved direction is a cinematic studio showcase, dark by default with saffron as the accent. The implemented revision uses the selected a as a physical object, spatial project navigation and scroll-controlled product compositions.
+The approved direction is a cinematic studio showcase, dark by default with saffron as the accent. The current homepage opens with an illustrated night landscape, followed by spatial project navigation and scroll-controlled product compositions. The user selected this landscape to replace the 3D hero object.
 
 ## Reference study
 
@@ -15,7 +15,11 @@ The requested references informed these choices:
 
 ## Composition
 
-The opening a is a cast-metal studio object. On page load, physical filaments trace its contour and connect its depth before the rounded surfaces form. The 3.2-second Blender render plays once. Its camera, position and scale remain fixed. Lighthouse and Inkube retain their entrances; each outgoing scene stays pinned beneath the incoming scene for one viewport, with receding artwork and an earlier fade of the title and phone. Their artwork, names and phone screens move at different depths. Heronis and Yanando occupy overlapping interface planes. Ktesio returns the site to a restrained developer composition.
+The opening fills the viewport with a painted coast: indigo mountains, blue mist, pine-covered cliffs and a small illuminated lighthouse. The headline occupies the quiet sky; the studio description and work link sit along the bottom. Saffron appears in the signature, one word of the headline and the lantern. The illustration establishes atmosphere without presenting itself as a gameplay screenshot.
+
+The light follows pointer input across the inlet. On touch devices, tapping aims the beam and scrolling guides it toward the water. Nothing loops or requires interaction to reveal the copy. The beam remains attached to the painted lantern across responsive crops. A full viewport of overlap and a soft leading mask carry the coast into Lighthouse's existing artwork. The hero's opening hold is 25% of a viewport on desktop and 20% on phones.
+
+Lighthouse and Inkube retain their entrances; each outgoing scene stays pinned beneath the incoming scene for one viewport, with receding artwork and an earlier fade of the title and phone. Their artwork, names and phone screens move at different depths. Heronis and Yanando occupy overlapping interface planes. Ktesio returns the site to a restrained developer composition. The studio page retains the cast-metal a and its finite Blender construction; the homepage no longer requests that animation.
 
 The Index control opens a spatial map of five projects. Hover and focus change the central preview. Right-angle paths connect the projects to the studio. On phones the map becomes a large, readable list with a preview behind it. The header and footer use the boxed a at mobile widths.
 

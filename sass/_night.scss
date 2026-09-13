@@ -1,0 +1,244 @@
+// The painted coast belongs to the studio; game scenes retain their own art.
+.home .site-header {
+  background: linear-gradient(180deg, #090e17f2, #090e1799 58%, #090e1700);
+}
+.night-scene {
+  --story-length: 125svh;
+  position: relative;
+  height: var(--story-length);
+  z-index: 1;
+}
+.night-stage {
+  --landscape-focus: 0.5;
+  position: sticky;
+  top: 0;
+  height: 100svh;
+  min-height: 520px;
+  overflow: hidden;
+  isolation: isolate;
+  // Keep paint and light attached when sticky scrolling reverses in WebKit.
+  transform: translateZ(0);
+  background: #0b1728;
+}
+.night-art,
+.night-image,
+.night-shade {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+.night-art {
+  opacity: calc(1 - var(--outro, 0) * 0.36);
+}
+.night-image {
+  display: block;
+  object-fit: cover;
+  object-position: calc(var(--landscape-focus) * 100%) 50%;
+}
+.night-beam {
+  position: absolute;
+  left: var(--beacon-x, 74.5%);
+  top: var(--beacon-y, 45%);
+  width: 125vmax;
+  height: 25vmax;
+  transform-origin: 0 50%;
+  transform: translateY(-50%) rotate(var(--beam-angle, 186deg));
+  filter: blur(7px);
+  mix-blend-mode: screen;
+  opacity: calc(0.5 - var(--outro, 0) * 0.3);
+}
+.night-beam::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  clip-path: polygon(0 50%, 100% 0, 100% 100%);
+  background: linear-gradient(90deg, #ffdd8866, #f4c84c1c 27%, #f4c84c00 74%);
+  mask-image: linear-gradient(180deg, transparent, #000 38% 62%, transparent);
+}
+.night-lantern {
+  position: absolute;
+  left: var(--beacon-x, 74.5%);
+  top: var(--beacon-y, 45%);
+  width: clamp(26px, 4vw, 70px);
+  aspect-ratio: 1;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(circle, #ffe4a57a, #f4c84c26 18%, #f4c84c00 66%);
+  mix-blend-mode: screen;
+}
+.night-shade {
+  background:
+    linear-gradient(0deg, #090e17e6, #090e1700 27%),
+    linear-gradient(90deg, #090e1740, #090e1700 56%),
+    linear-gradient(180deg, #090e171a, #090e1700 30%);
+}
+.night-copy {
+  position: absolute;
+  top: 21%;
+  left: var(--gutter);
+  z-index: 1;
+  opacity: calc(1 - var(--outro-content, 0));
+  transform: translateY(calc(var(--outro, 0) * -38px));
+}
+.night-copy h1 {
+  margin: 0;
+  font-size: clamp(64px, 7.15vw, 116px);
+  font-weight: 450;
+  line-height: 1.07;
+  letter-spacing: -0.068em;
+}
+.night-copy h1 > * {
+  display: block;
+}
+.night-copy h1 em {
+  font-style: normal;
+  color: var(--saffron);
+}
+.night-footer {
+  position: absolute;
+  bottom: 44px;
+  left: var(--gutter);
+  right: var(--gutter);
+  z-index: 1;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 24px;
+  opacity: calc(1 - var(--outro-content, 0));
+  transform: translateY(calc(var(--outro, 0) * -18px));
+}
+.night-footer p {
+  margin: 0;
+  font-size: clamp(15px, 1.2vw, 18px);
+  line-height: 1.7;
+  color: #c7cfd6;
+}
+.night-explore {
+  display: inline-flex;
+  align-items: center;
+  min-height: 48px;
+  gap: 30px;
+  font-size: 14px;
+}
+.night-explore .icon {
+  width: 19px;
+  height: 32px;
+  color: var(--saffron);
+  transition: transform 0.28s var(--ease);
+}
+.night-explore:hover .icon {
+  transform: translateY(5px);
+}
+.night-explore:is(:hover, :focus-visible) {
+  color: var(--saffron);
+}
+
+// Carry the coast under the incoming game with an open, soft leading edge.
+html.spatial-ready[data-motion="running"] .night-scene + .world .world-window {
+  clip-path: none;
+  mask-image: linear-gradient(
+    to bottom,
+    transparent,
+    #000 calc((1 - var(--arrival, 1)) * 38% + 1px)
+  );
+}
+
+@media (max-width: 950px) {
+  .night-stage {
+    --landscape-focus: 0.73;
+  }
+  .night-copy {
+    top: 19%;
+  }
+  .night-copy h1 {
+    font-size: clamp(58px, 8.7vw, 83px);
+  }
+}
+@media (max-width: 650px) {
+  .night-scene {
+    --story-length: 120svh;
+  }
+  .night-stage {
+    --landscape-focus: 0.76;
+  }
+  .night-copy {
+    top: 19%;
+  }
+  .night-copy h1 {
+    font-size: clamp(43px, 12.6vw, 76px);
+    line-height: 1.09;
+    letter-spacing: -0.065em;
+  }
+  .night-footer {
+    bottom: 25px;
+    display: block;
+  }
+  .night-footer p {
+    font-size: 15px;
+    line-height: 1.65;
+  }
+  .night-explore {
+    margin-top: 16px;
+    gap: 24px;
+    font-size: 13px;
+  }
+  .night-shade {
+    background: linear-gradient(0deg, #090e17f2, #090e1700 37%);
+  }
+}
+@media (max-height: 600px) and (min-aspect-ratio: 4/3) {
+  .night-stage {
+    --landscape-focus: 0.5;
+    min-height: 0;
+  }
+  .night-copy {
+    top: 28%;
+  }
+  .night-copy h1 {
+    font-size: clamp(44px, 6.8vw, 72px);
+  }
+  .night-footer {
+    bottom: 22px;
+    display: flex;
+  }
+  .night-footer p {
+    font-size: 13px;
+    line-height: 1.5;
+  }
+  .night-explore {
+    margin-top: 0;
+  }
+}
+
+html:not(.spatial-ready),
+html[data-motion="paused"] {
+  .night-scene {
+    height: auto;
+  }
+  .night-stage {
+    position: relative;
+  }
+  .night-art,
+  .night-copy,
+  .night-footer {
+    opacity: 1;
+    transform: none;
+  }
+  .night-beam,
+  .night-lantern {
+    display: none;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .night-scene {
+    height: auto;
+  }
+  .night-stage {
+    position: relative;
+  }
+  .night-beam,
+  .night-lantern {
+    display: none;
+  }
+}

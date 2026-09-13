@@ -11,6 +11,11 @@
     ),
   ];
   const host = document.querySelector("[data-brand-film]");
+  const landscape = document.querySelector("[data-night-landscape]");
+  const landscapeImage = landscape?.querySelector("[data-night-image]");
+  let landscapeMetrics = null;
+  let landscapePointer = false;
+  let beamAngle = 186;
   let manuallyPaused = false;
   try {
     manuallyPaused =
@@ -50,6 +55,25 @@
         distance: Math.max(1, bounds.height - innerHeight - overlap),
       };
     });
+    if (landscape && landscapeImage) {
+      const width = landscape.clientWidth;
+      const height = landscape.clientHeight;
+      const sourceWidth = landscapeImage.naturalWidth || 1643;
+      const sourceHeight = landscapeImage.naturalHeight || 957;
+      const scale = Math.max(width / sourceWidth, height / sourceHeight);
+      const focus = parseFloat(
+        getComputedStyle(landscape).getPropertyValue("--landscape-focus"),
+      );
+      // Keep the light attached to the painted lantern as object-fit crops
+      // the panorama differently on desktop, tablet and portrait phones.
+      const beaconX =
+        (width - sourceWidth * scale) * focus + sourceWidth * scale * 0.745;
+      const beaconY =
+        (height - sourceHeight * scale) / 2 + sourceHeight * scale * 0.45;
+      landscapeMetrics = { width, height, beaconX, beaconY };
+      landscape.style.setProperty("--beacon-x", `${beaconX.toFixed(2)}px`);
+      landscape.style.setProperty("--beacon-y", `${beaconY.toFixed(2)}px`);
+    }
     measurementsDirty = false;
   }
   function invalidateMeasurements() {
@@ -104,6 +128,24 @@
     host.append(film);
     host.classList.add("is-playing");
   }
+  function updateLandscape(damping) {
+    if (!landscapeMetrics || paused) return false;
+    const { width, height, beaconX, beaconY } = landscapeMetrics;
+    let angle = 186 - clamp(current.scroll / (height * 0.8)) * 24;
+    if (landscapePointer) {
+      const aimX = Math.min(
+        ((current.x + 1) / 2) * width,
+        beaconX - width * 0.2,
+      );
+      const aimY = ((current.y + 1) / 2) * height;
+      angle = (Math.atan2(aimY - beaconY, aimX - beaconX) * 180) / Math.PI;
+      if (angle < 0) angle += 360;
+      angle = clamp(angle, 138, 218);
+    }
+    beamAngle += (angle - beamAngle) * damping;
+    landscape.style.setProperty("--beam-angle", `${beamAngle.toFixed(3)}deg`);
+    return Math.abs(angle - beamAngle) > 0.02;
+  }
   function render(time) {
     frame = 0;
     const delta = Math.min(64, time - (lastTime || time - 16));
@@ -117,6 +159,7 @@
     const y = paused ? 0 : current.y;
     root.style.setProperty("--pointer-x", x.toFixed(4));
     root.style.setProperty("--pointer-y", y.toFixed(4));
+    const landscapeSettling = updateLandscape(damping);
     for (const { scene, top, nextTop, distance } of sceneMeasurements) {
       const p = paused ? 0 : clamp((current.scroll - top) / distance);
       // Overlap follows the native scroll position, keeping the outgoing view
@@ -153,6 +196,7 @@
       element.style.setProperty("--depth", depth.toFixed(4));
     }
     const settling =
+      landscapeSettling ||
       Math.abs(current.x - target.x) + Math.abs(current.y - target.y) > 0.001 ||
       Math.abs(current.scroll - target.scroll) > 0.2;
     if (settling && !paused) schedule();
@@ -181,6 +225,7 @@
     });
     if (paused) {
       target.x = target.y = current.x = current.y = 0;
+      landscapePointer = false;
     }
     updateFilm();
     target.scroll = current.scroll = scrollY;
@@ -207,18 +252,21 @@
         return;
       target.x = clamp((event.clientX / innerWidth) * 2 - 1, -1, 1);
       target.y = clamp((event.clientY / innerHeight) * 2 - 1, -1, 1);
+      landscapePointer = true;
       schedule();
     },
     { passive: true },
   );
   document.addEventListener("pointerleave", () => {
     target.x = target.y = 0;
+    landscapePointer = false;
     schedule();
   });
   addEventListener(
     "scroll",
     () => {
       target.scroll = scrollY;
+      if (!finePointer.matches) landscapePointer = false;
       schedule();
     },
     { passive: true },
@@ -232,6 +280,19 @@
     { passive: true },
   );
   addEventListener("astro90:render", schedule);
+  landscapeImage?.addEventListener("load", invalidateMeasurements);
+  landscape?.addEventListener(
+    "pointerdown",
+    (event) => {
+      if (paused || event.pointerType !== "touch" || event.target.closest("a"))
+        return;
+      landscapePointer = true;
+      target.x = clamp((event.clientX / innerWidth) * 2 - 1, -1, 1);
+      target.y = clamp((event.clientY / innerHeight) * 2 - 1, -1, 1);
+      schedule();
+    },
+    { passive: true },
+  );
   addEventListener("pageshow", () => {
     target.scroll = current.scroll = scrollY;
     invalidateMeasurements();

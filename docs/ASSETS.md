@@ -8,6 +8,18 @@ Selected shape: `logo-options-v1/04-wordmark.png`. Selected palette: `wordmark-c
 
 The website uses the original raster alpha through a cropped SVG viewport and a solid saffron filter. The full wordmark is not a production outline vector. The boxed a is an optically reconstructed vector from the selected first letter, shared by the favicon and mobile signature.
 
+## Illustrated night coast
+
+The homepage painting was generated with the built-in image generation tool for this revision. Its gouache-and-ink treatment uses layered midnight mountains, pines, a rocky inlet and a small warm lighthouse. It is studio artwork, not a capture from Lighthouse or any other game. No external reference image was supplied to the generator.
+
+- `assets/source/studio/night-coast.png`: unchanged 1643 × 957 generation master.
+- `assets/source/studio/night-coast-prompt.md`: complete generation prompt and provenance.
+- `static/media/night-coast-1643.webp`: full-resolution web delivery, 186,092 bytes.
+- `static/media/night-coast-960.webp`: smaller delivery, 72,220 bytes.
+- `sass/_night.scss`: full-bleed composition, responsive image crops and soft CSS light.
+
+`scripts/prepare_media.py` regenerates these WebPs with Pillow using quality 88. The source is not repainted or cropped during encoding. A responsive `srcset` chooses the delivery image; CSS crops the same panorama to keep the lighthouse in view on phones. The JavaScript measures that crop to anchor the light at the lantern, 74.5% across and 45% down in the master. All light movement is a browser presentation effect; it is not baked into an autoplay asset.
+
 ## Blender identity animation
 
 `scripts/trace_monogram.py` supplies the selected a contour. `assets/blender/build_identity.py` models a rounded, crowned saffron shell, a recessed titanium core and eight physical contour filaments with depth connections. A locked orthographic camera and four rectangular studio lights produce the reflections. All geometry, materials, lights and animation keyframes are included in the native Blender 5.2.1 LTS scene. No external model packs, textures or HDRIs are required.
@@ -32,7 +44,7 @@ python3 scripts/encode_identity.py
 
 Use `--preview` instead of `--render` to inspect four smaller keyframes before rendering the sequence. Frames are written into ignored `.local/identity-frames/`. On other systems, replace the executable path with `blender`; the encoder requires Pillow. These are optional authoring tools, not website build dependencies.
 
-`static/js/site.js` inserts the animated image once per page load when full motion is enabled. The WebP itself ends on its final frame and never loops. After playback, the browser releases the animation and shows the identically framed 960 px still. Reduced motion uses the finished still and does not request the animation. A failed image request restores the still. No browser GPU renderer or video codec is required.
+On the studio page, `static/js/site.js` inserts the animated image once per page load when full motion is enabled. The WebP itself ends on its final frame and never loops. After playback, the browser releases the animation and shows the identically framed 960 px still. Reduced motion uses the finished still and does not request the animation. A failed image request restores the still. No browser GPU renderer or video codec is required. The homepage does not request the Blender animation.
 
 Earlier orbital studies, the first static monogram scene and the WebGL experiment remain outside `static/` as design history. The WebGL authoring package writes only to `.local/`; its Three.js license is preserved beside the archived source. It is not used or delivered by the website.
 

@@ -55,7 +55,7 @@ The generated site is in `public/`. Upload that directory to a static host when 
 
 The site is a **static UI/UX iteration**. The spatial project index, screenshot viewer and pointer/scroll-driven scenes are presentation features. App Store and app-launch actions are visibly unavailable while products are in development. No store URLs, account flows, forms, payments, analytics, API integrations, or product installations are connected.
 
-The homepage moves from a physical version of the selected “a” into full-screen game worlds and layered app previews. The letter is constructed once on page load in a 3.2-second Blender animation; its camera and scale stay fixed. Game sections overlap as one recedes and the next enters. System reduced motion and the manual control remove the extra scroll distance and show the finished Blender still. The header and footer use only the boxed “a” on mobile.
+The homepage opens on a painted night coast, with indigo mountains and a small saffron lighthouse. The beam responds to the pointer, or to touch and scrolling on phones, and settles when input stops. A soft overlap carries the landscape into Lighthouse's game world. Smaller introductory type leaves most of the first screen to the illustration. The studio page retains the 3.2-second Blender letter construction. Reduced motion removes the beam and extra scroll distance, and uses the finished Blender still on the studio page. The header and footer use only the boxed “a” on mobile.
 
 Lighthouse and Inkube use actual development screenshots. Heronis and Yanando use labeled interface studies. Ktesio is source available under its own non-commercial license; it is not presented as an OSI-licensed open-source project. No download counts, ratings, customer testimonials, or release dates are invented.
 
@@ -64,7 +64,7 @@ Lighthouse and Inkube use actual development screenshots. Heronis and Yanando us
 - `content/`: page text, route structure, and front matter.
 - `data/projects.toml`: shared product descriptions, artwork, status, and links.
 - `templates/`: Tera 2 page templates and the shared components in `components.html`.
-- `sass/site.scss`: shared tokens and product components; imports `sass/_spatial.scss` for the spatial compositions and responsive rules.
+- `sass/site.scss`: shared tokens and product components; imports `sass/_spatial.scss` for the project compositions and `sass/_night.scss` for the illustrated opening.
 - `static/`: optimized delivery assets, self-hosted fonts, brand artwork, and presentation JavaScript.
 - `assets/`: Blender scenes/scripts, shared monogram geometry, archived WebGL studies, render masters and product marketing image sources.
 - `output/branding/`: the original logo and color explorations, preserved as design history. These are not published by Zola.
@@ -72,6 +72,8 @@ Lighthouse and Inkube use actual development screenshots. Heronis and Yanando us
 Use the existing components and semantic tokens when extending the site. Product facts belong in the catalog, so a status or description stays consistent across the home, collection, and detail pages.
 
 To edit the letter and its animation, open `assets/blender/astro90-identity.blend` in Blender. The reproducible scene builder is `assets/blender/build_identity.py`; `scripts/encode_identity.py` exports its frames as a transparent WebP that plays once. See the [asset guide](docs/ASSETS.md) for the render and encoding commands. Blender and Pillow are authoring dependencies; the website build remains Zola-only.
+
+The original hero painting and its generation prompt are in `assets/source/studio/`. The browser uses optimized 1643 px and 960 px WebP deliveries. `scripts/prepare_media.py` regenerates the delivery images with Pillow; it does not alter the source composition.
 
 ## Identity and design standards
 
