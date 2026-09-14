@@ -4,30 +4,35 @@ Cloudflare Pages owns the build and deployment pipeline through its GitHub integ
 
 ## Pages settings
 
-Configure these settings through the authenticated Cloudflare MCP connection, using the repository's existing Cloudflare GitHub app installation:
+The `astro90` Pages project is connected through the repository's existing Cloudflare GitHub app installation. Its settings are managed through Cloudflare MCP:
 
 | Setting | Value |
 | --- | --- |
 | Repository | `iMagdy/astro90.com` |
+| Pages project | `astro90` |
 | Production branch | `main` |
-| Automatic production deployments | Enabled after Access verification |
+| Automatic production deployments | Enabled |
+| Automatic branch previews | Enabled, protected by Access |
+| Custom domains | `astro90.com`, `www.astro90.com` |
+| Pages hostname | `astro90.pages.dev` |
 | Build command | `bash scripts/build_pages.sh` |
 | Build output | `public` |
 | Root directory | Repository root |
 | Build system | Version 3 |
 | Production and preview variable | `ZOLA_VERSION=0.23.4` |
-| Initial production and preview variable | `ASTRO90_BUILD_MODE=bootstrap` |
-| After Access verification | `ASTRO90_BUILD_MODE=site` |
+| Production and preview variable | `ASTRO90_BUILD_MODE=site` |
 
 The build script runs Zola's content checks, checks presentation JavaScript syntax, builds the site, and verifies the generated routes, links, assets and metadata. Any failed check prevents Cloudflare from publishing that build. GitHub and Cloudflare run the same build validation independently; Cloudflare does not wait for the GitHub check to finish.
 
-Production uses `https://astro90.com`. Preview builds use Cloudflare's `CF_PAGES_URL` so their navigation, images and canonical URLs stay on that preview. Keep automatic branch previews disabled until the wildcard Access application has been verified, then they can be enabled.
+Production uses `https://astro90.com`. Preview builds use Cloudflare's `CF_PAGES_URL` so their navigation, images and canonical URLs stay on that preview. A push to `main` triggers a production build on Cloudflare; other branches trigger private preview builds. No deploy hook, GitHub deployment job or hosting token is needed in GitHub Actions.
 
-## Connect hosting safely
+Both custom domains use proxied CNAME records pointing to `astro90.pages.dev`. Four Access applications cover `astro90.com`, `www.astro90.com`, `astro90.pages.dev` and `*.astro90.pages.dev`. They share the `Astro90 private preview owner` policy, which allows exactly the supplied owner email. The existing email-code identity provider and account Access organization are reused.
+
+## Recreating the private setup
 
 Use Cloudflare MCP to inspect the account, the active `astro90.com` zone, existing Pages projects, the GitHub integration and Access applications before changing them. Reuse matching resources. Create a Git-integrated Pages project when none exists; a Direct Upload project cannot be converted into a Git-integrated project.
 
-For the first build, keep `ASTRO90_BUILD_MODE=bootstrap` in both production and preview. The script also defaults to bootstrap when that variable is absent on Cloudflare. This copies only `scripts/cloudflare-bootstrap/`: a minimal Worker returning HTTP 403 on every request and a generic missing-page fallback. No website content is included.
+For the first build, keep `ASTRO90_BUILD_MODE=bootstrap` in both production and preview, with automatic branch previews disabled. The script also defaults to bootstrap when that variable is absent on Cloudflare. This copies only `scripts/cloudflare-bootstrap/`: a minimal Worker returning HTTP 403 on every request and a generic missing-page fallback. No website content is included.
 
 Connect `astro90.com` and, if used, `www.astro90.com` to the Pages project. Preserve mail and unrelated DNS records. Wait for the custom-domain certificates to become active before adding Access to those hostnames, as required by Cloudflare's domain verification.
 
@@ -39,9 +44,9 @@ Then configure and verify owner-only Access for all entry points:
 
 Use one allow policy containing exactly the owner email supplied for the private preview. Keep that private address in Cloudflare's policy rather than this public repository. Use the email one-time-code identity provider and a 24-hour session. Reuse an existing provider when possible. Do not add email-domain rules, Everyone, service-token exceptions, or bypass paths.
 
-Read back the application hostnames, identity provider and complete policy rules. Inspect any more-specific overlapping applications that could override the intended restriction. Anonymous requests to the homepage, a nested page, a static asset, a missing route, the Pages hostname and an actual deployment URL must reach the account's Access login. Complete an owner login separately to verify the authenticated experience.
+Read back the application hostnames, identity provider and complete policy rules. Inspect any more-specific overlapping applications that could override the intended restriction. Anonymous requests to the homepage, a nested page, a static asset, a missing route, the Pages hostname and an actual deployment URL must reach the account's Access login. HTTP requests may first redirect to HTTPS on the same hostname.
 
-Only after those checks pass, set `ASTRO90_BUILD_MODE=site` for the protected environments, enable automatic production deployments, and trigger a new Cloudflare build. Check its commit and deployment status, then repeat the anonymous access checks. The Zola output contains no Worker, so the deployment replaces the temporary bootstrap with static hosting.
+Only after those checks pass, set `ASTRO90_BUILD_MODE=site` for the protected environments, enable automatic production and preview deployments, and push a commit to trigger a new Cloudflare build. Check its commit and deployment status, then repeat the anonymous access checks. The Zola output contains no Worker, so the deployment replaces the temporary bootstrap with static hosting. The owner can then complete an email-code login to verify the authenticated experience.
 
 The build-mode variable controls which files are built; Cloudflare Access enforces authentication. Neither that variable nor the preview `X-Robots-Tag` header replaces an Access policy.
 
