@@ -1,94 +1,70 @@
 # Cloudflare Pages deployment
 
-The site is deployed with Wrangler from GitHub Actions. Zola **0.23.4** builds the HTML and assets; Wrangler **4.131.1** uploads them to the Direct Upload Pages project named `astro90`. The normal website has no server-side functions.
+Cloudflare Pages owns the build and deployment pipeline through its GitHub integration with `iMagdy/astro90.com`. GitHub Actions independently builds and validates the website. It has read-only repository permissions, no hosting credentials, and no deployment steps.
 
-The deployment workflow is in `.github/workflows/check.yml`. Pull requests and branches run validation. Pushes to `main` also deploy after the protection checks pass. A manual run on `main` can provision the infrastructure first by enabling the `setup` input. Deployments run sequentially and are never cancelled halfway through by a newer push.
+## Pages settings
 
-## Private preview
+Configure these settings through the authenticated Cloudflare MCP connection, using the repository's existing Cloudflare GitHub app installation:
 
-The intended custom hostnames are `astro90.com` and `www.astro90.com`. Access also protects the project's actual `pages.dev` hostname and its wildcard, which covers immutable deployment URLs and branch aliases. Each application uses a single reusable policy that allows exactly the owner email held in the `ASTRO90_ACCESS_EMAIL` secret. Email one-time codes are the only login method enabled for these applications. Sessions last 24 hours.
-
-No broad email-domain rules, service-token exceptions, IP bypasses, or public paths are added. Existing account settings and unrelated applications are left alone. The script stops for conflicting resources rather than adopting them silently.
-
-Before every upload, CI reads back the applications and policies, checks the domains and proxied DNS records, then makes anonymous requests to the site, assets, and every existing deployment alias. Those requests must redirect to this account's Access login. The checks run again after upload. An unavailable API, missing policy, changed owner rule, or failed edge check stops the workflow.
-
-`static/_headers` also sends `X-Robots-Tag: noindex, nofollow, noarchive` during the preview. This header is an indexing preference; Access provides the actual restriction.
-
-## Credentials
-
-Create a Cloudflare API token scoped to the account containing Astro90 with these permissions:
-
-| Resource | Permission |
+| Setting | Value |
 | --- | --- |
-| Account | Cloudflare Pages — Edit |
-| Account | Access: Apps and Policies — Edit |
-| Account | Access: Organizations, Identity Providers, and Groups — Edit |
-| Zone: `astro90.com` only | Zone — Read |
-| Zone: `astro90.com` only | DNS — Edit |
+| Repository | `iMagdy/astro90.com` |
+| Production branch | `main` |
+| Automatic production deployments | Enabled after Access verification |
+| Build command | `bash scripts/build_pages.sh` |
+| Build output | `public` |
+| Root directory | Repository root |
+| Build system | Version 3 |
+| Production and preview variable | `ZOLA_VERSION=0.23.4` |
+| Initial production and preview variable | `ASTRO90_BUILD_MODE=bootstrap` |
+| After Access verification | `ASTRO90_BUILD_MODE=site` |
 
-Keep the token and owner email in GitHub Actions secrets named `CLOUDFLARE_API_TOKEN` and `ASTRO90_ACCESS_EMAIL`. The account and zone IDs are discovered from the exact `astro90.com` zone, so no account ID is hardcoded. Neither secret is made available to pull-request deployment steps.
+The build script runs Zola's content checks, checks presentation JavaScript syntax, builds the site, and verifies the generated routes, links, assets and metadata. Any failed check prevents Cloudflare from publishing that build. GitHub and Cloudflare run the same build validation independently; Cloudflare does not wait for the GitHub check to finish.
 
-For local setup, create the ignored `.env.cloudflare` file:
+Production uses `https://astro90.com`. Preview builds use Cloudflare's `CF_PAGES_URL` so their navigation, images and canonical URLs stay on that preview. Keep automatic branch previews disabled until the wildcard Access application has been verified, then they can be enabled.
 
-```dotenv
-CLOUDFLARE_API_TOKEN=<your scoped token>
-ASTRO90_ACCESS_EMAIL=<the owner's email>
-```
+## Connect hosting safely
 
-The script reads that file as data, without executing shell expressions. Do not commit it or paste tokens into issues or workflow logs. Wrangler OAuth login alone does not provide the DNS and Access permissions required here.
+Use Cloudflare MCP to inspect the account, the active `astro90.com` zone, existing Pages projects, the GitHub integration and Access applications before changing them. Reuse matching resources. Create a Git-integrated Pages project when none exists; a Direct Upload project cannot be converted into a Git-integrated project.
 
-With GitHub CLI authenticated, the following stores both values through stdin without exposing them in command arguments:
+For the first build, keep `ASTRO90_BUILD_MODE=bootstrap` in both production and preview. The script also defaults to bootstrap when that variable is absent on Cloudflare. This copies only `scripts/cloudflare-bootstrap/`: a minimal Worker returning HTTP 403 on every request and a generic missing-page fallback. No website content is included.
+
+Connect `astro90.com` and, if used, `www.astro90.com` to the Pages project. Preserve mail and unrelated DNS records. Wait for the custom-domain certificates to become active before adding Access to those hostnames, as required by Cloudflare's domain verification.
+
+Then configure and verify owner-only Access for all entry points:
+
+- `astro90.com` and every additional custom hostname attached to the project.
+- The project's actual `pages.dev` hostname.
+- `*.<project-hostname>.pages.dev`, covering immutable deployments and branch aliases.
+
+Use one allow policy containing exactly the owner email supplied for the private preview. Keep that private address in Cloudflare's policy rather than this public repository. Use the email one-time-code identity provider and a 24-hour session. Reuse an existing provider when possible. Do not add email-domain rules, Everyone, service-token exceptions, or bypass paths.
+
+Read back the application hostnames, identity provider and complete policy rules. Inspect any more-specific overlapping applications that could override the intended restriction. Anonymous requests to the homepage, a nested page, a static asset, a missing route, the Pages hostname and an actual deployment URL must reach the account's Access login. Complete an owner login separately to verify the authenticated experience.
+
+Only after those checks pass, set `ASTRO90_BUILD_MODE=site` for the protected environments, enable automatic production deployments, and trigger a new Cloudflare build. Check its commit and deployment status, then repeat the anonymous access checks. The Zola output contains no Worker, so the deployment replaces the temporary bootstrap with static hosting.
+
+The build-mode variable controls which files are built; Cloudflare Access enforces authentication. Neither that variable nor the preview `X-Robots-Tag` header replaces an Access policy.
+
+## Local verification
 
 ```sh
-python3 scripts/cloudflare.py configure-ci
-```
-
-## First deployment
-
-Requirements: Zola 0.23.4, Node 22+, Python 3.11+, an active Cloudflare zone for `astro90.com`, and an existing Cloudflare Access organization.
-
-```sh
-npm ci
-python3 scripts/cloudflare.py inspect
-python3 scripts/cloudflare.py setup
 bash scripts/build_pages.sh .local/pages-production
-python3 scripts/cloudflare.py deploy --output .local/pages-production
+CF_PAGES=1 ASTRO90_BUILD_MODE=site CF_PAGES_BRANCH=preview CF_PAGES_URL=https://preview.astro90.pages.dev bash scripts/build_pages.sh .local/pages-preview
+CF_PAGES=1 ASTRO90_BUILD_MODE=bootstrap bash scripts/build_pages.sh .local/pages-bootstrap
 ```
 
-Setup creates the Pages project with Wrangler and initially uploads only `scripts/cloudflare-bootstrap/`. Its small Worker returns HTTP 403 on every request; it contains no website content. Setup then connects both custom domains, updates only their web DNS records, waits for certificates, and creates the Access applications. This ordering accommodates Cloudflare's requirement to validate a custom domain before enabling Access on that hostname.
+Normal builds need Zola 0.23.4, Python 3.11+ and Node for JavaScript syntax validation. Node does not bundle the website or install application dependencies. The bootstrap output must contain only its two source files. It must never include the site's HTML, artwork or fonts.
 
-The real site can be uploaded only after Access passes both configuration and anonymous-request checks. The Zola output contains no `_worker.js`, so that upload replaces the temporary Worker with static hosting. If domain verification takes longer than four minutes, setup stops with the closed bootstrap still in place; rerun after DNS and certificates have settled.
-
-An existing deployment with missing custom hostnames requires review before attachment, to prevent exposing its content on a new unprotected URL. Multiple existing A/AAAA/CNAME records for a hostname also require a reviewed DNS migration. MX and TXT records are preserved.
-
-## Routine checks
-
-```sh
-python3 scripts/cloudflare.py verify
-python3 -m unittest discover -s scripts -p 'test_cloudflare.py'
-```
-
-The first command verifies live protection without uploading content. It does not send login codes or sign in as the owner. Complete an owner login separately to verify the authenticated experience. Access blocks missing pages too; after authentication, Cloudflare Pages uses the generated `404.html` and returns HTTP 404.
-
-To validate a prospective preview build locally:
-
-```sh
-CF_PAGES=1 CF_PAGES_BRANCH=preview CF_PAGES_URL=https://preview.astro90.pages.dev bash scripts/build_pages.sh .local/pages-preview
-```
-
-Preview HTML uses its own origin for navigation, images and canonical URLs. CI currently deploys only `main`; the wildcard Access application protects the immutable URLs that Pages creates for those production uploads.
+Cloudflare Pages uses the generated `404.html` for missing routes and returns HTTP 404 after authentication. `static/_headers` applies a preview indexing preference plus standard response headers.
 
 ## Public release later
 
-Keep Access enabled until the owner explicitly requests the public release. The current CI script deliberately has no public or bypass switch.
+Keep Access enabled until the owner explicitly requests the public release. Make a reviewed change to remove the preview `X-Robots-Tag` header, then remove only the Astro90 Access applications for the hostnames intended to become public. Keep Pages and branch previews protected unless their release is also intended. Preserve shared identity providers and unrelated account settings.
 
-For release, make a reviewed change to remove the private-only deployment checks and the preview `X-Robots-Tag` header. Keep normal site validation. Then remove only the Astro90 Access applications for the public custom hostnames through the API. Keep the Pages hostname and wildcard private unless there is a reason to publish those URLs too. Remove the reusable owner policy only if nothing still references it, and keep the shared identity provider and account settings intact.
-
-Verify anonymous access to the homepage and assets, verify HTTP 404 for a missing route, and check that preview aliases still require authentication if they remain private. Reduce the CI token permissions once it no longer manages Access or DNS.
+Verify anonymous homepage and asset access, a real HTTP 404 for a missing route, and continued protection on any private preview URLs. Cloudflare's Git integration and the build-only GitHub workflow continue unchanged.
 
 ## References
 
-- [Cloudflare Pages with external CI](https://developers.cloudflare.com/pages/how-to/use-direct-upload-with-continuous-integration/)
+- [Cloudflare Pages Git integration](https://developers.cloudflare.com/pages/configuration/git-integration/)
 - [Zola build configuration](https://developers.cloudflare.com/pages/framework-guides/deploy-a-zola-site/)
 - [Pages Access and custom-domain limitations](https://developers.cloudflare.com/pages/platform/known-issues/)
-- [Access policy examples](https://developers.cloudflare.com/cloudflare-one/access-controls/policies/common-policies/)

@@ -32,7 +32,7 @@ python3 scripts/check_site.py
 
 The final command uses Python 3.11+ and its standard library. It checks the generated routes, internal links, assets, anchors, metadata, and basic document structure. `mise run check` runs the same checks in `.local/check-public/` so a production build cannot overwrite the running development preview. GitHub Actions runs the same checks using the pinned Zola release and a verified binary checksum.
 
-The generated site is in `public/`. GitHub Actions validates changes and is configured to deploy `main` to Cloudflare Pages through Wrangler, after verifying owner-only Cloudflare Access protection. The deployment requires the account setup and CI secrets described in the [deployment guide](docs/DEPLOYMENT.md). Pull requests run validation without deploying.
+The generated site is in `public/`. GitHub Actions only builds and validates production and preview output. Cloudflare Pages handles automatic builds and deployments through its GitHub app, using the setup described in the [deployment guide](docs/DEPLOYMENT.md). The GitHub workflow has read-only repository permissions and needs no Cloudflare credentials.
 
 ## Pages
 

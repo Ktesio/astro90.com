@@ -1,8 +1,0 @@
-{
-  "name": "astro90-site-deployment",
-  "private": true,
-  "description": "Deployment tooling; Zola builds the website.",
-  "devDependencies": {
-    "wrangler": "4.131.1"
-  }
-}
