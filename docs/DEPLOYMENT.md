@@ -64,7 +64,7 @@ Cloudflare Pages uses the generated `404.html` for missing routes and returns HT
 
 ## Public release later
 
-Keep Access enabled until the owner explicitly requests the public release. Make a reviewed change to remove the preview `X-Robots-Tag` header, then remove only the Astro90 Access applications for the hostnames intended to become public. Keep Pages and branch previews protected unless their release is also intended. Preserve shared identity providers and unrelated account settings.
+Keep Access enabled until the owner explicitly requests the public release. Make a reviewed change to set `extra.preview = false` in `zola.toml` and remove the preview `X-Robots-Tag` header, then remove only the Astro90 Access applications for the hostnames intended to become public. The configuration change updates HTML robots metadata and advertises the sitemap in robots.txt. Keep Pages and branch previews protected unless their release is also intended. Preserve shared identity providers and unrelated account settings.
 
 Verify anonymous homepage and asset access, a real HTTP 404 for a missing route, and continued protection on any private preview URLs. Cloudflare's Git integration and the build-only GitHub workflow continue unchanged.
 

@@ -1,8 +1,9 @@
 """Check a built static site without a browser or external dependencies."""
-from collections import Counter
+from collections import Counter, defaultdict
 from html.parser import HTMLParser
 from pathlib import Path
 import re
+import json
 import sys
 import tomllib
 from urllib.parse import unquote, urljoin, urlsplit
@@ -37,6 +38,11 @@ class Document(HTMLParser):
         self.description = ""
         self.canonical = ""
         self.redirect = ""
+        self.metas = defaultdict(list)
+        self.links = []
+        self.jsonld = []
+        self.in_jsonld = False
+        self.jsonld_text = ""
         self.feed(path.read_text())
 
     def handle_starttag(self, tag, attrs):
@@ -49,6 +55,15 @@ class Document(HTMLParser):
             self.main += 1
         if tag == "title":
             self.in_title = True
+        if tag == "meta":
+            self.metas[attrs.get("name") or attrs.get("property")].append(attrs.get("content", ""))
+            if attrs.get("property") == "og:image" or attrs.get("name") == "twitter:image":
+                self.refs.append(attrs.get("content", ""))
+        if tag == "link":
+            self.links.append(attrs)
+        if tag == "script" and attrs.get("type") == "application/ld+json":
+            self.in_jsonld = True
+            self.jsonld_text = ""
         if tag == "meta" and attrs.get("name") == "description":
             self.description = attrs.get("content", "")
         if tag == "meta" and attrs.get("http-equiv", "").lower() == "refresh":
@@ -73,10 +88,18 @@ class Document(HTMLParser):
     def handle_endtag(self, tag):
         if tag == "title":
             self.in_title = False
+        if tag == "script" and self.in_jsonld:
+            try:
+                self.jsonld.append(json.loads(self.jsonld_text))
+            except ValueError as error:
+                ERRORS.append(f"{self.path}: invalid JSON-LD: {error}")
+            self.in_jsonld = False
 
     def handle_data(self, value):
         if self.in_title:
             self.title += value
+        if self.in_jsonld:
+            self.jsonld_text += value
 
 
 def resolve_reference(value, source):
@@ -165,8 +188,11 @@ if animation.is_file():
     if not valid or offset != len(data) or frames <= 40 or duration != 3200 or loops != 1:
         ERRORS.append(f"Brand animation: expected a complete 3200 ms single-play WebP; got {frames} frames, {duration} ms, {loops} plays")
 
+from check_web_assets import check_web_assets
+ERRORS.extend(check_web_assets(PUBLIC, CONFIG, BASE_URL, documents))
+
 if ERRORS:
     print("Static site check failed:")
     print("\n".join(f"- {error}" for error in ERRORS))
     sys.exit(1)
-print(f"PASS: {len(documents)} pages; {references} references; routes, assets, anchors, metadata, and document structure.")
+print(f"PASS: {len(documents)} pages; {references} references; routes, assets, icons, manifest, social metadata, structured data, sitemap, and document structure.")

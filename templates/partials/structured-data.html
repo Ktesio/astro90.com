@@ -1,0 +1,58 @@
+{% set home=get_url(path='/', trailing_slash=true) %}
+{% set site_id=home ~ '#website' %}
+{% set organization_id=home ~ '#organization' %}
+{% set page_type="WebPage" %}
+{% if current_path == '/about/' %}{% set page_type="AboutPage" %}
+{% elif current_path == '/contact/' %}{% set page_type="ContactPage" %}
+{% elif section is defined and current_path != '/' %}{% set page_type="CollectionPage" %}{% endif %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": {{ organization_id | json_encode | safe }},
+      "name": "Astro90",
+      "url": {{ home | json_encode | safe }},
+      "description": {{ config.description | json_encode | safe }},
+      "email": {{ config.extra.email | json_encode | safe }},
+      "logo": {"@type":"ImageObject","url":{{ get_url(path='brand/icon-512.png') | json_encode | safe }},"width":512,"height":512}
+    },
+    {
+      "@type": "WebSite",
+      "@id": {{ site_id | json_encode | safe }},
+      "name": "Astro90",
+      "url": {{ home | json_encode | safe }},
+      "inLanguage": "en",
+      "publisher": {"@id":{{ organization_id | json_encode | safe }}}
+    },
+    {
+      "@type": {{ page_type | json_encode | safe }},
+      "@id": {{ (current_url ~ '#webpage') | json_encode | safe }},
+      "url": {{ current_url | json_encode | safe }},
+      "name": {{ meta_title | json_encode | safe }},
+      "description": {{ meta_description | json_encode | safe }},
+      "inLanguage": "en",
+      "isPartOf": {"@id":{{ site_id | json_encode | safe }}},
+      "primaryImageOfPage": {"@type":"ImageObject","url":{{ social_image | json_encode | safe }},"width":1200,"height":630}
+      {% if current_path != '/' %},"breadcrumb":{"@id":{{ (current_url ~ '#breadcrumb') | json_encode | safe }}}{% endif %}
+    }
+    {% if current_path != '/' %},
+    {
+      "@type":"BreadcrumbList",
+      "@id":{{ (current_url ~ '#breadcrumb') | json_encode | safe }},
+      "itemListElement":[
+        {"@type":"ListItem","position":1,"name":"Astro90","item":{{ home | json_encode | safe }}},
+        {% if page is defined and page.extra.parent is defined %}
+        {% set parent=get_section(path=page.extra.parent ~ '_index.md') %}
+        {"@type":"ListItem","position":2,"name":{{ parent.extra.meta_title | default(value=parent.title) | json_encode | safe }},"item":{{ parent.permalink | json_encode | safe }}},
+        {"@type":"ListItem","position":3,"name":{{ page.title | json_encode | safe }},"item":{{ current_url | json_encode | safe }}}
+        {% else %}
+        {"@type":"ListItem","position":2,"name":{% if page is defined %}{{ page.title | json_encode | safe }}{% else %}{{ section.extra.meta_title | default(value=section.title) | json_encode | safe }}{% endif %},"item":{{ current_url | json_encode | safe }}}
+        {% endif %}
+      ]
+    }
+    {% endif %}
+  ]
+}
+</script>

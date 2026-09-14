@@ -1,13 +1,20 @@
 
 <!doctype html>
-<html lang="en" data-motion="running">
+<html lang="en" data-motion="running" prefix="og: https://ogp.me/ns#">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#090E17">
-{% if page is defined %}
+{% set is_error = page is not defined and section is not defined %}
+{% set noindex = config.extra.preview or get_env(name="CF_PAGES_BRANCH", default="main") != "main" %}
+{% if is_error %}
+{% set meta_title="Page not found — Astro90" %}
+{% set meta_description="We couldn’t find this page. Return to Astro90 to explore the studio, its games, apps and public code." %}
+{% set noindex=true %}
+{% elif page is defined %}
 {% set meta_title=page.title ~ " — Astro90" %}
 {% set meta_description=page.description | default(value=config.description) %}
+{% if page.extra.noindex | default(value=false) %}{% set noindex=true %}{% endif %}
 {% elif section is defined and section.title %}
 {% set meta_title=(section.extra.meta_title | default(value=section.title)) ~ " — Astro90" %}
 {% set meta_description=section.description | default(value=config.description) %}
@@ -16,14 +23,7 @@
 {% set meta_description=config.description %}
 {% endif %}
 <title>{% block title %}{{ meta_title }}{% endblock title %}</title>
-<meta name="description" content="{{ meta_description }}">
-{% if current_url is defined %}<link rel="canonical" href="{{ current_url }}">{% endif %}
-<meta property="og:type" content="website">
-<meta property="og:title" content="{{ meta_title }}">
-<meta property="og:description" content="{{ meta_description }}">
-<meta property="og:image" content="{{ get_url(path='media/social-cover.png') }}">
-<meta name="twitter:card" content="summary_large_image">
-<link rel="icon" type="image/svg+xml" href="{{ get_url(path='brand/favicon.svg') }}">
+{% include "partials/metadata.html" %}
 <link rel="preload" href="{{ get_url(path='fonts/sora.woff2') }}" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="{{ get_url(path='site.css', cachebust=true) }}">
 <script src="{{ get_url(path='js/site.js', cachebust=true) }}" defer>

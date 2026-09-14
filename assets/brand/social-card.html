@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<title>Astro90 sharing artwork</title>
+<style>
+@font-face{font-family:Sora;src:url('__SORA__') format('woff2');font-weight:100 900}
+@font-face{font-family:Manrope;src:url('__MANROPE__') format('woff2');font-weight:200 800}
+*{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#090e17}
+.coast{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:74.5% 50%}
+.shade{position:absolute;inset:0;background:linear-gradient(90deg,rgba(9,14,23,.94),rgba(9,14,23,.68) 43%,rgba(9,14,23,.08) 79%),linear-gradient(0deg,rgba(9,14,23,.45),transparent 38%)}
+.signature{position:absolute;left:64px;top:60px;width:246px;height:auto;overflow:hidden}
+.copy{position:absolute;left:64px;top:226px;right:50px}
+h1{font:500 72px/1.1 Sora,sans-serif;letter-spacing:-4px;color:#f0f1ee;margin:0}
+h1 span{display:block}
+.subtitle{font:400 21px/1.5 Manrope,sans-serif;color:#bac5d4;margin:24px 0 0;letter-spacing:0}
+.address{position:absolute;left:64px;bottom:45px;font:500 18px Manrope,sans-serif;letter-spacing:.3px;color:#f4c84c}
+.screen{display:none;position:absolute;width:230px;height:500px;right:130px;top:65px;border:7px solid #29313e;border-radius:36px;box-shadow:0 24px 65px #0008;object-fit:cover}
+body.has-screen .coast{opacity:.55}body.has-screen .screen{display:block}
+body.has-screen h1{font-size:84px}
+body.square .coast,body.portrait .coast{object-position:75% 50%}
+body.square .shade,body.portrait .shade{background:linear-gradient(180deg,rgba(9,14,23,.84),rgba(9,14,23,.42) 44%,rgba(9,14,23,.08) 70%,rgba(9,14,23,.65))}
+body.square .signature,body.portrait .signature{left:80px;top:80px;width:300px}
+body.square .copy,body.portrait .copy{left:80px;top:235px}
+body.square h1,body.portrait h1{font-size:88px;letter-spacing:-5px}
+body.square .subtitle,body.portrait .subtitle{font-size:26px}
+body.square .address,body.portrait .address{left:80px;bottom:60px;font-size:24px}
+body.portrait .copy{top:265px}body.portrait .coast{object-position:74.5% 50%}
+body.banner .coast{object-position:75% 49%}
+body.banner .signature{left:355px;top:101px;width:375px}
+body.banner .copy{left:355px;top:221px}
+body.banner h1{font-size:44px;letter-spacing:-2px}
+body.banner h1 span{display:inline}body.banner h1 span+span:before{content:' '}
+body.banner .subtitle{font-size:20px;margin-top:19px}body.banner .address{display:none}
+</style>
+<img class="coast" src="__COAST__" alt="">
+<div class="shade"></div>
+<svg class="signature" viewBox="108 289 1320 244" aria-label="Astro90">
+<defs><filter id="saffron" color-interpolation-filters="sRGB"><feFlood flood-color="#F4C84C"/><feComposite in2="SourceGraphic" operator="in"/></filter></defs>
+<image href="__WORDMARK__" width="1536" height="1024" filter="url(#saffron)"/>
+</svg>
+<div class="copy"><h1></h1><p class="subtitle"></p></div>
+<img class="screen" alt="Development preview">
+<span class="address">astro90.com</span>
+</html>

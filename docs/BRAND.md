@@ -1,6 +1,6 @@
 # Astro90 identity standards
 
-Version 1.2 · September 2026
+Version 1.3 · September 2026
 
 Astro90 is a development studio for games, agentic AI software and open source. The selected identity is **04 Studio Wordmark** with **09 Saffron**, used on dark surfaces by default. The signature line is **Built from curiosity.**
 
@@ -22,6 +22,14 @@ The compact **a** is an optical vector reconstruction of the selected first lett
 | Background | An even dark field or a quiet area of a product image |
 
 Do not stretch, retype, outline, recolor individual letters or attach decoration. The metallic treatment is an illustration of the a, separate from the flat navigation signature. Examples in the identity guide may show both marks on mobile for comparison.
+
+## Digital assets
+
+Use the boxed a for favicons, installed browser-app icons and social avatars. Keep the opaque maskable and Apple variants square; the operating system adds its own corners. For circular crops, use the padded avatar or maskable export. The full letter stays within the central safe circle.
+
+Sharing artwork uses the current painted night coast, the original saffron wordmark and Sora/Manrope typography. Page-specific cards identify the section or product. Game cards use genuine development screenshots and retain their development status. Keep the lighthouse clear of type and preserve quiet space around the signature. The wide banner leaves room at the lower left for a profile-photo overlap; platform crops still need a visual check.
+
+Download the kit from `/brand/#downloads`. See `docs/WEB-ASSETS.md` for the sizes, integration, source files and export commands. Transparent wordmark PNGs remain raster masters; the a is available as SVG.
 
 ## Meaning of the form
 

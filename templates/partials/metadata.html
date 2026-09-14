@@ -1,0 +1,39 @@
+{% set social_cards=load_data(path="data/social.json") %}
+{% set social_card=social_cards | first %}
+{% if current_path is defined %}
+{% for card in social_cards %}{% if card.path == current_path %}{% set_global social_card=card %}{% endif %}{% endfor %}
+{% endif %}
+{% set social_image=get_url(path="brand/social/" ~ social_card.slug ~ ".jpg") %}
+<meta name="description" content="{{ meta_description }}">
+<meta name="color-scheme" content="dark">
+{% if noindex %}<meta name="robots" content="noindex, nofollow, noarchive">{% else %}<meta name="robots" content="index, follow, max-image-preview:large">{% endif %}
+{% if current_url is defined and not is_error %}<link rel="canonical" href="{{ current_url }}">{% endif %}
+<link rel="sitemap" type="application/xml" title="Sitemap" href="{{ get_url(path='sitemap.xml') }}">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="{{ config.extra.site_name }}">
+<meta property="og:locale" content="en_US">
+<meta property="og:title" content="{{ meta_title }}">
+<meta property="og:description" content="{{ meta_description }}">
+{% if current_url is defined and not is_error %}<meta property="og:url" content="{{ current_url }}">{% endif %}
+<meta property="og:image" content="{{ social_image }}">
+<meta property="og:image:type" content="image/jpeg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="{{ social_card.alt }}">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="{{ meta_title }}">
+<meta name="twitter:description" content="{{ meta_description }}">
+<meta name="twitter:image" content="{{ social_image }}">
+<meta name="twitter:image:alt" content="{{ social_card.alt }}">
+<meta name="application-name" content="Astro90">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Astro90">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<link rel="icon" href="{{ get_url(path='favicon.ico') }}" sizes="16x16 32x32 48x48" type="image/x-icon">
+<link rel="icon" href="{{ get_url(path='brand/favicon-96.png') }}" sizes="96x96" type="image/png">
+<link rel="icon" href="{{ get_url(path='brand/favicon.svg') }}" sizes="any" type="image/svg+xml">
+<link rel="apple-touch-icon" href="{{ get_url(path='apple-touch-icon.png') }}" sizes="180x180">
+<link rel="mask-icon" href="{{ get_url(path='brand/safari-pinned-tab.svg') }}" color="#F4C84C">
+<link rel="manifest" href="{{ get_url(path='site.webmanifest') }}" crossorigin="use-credentials">
+{% if not is_error %}{% include "partials/structured-data.html" %}{% endif %}

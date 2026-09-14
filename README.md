@@ -30,7 +30,7 @@ zola build
 python3 scripts/check_site.py
 ```
 
-The final command uses Python 3.11+ and its standard library. It checks the generated routes, internal links, assets, anchors, metadata, and basic document structure. `mise run check` runs the same checks in `.local/check-public/` so a production build cannot overwrite the running development preview. GitHub Actions runs the same checks using the pinned Zola release and a verified binary checksum.
+The final command uses Python 3.11+ and its standard library. It checks generated routes, links, assets, icon and sharing-image dimensions, manifest entries, Open Graph/Twitter metadata, JSON-LD, sitemap exclusions, the downloadable asset kit, and document structure. `mise run check` runs the same checks in `.local/check-public/` so a production build cannot overwrite the running development preview. GitHub Actions runs the same checks using the pinned Zola release and a verified binary checksum.
 
 The generated site is in `public/`. GitHub Actions only builds and validates production and preview output. Cloudflare Pages handles automatic builds and deployments through its GitHub app, using the setup described in the [deployment guide](docs/DEPLOYMENT.md). The GitHub workflow has read-only repository permissions and needs no Cloudflare credentials.
 
@@ -51,7 +51,7 @@ The generated site is in `public/`. GitHub Actions only builds and validates pro
 | `/studio/` | Redirect to `/about/`, preserving old links |
 | `/contact/` | Public email, copy-address feedback and enquiry guidance |
 | `/accessibility/` | Motion settings, keyboard controls and reporting help |
-| `/brand/` | Visual identity standards |
+| `/brand/` | Visual identity standards, asset previews and downloads |
 | `/brand/states/` | Loading, unavailable, empty, confirmation and release specimens |
 | `/404.html` | Custom missing-page design |
 
@@ -87,6 +87,7 @@ The original hero painting and its generation prompt are in `assets/source/studi
 - [Design system](docs/DESIGN-SYSTEM.md)
 - [Confirmed creative direction](docs/DESIGN-DIRECTION.md)
 - [Artwork sources and regeneration](docs/ASSETS.md)
+- [Favicons, app icons, sharing images and search metadata](docs/WEB-ASSETS.md)
 - [Deployment and private preview access](docs/DEPLOYMENT.md)
 
 Sora and Manrope are distributed under the SIL Open Font License; their license files are included. The public availability of this repository does not grant rights to Astro90 or product trademarks, artwork, or proprietary product code. See [asset notes](docs/ASSETS.md).

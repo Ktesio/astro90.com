@@ -1,5 +1,15 @@
 # Validation record
 
+## September 14, 2026 · Digital assets and discovery metadata
+
+- Created 41 digital exports, including favicon resolutions, Apple and maskable app icons, avatars, transparent wordmarks, fourteen route-specific sharing cards, social post formats and a wide banner. The downloadable archive contains those files, the app manifest and its guide.
+- Production and preview builds passed the expanded standard-library audit: 16 HTML documents and 867 references. Checks cover actual image dimensions, metadata consistency, canonical and schema origins, breadcrumb hierarchy, manifest icons and shortcuts, sitemap exclusions and exact archive contents.
+- Chrome parsed the app manifest with no errors and reported no installability errors in a fresh, non-incognito test profile. A normal link click downloaded the complete asset archive successfully. No app was installed on the user's computer.
+- Reviewed the Brand download section at 1440 × 1000 and 390 × 844. No horizontal overflow, page errors or failed resource requests were reported. The mobile header retains the compact a. Reviewed all fourteen social cards, the portrait and banner crops, and favicon exports on dark and light backgrounds at their real sizes.
+- Verified every non-background pixel of the maskable letter remains inside the centered 40%-radius safe circle, with an entirely opaque background. Reviewed circular and Apple-style masks visually.
+- A temporary release configuration rendered indexable production metadata and a sitemap directive, while the error page, interface specimens and non-production branches retained noindex. The committed configuration remains private. The bootstrap check still produces only its two closed-setup files.
+- The generated-HTML check caught Zola's minifier collapsing the manifest's `crossorigin="use-credentials"` attribute. HTML minification is disabled to preserve authenticated manifest loading. Owner authentication and installation on physical iOS/Android devices were not performed; Cloudflare Access remains in place.
+
 ## September 13, 2026 · Studio pages and interface states
 
 - Added About, Contact, Accessibility and a public interface-state gallery under Brand. The existing Studio route redirects to About. Contact uses the owner-confirmed `hello@astro90.com`; no email was sent and no submission service was added.

@@ -33,7 +33,7 @@ The 96-frame timeline is 3.2 seconds at 30 fps: contours are traced, depth conne
 - `static/media/monogram.webp`: finished still for reduced motion and fallback.
 - `static/media/monogram-build.webp`: 720 × 720 transparent animation encoded to play once.
 - `scripts/encode_identity.py`: delivery encoding and checks for framing, duration and repeat count.
-- `static/media/social-cover.png`: 1200 × 630 sharing card from the earlier static letter scene.
+- `static/media/social-cover.png`: now the 1200 × 630 night-coast sharing card, preserving the previous image URL.
 
 To regenerate on macOS:
 
@@ -47,6 +47,10 @@ Use `--preview` instead of `--render` to inspect four smaller keyframes before r
 The Blender entrance is retained as an identity study. No current page requests it: `/studio/` now redirects to the editorial About page. Its optional `data-brand-film` enhancement remains in `static/js/site.js`, with one playback, frame release and a reduced-motion still, for a future identity demonstration. The homepage uses the painted coast.
 
 Earlier orbital studies, the first static monogram scene and the WebGL experiment remain outside `static/` as design history. The WebGL authoring package writes only to `.local/`; its Three.js license is preserved beside the archived source. It is not used or delivered by the website.
+
+## Digital exports
+
+`scripts/generate_brand_assets.cjs` renders app icons from `assets/brand/monogram.json` and sharing cards from `assets/brand/social-card.html`. The current coast, wordmark alpha and existing game screens are composed without repainting their sources. `data/social.json` holds the route mapping and copy. The committed exports, dimensions, installation metadata and downloadable kit are documented in `docs/WEB-ASSETS.md`.
 
 ## Product artwork
 
