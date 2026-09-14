@@ -67,7 +67,7 @@ Marketing images are from the studio's existing product projects. Only product-f
 | `assets/source/products/inkube-game.jpg` | Inkube `docs/img/game.jpg` | Puzzle screen preview |
 | `assets/source/products/inkube-gameover.jpg` | Inkube `docs/img/gameover.jpg` | Result screen preview |
 
-All displayed screenshots are development previews. The Heronis and Yanando windows are original HTML/CSS interface studies for this website, explicitly labeled as such. They are not screenshots of a released product. The Ktesio terminal is an editorial illustration, not a live terminal or runtime telemetry.
+All displayed screenshots are development previews of Lighthouse and Inkube. Both games are in development for iOS.
 
 ## Fonts
 
@@ -75,6 +75,6 @@ Sora and Manrope Latin variable WOFF2 files are self-hosted in `static/fonts/`. 
 
 ## Rights and publication
 
-The Astro90 identity and product artwork belong to their respective studio/product owners. Publishing this website's repository does not relicense proprietary games, grant use of trademarks, or change any linked project's license. Ktesio's license is identified separately on its page. Check a repository's own license before using its code.
+The Astro90 identity and product artwork belong to their respective studio/product owners. Publishing this website's repository does not relicense proprietary games, grant use of trademarks, or change any linked project's license. Check a repository's own license before using its code.
 
 The original branding history and source masters live outside `static/` and are not included in a Zola website deployment. Deliveries use optimized WebP images, a PNG sharing card and SVG icons. The selected wordmark WebP preserves the original alpha losslessly.

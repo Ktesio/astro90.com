@@ -1,6 +1,6 @@
 # Astro90
 
-An independent development studio making mobile games, agentic AI software, and tools for developers. **Built from curiosity.**
+An independent studio focused on mobile games and entertainment. **Built from curiosity.**
 
 This repository contains the Astro90 website, the selected identity, and its design sources. The website is built with [Zola](https://www.getzola.org/), the Rust static site generator. The visual direction is cinematic and dark by default, with saffron as the accent.
 
@@ -42,12 +42,7 @@ The generated site is in `public/`. GitHub Actions only builds and validates pro
 | `/games/` | Mobile game collection |
 | `/games/lighthouse/` | Lighthouse art, features, screenshots, and release state |
 | `/games/inkube/` | Inkube art, features, screenshots, and release state |
-| `/apps/` | Web app collection |
-| `/apps/heronis/` | Personal agent product preview |
-| `/apps/yanando/` | Productivity product preview |
-| `/open-source/` | Public code and developer tools, with license distinctions |
-| `/open-source/ktesio/` | Ktesio overview and source link |
-| `/about/` | Studio story, disciplines and identity |
+| `/about/` | Studio story, games and identity |
 | `/studio/` | Redirect to `/about/`, preserving old links |
 | `/contact/` | Public email, copy-address feedback and enquiry guidance |
 | `/accessibility/` | Motion settings, keyboard controls and reporting help |
@@ -57,11 +52,11 @@ The generated site is in `public/`. GitHub Actions only builds and validates pro
 
 ## This iteration
 
-The site is a **static UI/UX iteration**. The spatial project index, screenshot viewer and pointer/scroll-driven scenes are presentation features. App Store and app-launch actions are visibly unavailable while products are in development. Contact uses the public address in `zola.toml` (`extra.email`) with standard email links and local copy feedback. No store URLs, account flows, submission forms, payments, analytics, API integrations, or product installations are connected.
+The site is a **static UI/UX iteration**. The spatial project index, screenshot viewer and pointer/scroll-driven scenes are presentation features. App Store actions are visibly unavailable while the games are in development. Contact uses the public address in `zola.toml` (`extra.email`) with standard email links and local copy feedback. No store URLs, account flows, submission forms, payments, analytics, API integrations, or product installations are connected.
 
 The homepage opens on a painted night coast, with indigo mountains and a small saffron lighthouse. The beam responds to the pointer, or to touch and scrolling on phones, and settles when input stops. A soft overlap carries the landscape into Lighthouse's game world. Smaller introductory type leaves most of the first screen to the illustration. About combines the painted coast with an editorial introduction to the work. Reduced motion removes the beam and extra scroll distance. The header and footer use only the boxed “a” on mobile.
 
-Lighthouse and Inkube use actual development screenshots. Heronis and Yanando use labeled interface studies. Ktesio is source available under its own non-commercial license; it is not presented as an OSI-licensed open-source project. No download counts, ratings, customer testimonials, or release dates are invented.
+Lighthouse and Inkube use actual development screenshots. Both games are in development for iOS. No download counts, ratings, customer testimonials, or release dates are invented.
 
 ## Working on the site
 

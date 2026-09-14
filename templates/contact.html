@@ -2,15 +2,15 @@
 {% block content %}
 <section class="contact-intro container">
   <h1>Say<br><em>hello.</em></h1>
-  <div class="contact-address"><p>A project, a collaboration,<br>or something you’d like to ask.</p><a class="email-link" href="mailto:{{ config.extra.email }}">{{ config.extra.email }}{{ <ui.icon name="diagonal" /> }}</a><div class="copy-address"><button class="quiet-button" type="button" data-copy-email="{{ config.extra.email }}" hidden>{{ <ui.icon name="copy" /> }}<span>Copy email address</span></button><p role="status" aria-live="polite" data-copy-status></p></div></div>
+  <div class="contact-address"><p>A game, a collaboration,<br>or something you’d like to ask.</p><a class="email-link" href="mailto:{{ config.extra.email }}">{{ config.extra.email }}{{ <ui.icon name="diagonal" /> }}</a><div class="copy-address"><button class="quiet-button" type="button" data-copy-email="{{ config.extra.email }}" hidden>{{ <ui.icon name="copy" /> }}<span>Copy email address</span></button><p role="status" aria-live="polite" data-copy-status></p></div></div>
   <div class="contact-stamp" aria-hidden="true"><img src="{{ get_url(path='brand/monogram.svg') }}" alt="" width="180" height="180"><span>Astro90<br>Built from curiosity.</span></div>
 </section>
 <section class="contact-details container" aria-labelledby="contact-details-title">
   <h2 id="contact-details-title">A good place<br><em>to start.</em></h2>
   <div class="contact-topics">
-    <article><h3>Talk about a project</h3><p>Tell us what you’re making, where you are with it, and how you’d like us to help. A few lines and a link are enough to begin.</p><a class="text-link" href="mailto:{{ config.extra.email }}?subject=Project%20enquiry">Start an email{{ <ui.icon name="diagonal" /> }}</a></article>
-    <article><h3>Ask about a product</h3><p>Mention the product name. If you’ve found a problem, include the page or screen, your device, and the steps that led to it.</p><a class="text-link" href="{{ get_url(path='games/') }}">Browse the games{{ <ui.icon name="diagonal" /> }}</a><a class="text-link" href="{{ get_url(path='apps/') }}">Browse the apps{{ <ui.icon name="diagonal" /> }}</a></article>
-    <article><h3>Explore the code</h3><p>Source, documentation and contribution details live in each repository. Check the project’s license before using or sharing its code.</p><a class="text-link" href="{{ get_url(path='open-source/') }}">Public code{{ <ui.icon name="diagonal" /> }}</a></article>
+    <article><h3>Talk about a game</h3><p>Tell us about your game or entertainment project and how you’d like to work together. A few lines and a link are enough to begin.</p><a class="text-link" href="mailto:{{ config.extra.email }}?subject=Project%20enquiry">Start an email{{ <ui.icon name="diagonal" /> }}</a></article>
+    <article><h3>Ask about our games</h3><p>Mention the game name. If you’ve found a problem, include the page or screen, your device, and the steps that led to it.</p><a class="text-link" href="{{ get_url(path='games/') }}">Browse the games{{ <ui.icon name="diagonal" /> }}</a></article>
+    <article><h3>Press & artwork</h3><p>Writing about Astro90? Download the studio wordmark and sharing images. Email us for game artwork or questions about the studio.</p><a class="text-link" href="{{ get_url(path='brand/') }}#downloads">Brand assets{{ <ui.icon name="diagonal" /> }}</a></article>
   </div>
 </section>
 <div class="container">{{ <ui.next_chapter title="Meet the studio." path="about/" /> }}</div>

@@ -16,7 +16,7 @@ The kit extends the approved Studio Wordmark 04 and Saffron 09 identity. All ico
 | `brand/avatar-1024.png` | 1024 × 1024 PNG | Social profile photo, safe for a circular crop |
 | `brand/safari-pinned-tab.svg` | Monochrome SVG | Safari pinned-tab mask |
 | `brand/wordmark-{saffron,white,midnight}.png` | 1320 × 244 transparent PNG | The original signature on dark or light surfaces |
-| `brand/social/*.jpg` | 1200 × 630 JPEG | Fourteen page-specific Open Graph / social cards |
+| `brand/social/*.jpg` | 1200 × 630 JPEG | Nine page-specific Open Graph / social cards |
 | `brand/social/post-square.jpg` | 1080 × 1080 JPEG | Square social post |
 | `brand/social/post-portrait.jpg` | 1080 × 1350 JPEG | Portrait social post |
 | `brand/social/profile-banner.jpg` | 1500 × 500 JPEG | Wide profile banner; preview each platform's crop |
@@ -35,7 +35,7 @@ The full wordmark PNGs preserve the selected raster alpha at its native cropped 
 
 HTML minification is disabled because the current Zola minifier removes the `use-credentials` value from the manifest link. The generated-HTML check explicitly verifies this value so a future minifier change cannot silently break authenticated manifest loading.
 
-`site.webmanifest` defines a stable root app ID, launch URL and scope, a standalone window, midnight launch and theme colors, and shortcuts to Games, Apps and Public code. Its same-origin paths work on production and branch previews. Installation presentation depends on the browser and operating system. This remains a static website: there is no offline cache, service worker, push permission or custom install prompt.
+`site.webmanifest` defines a stable root app ID, launch URL and scope, a standalone window, midnight launch and theme colors, and shortcuts to Games, Lighthouse and Inkube. Its same-origin paths work on production and branch previews. Installation presentation depends on the browser and operating system. This remains a static website: there is no offline cache, service worker, push permission or custom install prompt.
 
 JSON-LD describes the real organization, website, page and navigation hierarchy. Product availability, pricing, reviews, addresses, dates and social accounts are not fabricated. The generated sitemap excludes the old Studio redirect, the error page and the internal interface-state specimens.
 

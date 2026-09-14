@@ -10,6 +10,6 @@ title_accent = "play."
 caption = "POCKET-SIZED POSSIBILITIES"
 label = "Mobile games"
 kind = "games"
-next_title = "Explore the apps."
-next_path = "apps/"
+next_title = "Meet the studio."
+next_path = "about/"
 +++

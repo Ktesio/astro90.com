@@ -1,8 +1,8 @@
 # Astro90 identity standards
 
-Version 1.3 · September 2026
+Version 1.5 · September 2026
 
-Astro90 is a development studio for games, agentic AI software and open source. The selected identity is **04 Studio Wordmark** with **09 Saffron**, used on dark surfaces by default. The signature line is **Built from curiosity.**
+Astro90 is an independent studio focused on mobile games and entertainment. The selected identity is **04 Studio Wordmark** with **09 Saffron**, used on dark surfaces by default. The signature line is **Built from curiosity.**
 
 ## Signature
 
@@ -13,6 +13,7 @@ The compact **a** is an optical vector reconstruction of the selected first lett
 | Use | Standard |
 | --- | --- |
 | Desktop header | Full saffron wordmark, 166 px wide |
+| Open navigation | Boxed a, 44 px at every viewport size |
 | Header and footer at 650 px or below | Boxed a only |
 | Short phone landscape, up to 950 × 600 px | Boxed a only |
 | Mobile icon | 43 px artwork inside a 44 px minimum link target |
@@ -33,7 +34,7 @@ Download the kit from `/brand/#downloads`. See `docs/WEB-ASSETS.md` for the size
 
 ## Meaning of the form
 
-The a identifies the studio directly. Its rounded corners preserve the selected lettering; the saffron face and dark core translate the two brand colors into a physical object. The index connects the five products to that object with paths that turn through 90 degrees. This is a visual use of the name, not a claim about its origin.
+The a identifies the studio directly. Its rounded corners preserve the selected lettering; the saffron face and dark core translate the two brand colors into a physical object. The earlier spatial index and right-angle paths are retired. The current navigation extends the illustrated coast into a sea of destinations; the a remains the home signature.
 
 The earlier rings were intended to suggest products orbiting one studio. They did not establish a distinctive Astro90 association and are retired from the website. Original explorations remain in the source archive. Do not reintroduce rings or floating spheres as default brand decoration.
 
@@ -67,26 +68,28 @@ Use scale, alignment and spacing for hierarchy. Avoid decorative chips, numbered
 
 The studio's opening is a painted coastal panorama with a small lighthouse. It establishes a setting for exploration and leads into the first game. It is editorial studio artwork, not a gameplay screenshot or a nautical theme to apply to every product. Keep the responsive crop focused on the lighthouse and maintain readable sky above it on phones. Source artwork and its generation prompt are preserved in `assets/source/studio/`.
 
-Lighthouse keeps its coastal illustration and nautical interfaces. Inkube keeps its colorful ink and dark puzzle board. Heronis uses violet and Yanando uses mint within clearly labeled interface studies. Ktesio uses technical typography and a terminal illustration.
+The navigation uses four separate painted islands, with one destination on each: Lighthouse, Inkube, About and Contact. Their lighthouses, cottages and harbours are studio navigation artwork, not representations of game levels. Keep the whole shoreline in frame at every size. Preserve the saffron lights and readable warm-white labels; avoid decorative coordinates, invented lore and extra slogans. The original transparent illustrations and prompts are in `assets/source/navigation/`.
 
-Actual development screens take priority over invented mockups. Label interface studies and unreleased products. Do not fabricate stores, dates, reviews, ratings, customers or usage metrics. Ktesio has a non-commercial source-available license, which is distinct from OSI open source.
+Lighthouse keeps its coastal illustration and nautical interfaces. Inkube keeps its colorful ink and dark puzzle board.
+
+Actual development screens take priority over invented mockups. Label unreleased games and development previews. Do not fabricate stores, dates, reviews, ratings, customers or usage metrics.
 
 ## Motion
 
 On the homepage, the lighthouse's soft beam follows pointer input across the inlet. On touch devices it responds to taps and scroll position. Keep the light attached to the painted lantern as crops change; it must settle when input stops. The first scroll carries the night coast into Lighthouse's existing game artwork through a soft overlap. Do not animate the sky or stars on an idle loop.
 
-The archived Blender identity study constructs the letter once: traced filaments, connected depth, then one rounded metal object. The authored Blender animation lasts 3.2 seconds. No current page loads it. Keep its camera and scale fixed; do not zoom it with scroll. Product scenes respond to scrolling through image crops, oversized titles and device positions. Give the outgoing scene a full viewport of overlap with the incoming scene. The index previews respond equally to pointer hover and keyboard focus.
+The archived Blender identity study constructs the letter once: traced filaments, connected depth, then one rounded metal object. The authored Blender animation lasts 3.2 seconds. No current page loads it. Keep its camera and scale fixed; do not zoom it with scroll. Product scenes respond to scrolling through image crops, oversized titles and device positions. Give the outgoing scene a full viewport of overlap with the incoming scene. The sea navigation responds equally to pointer hover and keyboard focus. Each destination lights up, its shoreline brightens and a boat changes course toward it. Clicking gives brief water feedback before following the link. The system and manual reduced-motion settings keep the islands and their labels while removing travel and the click delay.
 
 Scenes settle when input stops. There is no autonomous rotation, floating loop, top progress line, scroll hijacking, loading gate, custom cursor or forced scene completion. Normal document scrolling and direct links remain available.
 
-Honor `prefers-reduced-motion`. The manual Reduce motion control in the index and footer uses a session preference. Reduced motion removes the extra pinned scroll distance and the landscape's light overlays. All content and links remain available.
+Honor `prefers-reduced-motion`. The manual Reduce motion control in the navigation and footer uses a session preference. Reduced motion removes the extra pinned scroll distance and the landscape's light overlays. All content and links remain available.
 
 ## Voice
 
-Describe what the product does and where it stands. Let artwork supply atmosphere. Use concrete language such as “coastal logic puzzles,” “personal AI agents” and “token budgets.” Keep technical detail where it helps a developer decide what to inspect.
+Describe how the game plays and where it stands. Let artwork supply atmosphere. Use concrete language such as “coastal logic puzzles,” “merging ink” and “chain reactions.” State supported platforms and development status.
 
-Astro90 is the shared signature, while Lighthouse, Inkube, Heronis, Yanando and Ktesio retain distinct names and product identities.
+Astro90 is the shared signature, while Lighthouse and Inkube retain distinct names and game identities.
 
 ## Feedback
 
-Use the index’s four-square motif for pending previews. Let images load in their reserved space and keep the rest of the page available. Pair unavailable states with plain language and a retry action. A copied address earns an inline confirmation only after the copy succeeds. See `/brand/states/` for specimens.
+Use the Explore control’s four-square motif for pending previews. Let images load in their reserved space and keep the rest of the page available. Pair unavailable states with plain language and a retry action. A copied address earns an inline confirmation only after the copy succeeds. See `/brand/states/` for specimens.

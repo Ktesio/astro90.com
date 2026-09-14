@@ -1,21 +1,68 @@
-<dialog id="project-index" class="atlas" aria-labelledby="index-title">
-  <div class="atlas-top"><h2 id="index-title">The studio index</h2><button class="index-close" type="button" data-index-close aria-label="Close index"><span>Close</span>{{ <ui.icon name="close" /> }}</button></div>
-  <div class="atlas-map" data-active-project="studio">
-    <svg class="atlas-routes" viewBox="0 0 1200 600" preserveAspectRatio="none" aria-hidden="true"><path d="M210 130H390V300H600M170 440H430V300H600M600 300H850V100H970M600 300H890V410H1030M600 300V530H730"/></svg>
-    <div class="atlas-preview" aria-hidden="true">
-      <img class="atlas-image atlas-image--studio" src="{{ get_url(path='media/monogram.webp') }}" alt="" width="1500" height="1500">
-      <img class="atlas-image atlas-image--lighthouse" src="{{ get_url(path='media/lighthouse-coast.webp') }}" alt="" width="1024" height="1536" loading="lazy">
-      <img class="atlas-image atlas-image--inkube" src="{{ get_url(path='media/inkube-game.webp') }}" alt="" width="395" height="860" loading="lazy">
-      <div class="atlas-image atlas-image--heronis"><span>h</span><p>Personal AI agents</p></div>
-      <div class="atlas-image atlas-image--yanando"><span>y</span><p>Tasks. Priorities. Teamwork.</p></div>
-      <div class="atlas-image atlas-image--ktesio"><span>kt<span>_</span></span><p>Agent infrastructure in Rust</p></div>
-    </div>
-    <nav class="atlas-projects" aria-label="Projects">
-      {% set catalog=load_data(path="data/projects.toml") %}
-      {% for project in catalog.projects %}
-      <a class="atlas-project atlas-project--{{ project.id }}" href="{{ get_url(path=project.url) }}" data-project="{{ project.id }}"><span class="atlas-project-type">{{ project.platform }}</span><span class="atlas-project-name">{{ project.title }}{{ <ui.icon name="diagonal" /> }}</span></a>
-      {% endfor %}
-    </nav>
+<dialog id="project-index" class="sea-nav" aria-labelledby="index-title">
+  <h2 id="index-title" class="sea-sr-only">Explore Astro90</h2>
+  <div class="sea-water" aria-hidden="true">
+    <svg class="sea-currents" viewBox="0 0 1440 1000" preserveAspectRatio="xMidYMid slice">
+      <defs>
+        <pattern id="sea-ripples" width="270" height="160" patternUnits="userSpaceOnUse" patternTransform="rotate(-12)">
+          <g fill="none" stroke="#97bfcc" stroke-width=".7">
+            <path d="M12 22q18-5 40 0m79 53q27-5 58-1M67 141q24-5 60-2M201 127l19-2" opacity=".19"/>
+            <path d="M175 31q28-5 55-1M17 90l23-2m19 9q21-3 38-1" opacity=".11"/>
+          </g>
+        </pattern>
+        <radialGradient id="sea-current-fade"><stop stop-color="#fff"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient>
+        <mask id="sea-current-mask"><rect width="1440" height="1000" fill="url(#sea-current-fade)"/></mask>
+      </defs>
+      <rect width="1440" height="1000" fill="url(#sea-ripples)"/>
+      <g class="sea-contours" mask="url(#sea-current-mask)" fill="none" stroke="#6e9ba7" stroke-width=".8">
+        <path d="M-150 615C60 300 270 510 483 506S660 120 875 164s190 290 425 220 257-230 310-120"/>
+        <path d="M-160 640C68 315 270 528 485 522S688 141 879 183s192 290 428 224 240-223 309-114"/>
+        <path d="M-155 665C76 330 270 546 487 538S712 163 883 202s194 290 430 228 220-216 308-108"/>
+        <path d="M-140 695C84 345 270 564 489 554S736 185 887 221s196 290 430 232 205-200 308-101"/>
+        <path d="M-120 725C92 360 270 584 491 570S760 207 891 240s198 290 430 236 190-193 308-94"/>
+        <path d="M-105 755C100 375 270 602 493 586S784 229 895 259s200 290 430 240 174-186 308-87"/>
+        <path d="M-100 785C108 390 270 620 495 602S805 251 899 278s202 290 430 244 159-179 308-80"/>
+      </g>
+    </svg>
+    <div class="sea-sheen"></div>
   </div>
-  <div class="atlas-bottom"><nav aria-label="Studio pages"><a href="{{ get_url(path='games/') }}">Games</a><a href="{{ get_url(path='apps/') }}">Apps</a><a href="{{ get_url(path='open-source/') }}">Code</a><a href="{{ get_url(path='about/') }}">About</a><a href="{{ get_url(path='contact/') }}">Contact</a><a href="{{ get_url(path='brand/') }}">Identity</a><a href="https://github.com/iMagdy">GitHub{{ <ui.icon name="diagonal" /> }}</a></nav><button class="motion-switch" type="button" aria-label="Reduce motion" aria-pressed="false" data-motion-toggle>{{ <ui.icon name="pause" /> }}<span>Reduce motion</span></button></div>
+  <div class="sea-top">
+    <a class="sea-home" href="{{ get_url(path='/') }}" aria-label="Astro90 home"><img src="{{ get_url(path='brand/monogram.svg') }}" alt="" width="44" height="44"></a>
+    <button class="index-close" type="button" data-index-close aria-label="Close navigation" autofocus><span>Close</span>{{ <ui.icon name="close" /> }}</button>
+  </div>
+  <div class="sea-map" data-sea-map>
+    <svg class="sea-course" aria-hidden="true"><path data-sea-course fill="none"/></svg>
+    <span class="sea-vessel" data-sea-vessel aria-hidden="true">
+      <svg viewBox="0 0 100 50" fill="none">
+        <g class="sea-vessel-wake" stroke="#b0d5d8" stroke-linecap="round"><path d="M34 19 3 8m31 23L3 42" opacity=".25"/><path d="M25 21 6 16m19 13L6 34" opacity=".5"/></g>
+        <ellipse cx="60" cy="30" rx="30" ry="10" fill="#020d17" opacity=".6"/>
+        <path d="M34 17Q68 10 91 25 68 41 34 33Z" fill="#a37b34"/>
+        <path d="M34 15Q69 9 92 24 66 36 34 31Z" fill="#e8c66b"/>
+        <path d="M38 18Q65 12 85 24 66 32 38 28Z" fill="#344955"/>
+        <path d="M48 15H65L69 23 65 29H48Z" fill="#e7e5d2"/>
+        <path d="M51 18H61V26H51Z" fill="#9cafb3"/><path d="M66 19 70 23 66 27Z" fill="#122b3a"/>
+        <path d="M77 18V31M39 24H84" stroke="#f6dda4" stroke-width="1.2"/>
+        <circle cx="70" cy="24" r="1.5" fill="#ffe7a4"/>
+      </svg>
+    </span>
+    <svg class="sea-sailboat" viewBox="0 0 80 100" aria-hidden="true">
+      <path d="m24 87-6 11m36-11 8 11" fill="none" stroke="#a0c4ce" stroke-opacity=".3"/>
+      <path d="M26 61Q39 54 55 61L45 83H34Z" fill="#b5a77e"/><path d="M37 17V73" stroke="#bfbdad" stroke-width="2"/>
+      <path d="M35 19 13 60 35 57Z" fill="#c3c7bd"/><path d="M41 26 60 61 41 59Z" fill="#7f999f"/>
+    </svg>
+    <nav class="sea-islands" aria-label="Main navigation">
+      {% set catalog=load_data(path="data/projects.toml") %}
+      {% set shorelines=load_data(path="data/navigation-shores.json") %}
+      {% for island in catalog.projects %}{% include "partials/island.html" %}{% endfor %}
+      {% set studio_islands=[{"id": "about", "title": "About", "url": "about/"}, {"id": "contact", "title": "Contact", "url": "contact/"}] %}
+      {% for island in studio_islands %}{% include "partials/island.html" %}{% endfor %}
+    </nav>
+    <svg class="sea-compass" viewBox="0 0 100 120" aria-hidden="true">
+      <text x="50" y="13" text-anchor="middle">N</text>
+      <g transform="translate(50 68)"><circle r="33"/><circle r="29" stroke-dasharray="1 8"/><path d="M0-45V45M-45 0H45"/><path d="M0-28 7 0 0 28-7 0Z" fill="#94b4bd" stroke="none"/><path d="M0-28V28L-7 0Z" fill="#233e4c" stroke="none"/><circle r="3" fill="#f4c84c" stroke="none"/></g>
+    </svg>
+  </div>
+  <div class="sea-bottom">
+    <p>Choose an island</p>
+    <button class="motion-switch" type="button" aria-label="Reduce motion" aria-pressed="false" data-motion-toggle>{{ <ui.icon name="pause" /> }}<span>Reduce motion</span></button>
+  </div>
 </dialog>

@@ -1,6 +1,6 @@
 base_url = "https://astro90.com"
 title = "Astro90 — Built from curiosity."
-description = "An independent development studio making mobile games, agentic AI software, and tools for developers."
+description = "An independent studio focused on mobile games and entertainment."
 default_language = "en"
 compile_sass = true
 # Zola's current minifier collapses crossorigin="use-credentials" to a bare
