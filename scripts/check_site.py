@@ -10,7 +10,8 @@ from urllib.parse import unquote, urljoin, urlsplit
 ROOT = Path(__file__).resolve().parents[1]
 PUBLIC = (ROOT / (sys.argv[1] if len(sys.argv) > 1 else "public")).resolve()
 CONFIG = tomllib.loads((ROOT / "zola.toml").read_text())
-ORIGIN = urlsplit(CONFIG["base_url"])
+BASE_URL = sys.argv[2] if len(sys.argv) > 2 else CONFIG["base_url"]
+ORIGIN = urlsplit(BASE_URL)
 INTERNAL_HOSTS = {ORIGIN.hostname, "127.0.0.1", "localhost"}
 ERRORS = []
 EXPECTED = {
@@ -80,7 +81,7 @@ class Document(HTMLParser):
 
 def resolve_reference(value, source):
     relative = source.relative_to(PUBLIC).as_posix()
-    parsed = urlsplit(urljoin(f"{CONFIG['base_url']}/{relative}", value))
+    parsed = urlsplit(urljoin(f"{BASE_URL.rstrip('/')}/{relative}", value))
     if parsed.scheme in {"data", "mailto", "tel"}:
         return None, ""
     if parsed.scheme not in {"http", "https"}:
@@ -120,6 +121,8 @@ for path, doc in documents.items():
     titles[doc.title.strip()] += 1
     if relative.as_posix() != "404.html" and not doc.canonical:
         ERRORS.append(f"{relative}: missing canonical URL")
+    if doc.canonical and urlsplit(doc.canonical).netloc != ORIGIN.netloc:
+        ERRORS.append(f"{relative}: canonical URL does not match the build origin")
     for duplicate, count in Counter(doc.ids).items():
         if count > 1:
             ERRORS.append(f"{relative}: duplicate id {duplicate}")

@@ -1,18 +1,30 @@
-name: Check static site
+name: Check and deploy static site
 
 on:
   push:
   pull_request:
   workflow_dispatch:
+    inputs:
+      setup:
+        description: Provision private Cloudflare hosting before deployment
+        type: boolean
+        default: false
 
 permissions:
   contents: read
+
+concurrency:
+  group: astro90-site-${{ github.ref }}
+  cancel-in-progress: false
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: '22'
       - name: Install Zola 0.23.4
         run: |
           curl --fail --location --retry 3 --output /tmp/zola.tar.gz https://github.com/getzola/zola/releases/download/v0.23.4/zola-v0.23.4-x86_64-unknown-linux-gnu.tar.gz
@@ -21,6 +33,21 @@ jobs:
           sudo install /tmp/zola /usr/local/bin/zola
       - name: Validate and build
         run: |
-          zola check --skip-external-links
-          zola build
-          python3 scripts/check_site.py
+          bash scripts/build_pages.sh
+          CF_PAGES=1 CF_PAGES_BRANCH=ci-preview CF_PAGES_URL=https://ci-preview.astro90.pages.dev bash scripts/build_pages.sh .local/pages-preview
+          python3 -m unittest discover -s scripts -p 'test_cloudflare.py'
+      - name: Install pinned deployment tooling
+        if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
+        run: npm ci
+      - name: Provision private hosting
+        if: github.ref == 'refs/heads/main' && github.event_name == 'workflow_dispatch' && inputs.setup
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          ASTRO90_ACCESS_EMAIL: ${{ secrets.ASTRO90_ACCESS_EMAIL }}
+        run: python3 scripts/cloudflare.py setup
+      - name: Verify Access and deploy with Wrangler
+        if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          ASTRO90_ACCESS_EMAIL: ${{ secrets.ASTRO90_ACCESS_EMAIL }}
+        run: python3 scripts/cloudflare.py deploy

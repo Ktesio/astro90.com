@@ -5,3 +5,9 @@ public/
 *.blend2
 .zola-build.lock
 node_modules/
+.wrangler/
+.dev.vars
+.dev.vars.*
+.env
+.env.*
+__pycache__/

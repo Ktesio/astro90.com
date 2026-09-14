@@ -32,7 +32,7 @@ python3 scripts/check_site.py
 
 The final command uses Python 3.11+ and its standard library. It checks the generated routes, internal links, assets, anchors, metadata, and basic document structure. `mise run check` runs the same checks in `.local/check-public/` so a production build cannot overwrite the running development preview. GitHub Actions runs the same checks using the pinned Zola release and a verified binary checksum.
 
-The generated site is in `public/`. Upload that directory to a static host when deployment is wanted. The included workflow validates the site; it does not deploy it.
+The generated site is in `public/`. GitHub Actions validates changes and is configured to deploy `main` to Cloudflare Pages through Wrangler, after verifying owner-only Cloudflare Access protection. The deployment requires the account setup and CI secrets described in the [deployment guide](docs/DEPLOYMENT.md). Pull requests run validation without deploying.
 
 ## Pages
 
@@ -87,5 +87,6 @@ The original hero painting and its generation prompt are in `assets/source/studi
 - [Design system](docs/DESIGN-SYSTEM.md)
 - [Confirmed creative direction](docs/DESIGN-DIRECTION.md)
 - [Artwork sources and regeneration](docs/ASSETS.md)
+- [Deployment and private preview access](docs/DEPLOYMENT.md)
 
 Sora and Manrope are distributed under the SIL Open Font License; their license files are included. The public availability of this repository does not grant rights to Astro90 or product trademarks, artwork, or proprietary product code. See [asset notes](docs/ASSETS.md).
