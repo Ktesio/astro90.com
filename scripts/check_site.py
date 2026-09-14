@@ -22,6 +22,9 @@ EXPECTED = {
     "accessibility/index.html", "brand/index.html", "brand/states/index.html",
 }
 REDIRECTS = {"studio/index.html": "about/index.html"}
+CATALOG = tomllib.loads((ROOT / "data/projects.toml").read_text())["projects"]
+NAVIGATION = {item["id"]: (item["title"], item["url"]) for item in CATALOG}
+NAVIGATION.update({"about": ("About", "about/"), "contact": ("Contact", "contact/")})
 
 
 class Document(HTMLParser):
@@ -39,6 +42,7 @@ class Document(HTMLParser):
         self.redirect = ""
         self.metas = defaultdict(list)
         self.links = []
+        self.islands = []
         self.jsonld = []
         self.in_jsonld = False
         self.jsonld_text = ""
@@ -60,6 +64,8 @@ class Document(HTMLParser):
                 self.refs.append(attrs.get("content", ""))
         if tag == "link":
             self.links.append(attrs)
+        if "data-island" in attrs:
+            self.islands.append((tag, attrs))
         if tag == "script" and attrs.get("type") == "application/ld+json":
             self.in_jsonld = True
             self.jsonld_text = ""
@@ -140,6 +146,19 @@ for path, doc in documents.items():
         continue
     if doc.h1 != 1 or doc.main != 1:
         ERRORS.append(f"{relative}: expected one h1 and one main, got {doc.h1}/{doc.main}")
+    if Counter(attrs.get("data-island") for _, attrs in doc.islands) != Counter(NAVIGATION.keys()):
+        ERRORS.append(f"{relative}: navigation must expose each game, About and Contact exactly once")
+    for tag, attrs in doc.islands:
+        item = NAVIGATION.get(attrs["data-island"])
+        if item is None:
+            continue
+        title, route = item
+        target = PUBLIC / route / "index.html"
+        resolved, _ = resolve_reference(attrs.get("href", ""), path)
+        if tag != "a" or resolved != target or attrs.get("aria-label") != title:
+            ERRORS.append(f"{relative}: {title} needs a named direct navigation link")
+        if (attrs.get("aria-current") == "page") != (path == target):
+            ERRORS.append(f"{relative}: incorrect current-page marker for {title}")
     if not doc.title.strip() or not doc.description.strip():
         ERRORS.append(f"{relative}: missing title or description")
     titles[doc.title.strip()] += 1

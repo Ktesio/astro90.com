@@ -100,166 +100,9 @@ html.spatial-ready[data-motion="running"] {
 .motion-switch:disabled {
   cursor: default;
 }
-
-// The index is a map on large screens and a spacious project list on touch.
-.atlas {
-  width: 100%;
-  max-width: none;
-  height: 100svh;
-  max-height: 100%;
-  padding: 28px var(--gutter);
-  margin: 0;
-  border: 0;
-  color: var(--text);
-  background: #090e17;
-  overflow-x: hidden;
-}
-.atlas::backdrop {
-  background: #090e17;
-}
-.atlas[open] {
-  display: flex;
-  flex-direction: column;
-}
-.atlas-top {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  min-height: 56px;
-}
-.atlas-top h2 {
-  font-family: var(--font-body);
-  font-size: 14px;
-  letter-spacing: 0;
-  font-weight: 500;
-  color: var(--muted);
-}
 .index-close .icon {
   width: 28px;
   height: 28px;
-}
-.atlas-map {
-  position: relative;
-  flex: 1;
-  min-height: 470px;
-  perspective: 1000px;
-}
-.atlas-routes {
-  position: absolute;
-  inset: 0;
-  height: 100%;
-  width: 100%;
-}
-.atlas-routes path {
-  fill: none;
-  stroke: #f4c84c30;
-  stroke-width: 0.6;
-  vector-effect: non-scaling-stroke;
-}
-.atlas-preview {
-  width: min(36vw, 460px);
-  height: min(40vw, 490px);
-  position: absolute;
-  left: 50%;
-  top: 48%;
-  transform: translate(-50%, -50%) rotateY(calc(var(--pointer-x, 0) * 9deg))
-    rotateX(calc(var(--pointer-y, 0) * -6deg));
-  pointer-events: none;
-}
-.atlas-image {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-  opacity: 0;
-  transform: scale(0.84) rotate(-7deg);
-  transition:
-    opacity 0.32s,
-    transform 0.7s var(--ease);
-}
-.atlas-image--lighthouse {
-  object-fit: cover;
-  border-radius: 3px;
-  clip-path: polygon(0 0, 85% 0, 100% 15%, 100% 100%, 15% 100%, 0 85%);
-}
-.atlas-image--inkube {
-  padding: 12px;
-}
-.atlas-image--studio {
-  transform: scale(1.2) rotate(-10deg);
-}
-@each $project in studio, lighthouse, inkube {
-  [data-active-project="#{$project}"] .atlas-image--#{$project} {
-    opacity: 1;
-    transform: scale(1) rotate(-5deg);
-  }
-}
-.atlas-project {
-  position: absolute;
-  z-index: 2;
-  padding: 14px 0;
-}
-.atlas-project-type {
-  display: block;
-  color: var(--subtle);
-  font-size: 11px;
-  margin-bottom: 7px;
-}
-.atlas-project-name {
-  font: 500 clamp(27px, 3.3vw, 52px) / 1.1 var(--font-display);
-  letter-spacing: -0.05em;
-  display: flex;
-  align-items: center;
-  gap: 20px;
-}
-.atlas-project-name .icon {
-  width: 20px;
-  opacity: 0;
-  transform: translate(-10px, 10px);
-  transition:
-    opacity 0.2s,
-    transform 0.3s;
-}
-.atlas-project:is(:hover, :focus-visible) {
-  color: var(--saffron);
-}
-.atlas-project:is(:hover, :focus-visible) .icon {
-  opacity: 1;
-  transform: none;
-}
-.atlas-project--lighthouse {
-  left: 5%;
-  top: 24%;
-}
-.atlas-project--inkube {
-  right: 6%;
-  top: 64%;
-}
-.atlas-bottom {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 24px;
-  border-top: 1px solid var(--line);
-  padding-top: 16px;
-}
-.atlas-bottom nav {
-  display: flex;
-  gap: clamp(20px, 3vw, 45px);
-  flex-wrap: wrap;
-}
-.atlas-bottom nav a {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  min-height: 44px;
-  font-size: 13px;
-}
-.atlas-bottom nav a:hover {
-  color: var(--saffron);
-}
-.atlas-bottom .icon {
-  width: 14px;
 }
 html:has(dialog[open]) {
   overflow: hidden;
@@ -995,13 +838,6 @@ html.spatial-ready[data-motion="running"] .home .world-window {
   .world-copy {
     max-width: 50%;
   }
-  .atlas-project--lighthouse {
-    left: 1%;
-  }
-  .atlas-preview {
-    width: 38vw;
-    height: 46vw;
-  }
 }
 @media (max-width: 650px) {
   .header-inner {
@@ -1023,65 +859,6 @@ html.spatial-ready[data-motion="running"] .home .world-window {
   .index-glyph {
     width: 33px;
     height: 33px;
-  }
-  .atlas {
-    padding: 18px 24px 22px;
-  }
-  .atlas-map {
-    min-height: 460px;
-    display: flex;
-    align-items: center;
-    padding-block: 15px;
-  }
-  .atlas-preview {
-    width: 80vw;
-    height: 80vw;
-    left: 70%;
-    top: 45%;
-    opacity: 0.23;
-  }
-  .atlas-routes {
-    display: none;
-  }
-  .atlas-projects {
-    width: 100%;
-    position: relative;
-  }
-  .atlas-project {
-    position: relative;
-    inset: auto;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    width: 100%;
-    gap: 18px;
-    padding-block: 19px;
-    border-bottom: 1px solid #ffffff16;
-  }
-  .atlas-project-type {
-    order: 2;
-    font-size: 10px;
-    margin: 0;
-  }
-  .atlas-project-name {
-    font-size: clamp(28px, 8vw, 43px);
-  }
-  .atlas-project-name .icon {
-    opacity: 1;
-    width: 15px;
-    transform: none;
-  }
-  .atlas-bottom {
-    align-items: flex-start;
-    flex-direction: column;
-    gap: 4px;
-    padding-top: 14px;
-  }
-  .atlas-bottom nav {
-    gap: 0 25px;
-  }
-  .atlas-bottom nav a {
-    font-size: 12px;
   }
   .identity-scene {
     --story-length: 112svh;
@@ -1396,19 +1173,6 @@ html.spatial-ready[data-motion="running"] .home .world-window {
     width: 160px;
     top: 15%;
   }
-  .atlas-map {
-    min-height: 310px;
-  }
-  .atlas-project-name {
-    font-size: 30px;
-  }
-  .atlas-preview {
-    height: 260px;
-    width: 260px;
-  }
-  .atlas {
-    padding-block: 12px;
-  }
 }
 @media (max-width: 950px) and (max-height: 600px) {
   .site-header .brand .wordmark,
@@ -1461,8 +1225,7 @@ html[data-motion="paused"] {
   .feature,
   .screenshot,
   .brand-chapter,
-  .studio-line,
-  .atlas-preview {
+  .studio-line {
     transform: none !important;
   }
   .identity-copy {

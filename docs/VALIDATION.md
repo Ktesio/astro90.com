@@ -1,5 +1,20 @@
 # Validation record
 
+## September 14, 2026 · Island navigation
+
+- Replaced the central monogram index with a full-screen sea and four illustrated destinations: Lighthouse, Inkube, About and Contact. The current page is marked in the map. The header control is now named Explore, and the no-JavaScript navigation exposes the same four destinations.
+- Four original 1536 × 1024 transparent PNG illustrations and their exact built-in image-generation prompts are preserved under `assets/source/navigation/`. Optimized WebP deliveries total 544,494 bytes at 900 px and 182,582 bytes at 480 px. The previous central monogram is no longer requested by navigation.
+- Hover and focus illuminate an island and send a boat along a curved course through open water. Routes use the actual illustrated shorelines, including detached rocks, and reserve clearance for the full hull and hover lift. New selections redirect from the boat's current position. Clicks show a 240 ms shoreline response before following the real link; Close, Escape and a second selection can interrupt it. Modified clicks remain native.
+- Chrome checked ten pages across nine viewports: 1440 × 1000, 1280 × 720, 2560 × 1440, 768 × 1024, 390 × 844, 320 × 740, 812 × 450, 360 × 640 and 640 × 400. All 90 page/viewport checks and nine navigation layout checks passed, with no horizontal overflow, clipped island canvases, page errors or failed asset requests. Very short portrait/zoom layouts allow vertical scrolling; Close stays available at the top.
+- Nine interaction scenarios passed, including course changes, cancelling departures, replacing a pending selection, keyboard Enter, all four destinations, history restoration, touch, both motion preferences, modified clicks and direct navigation without JavaScript. The game screenshot viewer still supports keyboard navigation and restores focus.
+- A separate browser check exercised 104 island selections across eight screen sizes, including 99 moving journeys and mid-voyage redirects. Independent geometry checks sampled every rendered route segment at 2 px intervals: every segment cleared every shoreline by at least the boat's collision radius. When a berth is already reached or no connected route is available, the boat stays in open water.
+- Keyboard focus wrapped through 24 Tab and Shift+Tab steps with full and reduced motion. Escape restored the trigger, and Close remained visible in the short viewport. Without JavaScript, the mobile header occupies normal document flow so the four direct links do not overlap the hero heading.
+- All navigation animations stopped after input settled. Enabling reduced motion during a voyage cancelled its animations, removed travel and the click delay, and preserved the links and artwork. The manual preference survived navigation; the system preference took precedence.
+- Production and Cloudflare preview builds passed with 11 HTML documents and 599 references. The static audit now verifies that every page exposes a named direct link for each game, About and Contact, with the correct current-page marker. Build checks include the navigation scripts and a geometry regression check for full-hull clearance, interrupted trips and disconnected channels.
+
+The game pages, homepage coast and scroll compositions are preserved. This revision changes presentation only; it adds no backend or product integrations. Chrome was tested on desktop with touch and motion emulation; physical devices and other browser engines were not tested.
+
+
 ## September 14, 2026 · Mobile games and entertainment
 
 - Narrowed the website to Lighthouse and Inkube. Removed the former app and code collections, their detail pages, navigation entries, interface illustrations, styles and sharing artwork. The homepage, About, Contact, brand guide, metadata, manifest and downloadable kit now describe the games studio.

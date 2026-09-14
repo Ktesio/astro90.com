@@ -1,0 +1,14 @@
+<a class="sea-island sea-island--{{ island.id }}" href="{{ get_url(path=island.url, trailing_slash=true) }}" aria-label="{{ island.title }}" data-island="{{ island.id }}"{% if current_path is defined and current_path == '/' ~ island.url %} aria-current="page"{% endif %}>
+  <span class="island-arrival">
+    <span class="island-art" aria-hidden="true" data-shoreline='{{ shorelines[island.id] | json_encode | safe }}'>
+      <svg class="island-tide" viewBox="0 0 600 400" fill="none"><path d="M52 274C8 220 96 160 210 169S373 125 494 203 531 329 397 346 98 329 52 274Z"/><path d="M21 280C-14 211 70 137 207 149S389 105 513 188 556 354 403 369 55 342 21 280Z"/></svg>
+      <span class="island-land">
+        <img src="{{ get_url(path='media/navigation/' ~ island.id ~ '-900.webp') }}" srcset="{{ get_url(path='media/navigation/' ~ island.id ~ '-480.webp') }} 480w, {{ get_url(path='media/navigation/' ~ island.id ~ '-900.webp') }} 900w" sizes="(max-width: 650px) 53vw, (max-height: 600px) 44vh, (max-width: 900px) 42vw, 34vw" alt="" width="1536" height="1024" loading="lazy" decoding="async">
+        <span class="island-lantern"></span>
+        <span class="island-beam"></span>
+      </span>
+      <span class="island-dock" data-island-dock></span>
+    </span>
+    <span class="island-label"><span class="island-label-name">{{ island.title }}{{ <ui.icon name="diagonal" /> }}</span>{% if current_path is defined and current_path == '/' ~ island.url %}<span class="island-here">You are here</span>{% endif %}</span>
+  </span>
+</a>

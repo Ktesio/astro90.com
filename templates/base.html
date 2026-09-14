@@ -29,8 +29,10 @@
 <script src="{{ get_url(path='js/site.js', cachebust=true) }}" defer>
 </script>
 <script src="{{ get_url(path='js/feedback.js', cachebust=true) }}" defer></script>
+<script src="{{ get_url(path='js/sea-routes.js', cachebust=true) }}" defer></script>
+<script src="{{ get_url(path='js/navigation.js', cachebust=true) }}" defer></script>
 <noscript>
-<style>[data-index-open],[data-motion-toggle]{display:none!important}.no-script-nav{display:flex!important}</style>
+<style>[data-index-open],[data-motion-toggle]{display:none!important}.no-script-nav{display:flex!important}.site-header{position:relative;background:#090e17}</style>
 </noscript>
 {% block head %}
 {% endblock head %}
@@ -49,9 +51,9 @@
 <header class="site-header">
 <div class="header-inner">
 <a class="brand" href="{{ get_url(path='/') }}" aria-label="Astro90 home">{{ <ui.wordmark /> }}<img class="brand-monogram" src="{{ get_url(path='brand/monogram.svg') }}" alt="" width="48" height="48"></a>
-<button class="index-trigger" type="button" aria-haspopup="dialog" aria-controls="project-index" data-index-open><span>Index</span><span class="index-glyph" aria-hidden="true"><i></i><i></i><i></i><i></i></span></button>
+<button class="index-trigger" type="button" aria-haspopup="dialog" aria-controls="project-index" aria-expanded="false" data-index-open><span>Explore</span><span class="index-glyph" aria-hidden="true"><i></i><i></i><i></i><i></i></span></button>
 </div>
-<nav class="no-script-nav" aria-label="Main navigation"><a href="{{ get_url(path='games/') }}">Games</a><a href="{{ get_url(path='about/') }}">About</a><a href="{{ get_url(path='contact/') }}">Contact</a></nav>
+<nav class="no-script-nav" aria-label="Main navigation">{% set catalog=load_data(path="data/projects.toml") %}{% for game in catalog.projects %}<a href="{{ get_url(path=game.url, trailing_slash=true) }}">{{ game.title }}</a>{% endfor %}<a href="{{ get_url(path='about/') }}">About</a><a href="{{ get_url(path='contact/') }}">Contact</a></nav>
 </header>
 <main id="main">{% block content %}
 {% endblock content %}</main>

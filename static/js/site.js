@@ -1,4 +1,4 @@
-/* Static presentation: input-led artwork, project index and image viewer. */
+/* Static presentation: input-led artwork and scroll composition. */
 (() => {
   const root = document.documentElement;
   const reducedMotion = matchMedia("(prefers-reduced-motion: reduce)");
@@ -311,28 +311,5 @@
   const sceneObserver = new ResizeObserver(invalidateMeasurements);
   scenes.forEach((scene) => sceneObserver.observe(scene));
   document.fonts?.ready.then(invalidateMeasurements);
-
-  const index = document.querySelector("#project-index");
-  const indexOpener = document.querySelector("[data-index-open]");
-  if (index && indexOpener && typeof index.showModal === "function") {
-    const map = index.querySelector(".atlas-map");
-    indexOpener.addEventListener("click", () => {
-      index.showModal();
-      index.scrollTop = 0;
-    });
-    index
-      .querySelector("[data-index-close]")
-      .addEventListener("click", () => index.close());
-    index.addEventListener("close", () =>
-      indexOpener.focus({ preventScroll: true }),
-    );
-    index.querySelectorAll("[data-project]").forEach((link) => {
-      const preview = () => {
-        map.dataset.activeProject = link.dataset.project;
-      };
-      link.addEventListener("pointerenter", preview);
-      link.addEventListener("focus", preview);
-    });
-  }
 
 })();

@@ -47,5 +47,8 @@ fi
 zola check --skip-external-links
 node --check static/js/site.js
 node --check static/js/feedback.js
+node --check static/js/navigation.js
+node --check static/js/sea-routes.js
+node scripts/check_sea_routes.cjs
 zola build --base-url "$base_url" --output-dir "$output" --force
 python3 scripts/check_site.py "$output" "$base_url"
