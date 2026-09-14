@@ -1,5 +1,5 @@
 +++
 title = "About"
-description = "Meet Astro90, the independent studio behind Lighthouse, Inkube, Heronis, Yanando and Ktesio. Games, agentic AI software and public code."
+description = "Meet Astro90, an independent mobile games and entertainment studio behind Lighthouse and Inkube."
 template = "about.html"
 +++

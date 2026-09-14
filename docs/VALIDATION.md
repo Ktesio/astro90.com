@@ -1,5 +1,13 @@
 # Validation record
 
+## September 14, 2026 · Mobile games and entertainment
+
+- Narrowed the website to Lighthouse and Inkube. Removed the former app and code collections, their detail pages, navigation entries, interface illustrations, styles and sharing artwork. The homepage, About, Contact, brand guide, metadata, manifest and downloadable kit now describe the games studio.
+- Production and Cloudflare preview builds passed: 11 HTML documents and 479 references. The audit now rejects unexpected routes and obsolete social exports. The kit contains 36 artwork exports, its manifest and guide; nine sharing cards map to the remaining content routes.
+- Chrome checked ten pages at 1440 × 1000, 768 × 1024, 390 × 844, 320 × 740 and 812 × 450. No horizontal overflow or page/resource errors were reported. Reviewed the two-game index, revised studio pages, opening coast and the Inkube-to-studio overlap on desktop and phone.
+- Verified index hover/focus previews and Escape focus restoration, screenshot navigation, disabled store controls, reduced motion, navigation without JavaScript, removed routes returning 404, the manifest shortcuts and the asset-kit download. The shorter footer navigation retains the compact mobile signature; its grid placement and 68 px mark were checked at three phone/landscape sizes.
+- Scanned the rendered HTML, styles, scripts, sitemap and manifest for references to the retired products and sections. No matches remained. The game artwork, original identity, loading/error states and Cloudflare Access configuration are preserved.
+
 ## September 14, 2026 · Digital assets and discovery metadata
 
 - Created 41 digital exports, including favicon resolutions, Apple and maskable app icons, avatars, transparent wordmarks, fourteen route-specific sharing cards, social post formats and a wide banner. The downloadable archive contains those files, the app manifest and its guide.

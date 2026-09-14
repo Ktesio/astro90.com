@@ -13,34 +13,9 @@
 <section class="container catalog-section">
 <div class="catalog-bar">
 <span>{{ section.extra.label }}</span>
-<span class="micro">{{ project_count }} {% if project_count == 1 %}project{% else %}projects{% endif %}</span>
+<span class="micro">{{ project_count }} {% if project_count == 1 %}game{% else %}games{% endif %}</span>
 </div>
 {% if project_count > 0 %}<div class="project-grid">{% for project in catalog.projects %}{% if project.kind == section.extra.kind %}{{ <ui.card project={project} /> }}{% endif %}{% endfor %}</div>{% else %}{{ <ui.empty_state /> }}{% endif %}
-{% if section.extra.kind == "code" %}<div class="repository-list reveal">
-<div>
-<h2>More on<br>GitHub.</h2>
-</div>
-<div>
-<a href="https://github.com/iMagdy/homebrew-tap">
-<span>
-<strong>Homebrew tap</strong>
-<small>Package distribution for our command-line tools.</small>
-</span>
-<span class="repo-tag">Public repository</span>{{ <ui.icon name="diagonal" /> }}</a>
-<a href="https://github.com/iMagdy/inbox">
-<span>
-<strong>inbox</strong>
-<small>A small Node.js email checker for the terminal.</small>
-</span>
-<span class="repo-tag">Public repository</span>{{ <ui.icon name="diagonal" /> }}</a>
-<a href="https://github.com/iMagdy">
-<span>
-<strong>Explore the repositories</strong>
-<small>Experiments, tools, and contributions on GitHub.</small>
-</span>{{ <ui.icon name="diagonal" /> }}</a>
-</div>
-</div>
-<p class="license-note">Each repository carries its own license. Ktesio is source available under a non-commercial license.</p>{% endif %}
 {{ <ui.next_chapter title={section.extra.next_title} path={section.extra.next_path} /> }}
 </section>
 {% endblock %}

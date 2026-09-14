@@ -9,7 +9,7 @@
 {% set noindex = config.extra.preview or get_env(name="CF_PAGES_BRANCH", default="main") != "main" %}
 {% if is_error %}
 {% set meta_title="Page not found — Astro90" %}
-{% set meta_description="We couldn’t find this page. Return to Astro90 to explore the studio, its games, apps and public code." %}
+{% set meta_description="We couldn’t find this page. Return to Astro90 to explore its mobile games and meet the studio." %}
 {% set noindex=true %}
 {% elif page is defined %}
 {% set meta_title=page.title ~ " — Astro90" %}
@@ -51,7 +51,7 @@
 <a class="brand" href="{{ get_url(path='/') }}" aria-label="Astro90 home">{{ <ui.wordmark /> }}<img class="brand-monogram" src="{{ get_url(path='brand/monogram.svg') }}" alt="" width="48" height="48"></a>
 <button class="index-trigger" type="button" aria-haspopup="dialog" aria-controls="project-index" data-index-open><span>Index</span><span class="index-glyph" aria-hidden="true"><i></i><i></i><i></i><i></i></span></button>
 </div>
-<nav class="no-script-nav" aria-label="Main navigation"><a href="{{ get_url(path='games/') }}">Games</a><a href="{{ get_url(path='apps/') }}">Apps</a><a href="{{ get_url(path='open-source/') }}">Code</a><a href="{{ get_url(path='about/') }}">About</a><a href="{{ get_url(path='contact/') }}">Contact</a></nav>
+<nav class="no-script-nav" aria-label="Main navigation"><a href="{{ get_url(path='games/') }}">Games</a><a href="{{ get_url(path='about/') }}">About</a><a href="{{ get_url(path='contact/') }}">Contact</a></nav>
 </header>
 <main id="main">{% block content %}
 {% endblock content %}</main>
@@ -61,13 +61,10 @@
 <a class="footer-signature" href="{{ get_url(path='/') }}" aria-label="Astro90 home">{{ <ui.wordmark /> }}<img class="brand-monogram" src="{{ get_url(path='brand/monogram.svg') }}" alt="" width="68" height="68"></a>
 <div class="footer-links">
 <a href="{{ get_url(path='games/') }}">Games</a>
-<a href="{{ get_url(path='apps/') }}">Apps</a>
-<a href="{{ get_url(path='open-source/') }}">Open source</a>
 <a href="{{ get_url(path='about/') }}">About</a>
 <a href="{{ get_url(path='contact/') }}">Contact</a>
 <a href="{{ get_url(path='brand/') }}">Brand</a>
 <a href="{{ get_url(path='accessibility/') }}">Accessibility</a>
-<a href="https://github.com/iMagdy">GitHub{{ <ui.icon name="diagonal" /> }}</a>
 </div>
 </div>
 <div class="footer-bottom">

@@ -92,6 +92,8 @@ def check_web_assets(public, config, base_url, documents):
             need(len(trail) >= 2 and trail[0].get("item") == home and trail[-1].get("item") == doc.canonical and [item.get("position") for item in trail] == list(range(1, len(trail)+1)), f"{relative}: incorrect breadcrumb hierarchy")
     need(seen == set(cards), "Sharing-card route catalog differs from rendered website routes")
     need(len(cards) == len(catalog), "Duplicate sharing-card route")
+    expected_social_files = {card["slug"] + ".jpg" for card in catalog} | {"post-square.jpg", "post-portrait.jpg", "profile-banner.jpg", "repository-cover.jpg"}
+    need({path.name for path in (public / "brand/social").glob("*.jpg")} == expected_social_files, "Social artwork directory contains missing or retired exports")
     for card in catalog:
         dimensions("brand/social/" + card["slug"] + ".jpg", (1200, 630))
     for filename, size in [("post-square", (1080,1080)),("post-portrait", (1080,1350)),("profile-banner", (1500,500)),("repository-cover", (1280,640))]:

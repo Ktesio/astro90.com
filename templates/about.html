@@ -2,20 +2,18 @@
 {% block content %}
 <section class="editorial-intro container">
   <h1>We are<br><em>Astro90.</em></h1>
-  <div class="editorial-lead"><p>An independent development studio making mobile games, agentic AI software and tools for developers.</p><a class="world-link" href="#our-work">Get to know the work{{ <ui.icon name="down" /> }}</a></div>
+  <div class="editorial-lead"><p>An independent studio focused on mobile games and entertainment.</p><a class="world-link" href="#our-work">Get to know the work{{ <ui.icon name="down" /> }}</a></div>
 </section>
 <div class="about-panorama media-frame" data-media>
   <img data-media-image src="{{ get_url(path='media/night-coast-1643.webp') }}" srcset="{{ get_url(path='media/night-coast-960.webp') }} 960w, {{ get_url(path='media/night-coast-1643.webp') }} 1643w" sizes="100vw" width="1643" height="957" alt="A painted night coast with indigo mountains and a lighthouse glowing saffron" fetchpriority="high">
   {{ <ui.media_status /> }}
 </div>
 <section class="about-work container" id="our-work" aria-labelledby="work-title">
-  <h2 id="work-title">From a puzzle on your phone<br> to an agent <em>on your machine.</em></h2>
+  <h2 id="work-title">Two games,<br><em>two worlds.</em></h2>
   <div class="editorial-rows">
     <article class="editorial-row"><span class="row-number" aria-hidden="true">01</span><h3>Games</h3><div><p>We build games around a clear interaction and a world worth spending time in. Solve coastal logic puzzles in Lighthouse, or merge ink and start chain reactions in Inkube.</p><p class="row-note">Both are in development for iOS.</p><div class="inline-links"><a href="{{ get_url(path='games/lighthouse/') }}">Lighthouse{{ <ui.icon name="diagonal" /> }}</a><a href="{{ get_url(path='games/inkube/') }}">Inkube{{ <ui.icon name="diagonal" /> }}</a></div></div></article>
-    <article class="editorial-row"><span class="row-number" aria-hidden="true">02</span><h3>Agentic AI</h3><div><p>We’re developing Heronis for conversations with personal agents and reviewing their work. With Yanando, we’re exploring AI assistance for tasks, priorities and shared projects.</p><div class="inline-links"><a href="{{ get_url(path='apps/heronis/') }}">Heronis{{ <ui.icon name="diagonal" /> }}</a><a href="{{ get_url(path='apps/yanando/') }}">Yanando{{ <ui.icon name="diagonal" /> }}</a></div></div></article>
-    <article class="editorial-row"><span class="row-number" aria-hidden="true">03</span><h3>Public code</h3><div><p>We share developer tools and experiments on GitHub. Ktesio provides lifecycle controls, token tracking and budgets for AI agents, written in Rust.</p><p class="row-note">Ktesio is source available under its own non-commercial license. Check each repository for its terms.</p><div class="inline-links"><a href="{{ get_url(path='open-source/') }}">Explore the code{{ <ui.icon name="diagonal" /> }}</a></div></div></article>
   </div>
 </section>
-<section class="about-signature container"><div><h2>A shared<br><em>signature.</em></h2><p>Each product has its own world. We connect them through the Astro90 wordmark, a dark canvas and a little saffron.</p><a class="world-link" href="{{ get_url(path='brand/') }}">Explore the identity{{ <ui.icon name="diagonal" /> }}</a></div><div class="about-signature-art" aria-hidden="true">{{ <ui.wordmark /> }}<img src="{{ get_url(path='brand/monogram.svg') }}" alt="" width="100" height="100"></div></section>
+<section class="about-signature container"><div><h2>A shared<br><em>signature.</em></h2><p>Each game has its own world. We connect them through the Astro90 wordmark, a dark canvas and a little saffron.</p><a class="world-link" href="{{ get_url(path='brand/') }}">Explore the identity{{ <ui.icon name="diagonal" /> }}</a></div><div class="about-signature-art" aria-hidden="true">{{ <ui.wordmark /> }}<img src="{{ get_url(path='brand/monogram.svg') }}" alt="" width="100" height="100"></div></section>
 <div class="container">{{ <ui.next_chapter title="Say hello." path="contact/" /> }}</div>
 {% endblock %}

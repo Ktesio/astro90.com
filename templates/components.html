@@ -14,135 +14,9 @@
 {% component ui.button(label, path, secondary=false) %}<a class="button {% if secondary %}button--secondary{% endif %}" href="{{ get_url(path=path) }}">
 <span>{{ label }}</span>{{ <ui.icon name="diagonal" /> }}</a>{% endcomponent %}
 
-{% component ui.app_visual(id) %}
-<div class="app-visual app-visual--{{ id }}" role="img" aria-label="{% if id == 'heronis' %}Heronis interface concept{% else %}Yanando interface concept{% endif %}">
-  <div class="app-window">
-    <div class="window-bar">
-<span class="window-dots">
-<i>
-</i>
-<i>
-</i>
-<i>
-</i>
-</span>
-<span>{% if id == "heronis" %}Heronis{% else %}Yanando{% endif %}</span>
-<span class="window-label">Interface study</span>
-</div>
-    {% if id == "heronis" %}
-    <div class="agent-workspace">
-<div class="agent-sidebar">
-<span class="agent-glyph">h</span>
-<i>
-</i>
-<i>
-</i>
-<i>
-</i>
-<span class="sidebar-bottom">
-</span>
-</div>
-<div class="agent-body">
-<p class="micro">LAUNCH PLANNING</p>
-<h4>What are we<br>working on?</h4>
-<div class="prompt-example">Help me plan my next launch.{{ <ui.icon name="diagonal" /> }}</div>
-<div class="run-preview">
-<span class="run-icon">{{ <ui.icon name="spark" /> }}</span>
-<div>
-<strong>Launch plan</strong>
-<span>Draft ready for review</span>
-</div>
-<i class="status-orb">
-</i>
-</div>
-<div class="agent-step">{{ <ui.icon name="check" /> }} Gather the context</div>
-<div class="agent-step">{{ <ui.icon name="check" /> }} Shape the first steps</div>
-<div class="agent-step agent-step--muted">{{ <ui.icon name="plus" /> }} Ready for your review</div>
-</div>
-</div>
-    {% else %}
-    <div class="task-workspace">
-<div class="task-heading">
-<span class="project-glyph">y</span>
-<span>My workspace</span>
-<i class="avatar-dot">
-</i>
-</div>
-<p class="micro">LAUNCH PROJECT</p>
-<h4>Today's<br>priorities.</h4>
-<div class="task-tabs">
-<span>Today <b>3</b>
-</span>
-<span>Upcoming</span>
-</div>
-<div class="task-row">
-<i>
-</i>
-<span>Review the landing page</span>
-<b class="task-label">Design</b>
-</div>
-<div class="task-row">
-<i>
-</i>
-<span>Prepare the release notes</span>
-<b class="task-label task-label--blue">Focus</b>
-</div>
-<div class="task-row task-row--complete">
-<i>{{ <ui.icon name="check" /> }}</i>
-<span>Gather product screenshots</span>
-</div>
-<div class="task-assistant">{{ <ui.icon name="spark" /> }} Review the landing page before publishing.</div>
-</div>
-    {% endif %}
-  </div>
-</div>
-{% endcomponent %}
-
-{% component ui.terminal() %}
-<div class="terminal" aria-label="Ktesio developer tool preview">
-<div class="terminal-top">
-<span class="window-dots">
-<i>
-</i>
-<i>
-</i>
-<i>
-</i>
-</span>
-<span>ktesio / Rust CLI</span>{{ <ui.icon name="code" /> }}</div>
-<div class="terminal-body">
-<p class="terminal-command">
-<span>$</span> cargo install ktesio<i class="terminal-caret">
-</i>
-</p>
-<p class="terminal-comment"># Lifecycle, token usage and budgets.</p>
-<div class="terminal-rule">
-</div>
-<div class="terminal-row">
-<span>LIFECYCLE</span>
-<strong>
-<i>
-</i> Supervised</strong>
-</div>
-<div class="terminal-row">
-<span>TOKEN USAGE</span>
-<strong>Metered</strong>
-</div>
-<div class="terminal-row">
-<span>BUDGETS</span>
-<strong>Bounded</strong>
-</div>
-<div class="terminal-rule">
-</div>
-<p class="terminal-end">
-<span>kt</span> Agent supervision in Rust.</p>
-</div>
-</div>
-{% endcomponent %}
-
 {% component ui.card(project) %}
 <article class="project-card project-card--{{ project.id }} reveal" style="--project-accent:{{ project.accent }}">
-<a class="project-art" href="{{ get_url(path=project.url) }}" aria-label="Explore {{ project.title }}"{% if project.kind == "games" %} data-media{% endif %}>
+<a class="project-art" href="{{ get_url(path=project.url) }}" aria-label="Explore {{ project.title }}" data-media>
 {% if project.id == "lighthouse" %}
 <img data-media-image class="coast-art" src="{{ get_url(path='media/lighthouse-coast.webp') }}" alt="Lighthouse's illustrated islands at dusk, surrounded by deep blue sea" width="1024" height="1536" loading="lazy">
 <div class="coast-light" aria-hidden="true">
@@ -163,12 +37,8 @@
 <div class="mini-phone">
 <img data-media-image src="{{ get_url(path='media/inkube-game.webp') }}" alt="Inkube game screen with colorful merging ink blots" width="395" height="860" loading="lazy">
 </div>
-{% elif project.kind == "apps" %}
-{{ <ui.app_visual id={project.id} /> }}
-{% else %}
-{{ <ui.terminal /> }}
 {% endif %}
-{% if project.kind == "games" %}{{ <ui.media_status retry={false} /> }}{% endif %}
+{{ <ui.media_status retry={false} /> }}
 <span class="art-link" aria-hidden="true">{{ <ui.icon name="diagonal" /> }}</span>
 </a>
 <div class="project-info">
@@ -198,4 +68,4 @@
 
 {% component ui.media_status(retry=true) %}<div class="media-status" data-media-status hidden><span class="media-trace" aria-hidden="true"><i></i><i></i><i></i><i></i></span><p data-media-label role="status" aria-live="polite">Loading preview…</p>{% if retry %}<button class="quiet-button" type="button" data-media-retry hidden>{{ <ui.icon name="retry" /> }}<span>Try again</span></button>{% endif %}</div>{% endcomponent %}
 
-{% component ui.empty_state(title="Nothing here yet.", description="We’ll add projects here as we share more of our work.", nested=false) %}<div class="empty-state"><span class="empty-mark" aria-hidden="true">{{ <ui.icon name="grid" /> }}</span>{% if nested %}<h3>{{ title }}</h3>{% else %}<h2>{{ title }}</h2>{% endif %}<p>{{ description }}</p><a class="world-link" href="{{ get_url(path='about/') }}">Meet the studio{{ <ui.icon name="diagonal" /> }}</a></div>{% endcomponent %}
+{% component ui.empty_state(title="Nothing here yet.", description="We’ll add games here as we have more to show.", nested=false) %}<div class="empty-state"><span class="empty-mark" aria-hidden="true">{{ <ui.icon name="grid" /> }}</span>{% if nested %}<h3>{{ title }}</h3>{% else %}<h2>{{ title }}</h2>{% endif %}<p>{{ description }}</p><a class="world-link" href="{{ get_url(path='about/') }}">Meet the studio{{ <ui.icon name="diagonal" /> }}</a></div>{% endcomponent %}

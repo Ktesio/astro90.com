@@ -1,16 +1,11 @@
 [
-  {"path":"/","slug":"astro90","title":["Built from","curiosity."],"subtitle":"Games. Agentic AI. Open source.","alt":"Astro90. Built from curiosity. A saffron signature above a painted night coast."},
+  {"path":"/","slug":"astro90","title":["Built from","curiosity."],"subtitle":"Mobile games & entertainment","alt":"Astro90. Built from curiosity. A saffron signature above a painted night coast."},
   {"path":"/games/","slug":"games","title":["Small worlds.","Worth exploring."],"subtitle":"Mobile games by Astro90","alt":"Mobile games by Astro90, set against the studio's illustrated night coast."},
-  {"path":"/apps/","slug":"apps","title":["Software for","what’s next."],"subtitle":"Heronis & Yanando · In development","alt":"Astro90 apps. Heronis and Yanando, in development."},
-  {"path":"/open-source/","slug":"open-source","title":["Built here.","Shared here."],"subtitle":"Developer tools & public code","alt":"Astro90 developer tools and public code. Built here. Shared here."},
-  {"path":"/about/","slug":"about","title":["An independent","kind of studio."],"subtitle":"Games. Agentic AI. Open source.","alt":"About Astro90, an independent development studio."},
+  {"path":"/about/","slug":"about","title":["An independent","kind of studio."],"subtitle":"Mobile games & entertainment","alt":"About Astro90, an independent mobile games and entertainment studio."},
   {"path":"/contact/","slug":"contact","title":["Let’s talk."],"subtitle":"hello@astro90.com","alt":"Contact Astro90 at hello@astro90.com."},
   {"path":"/brand/","slug":"brand","title":["The Astro90","identity."],"subtitle":"Midnight & saffron","alt":"The Astro90 identity. Midnight and saffron, with the original studio signature."},
   {"path":"/accessibility/","slug":"accessibility","title":["Explore at","your own pace."],"subtitle":"Accessibility at Astro90","alt":"Astro90 accessibility. Explore at your own pace."},
   {"path":"/brand/states/","slug":"states","title":["Interface","states."],"subtitle":"The Astro90 design system","alt":"Interface states in the Astro90 design system."},
   {"path":"/games/lighthouse/","slug":"lighthouse","title":["Lighthouse"],"subtitle":"Coastal logic puzzles · In development for iOS","alt":"Lighthouse by Astro90. Coastal logic puzzles, in development for iOS.","screen":"lighthouse-home.webp"},
-  {"path":"/games/inkube/","slug":"inkube","title":["Inkube"],"subtitle":"Merge. Burst. Repeat. · In development for iOS","alt":"Inkube by Astro90. A development preview of its ink puzzle board.","screen":"inkube-game.webp"},
-  {"path":"/apps/heronis/","slug":"heronis","title":["Heronis"],"subtitle":"Personal AI agents · In development","alt":"Heronis by Astro90. Personal AI agents, in development."},
-  {"path":"/apps/yanando/","slug":"yanando","title":["Yanando"],"subtitle":"AI-assisted productivity · In development","alt":"Yanando by Astro90. AI-assisted productivity, in development."},
-  {"path":"/open-source/ktesio/","slug":"ktesio","title":["Ktesio"],"subtitle":"Agent infrastructure · Source available","alt":"Ktesio by Astro90. Agent infrastructure with source available under a non-commercial license."}
+  {"path":"/games/inkube/","slug":"inkube","title":["Inkube"],"subtitle":"Merge. Burst. Repeat. · In development for iOS","alt":"Inkube by Astro90. A development preview of its ink puzzle board.","screen":"inkube-game.webp"}
 ]

@@ -58,7 +58,7 @@ Maintain one h1 and one main landmark per page, unique metadata, descriptive lin
 
 ## Content and validation
 
-`data/projects.toml` holds product facts. Detail Markdown selects a project and supplies editorial headings. Verify any new store destination before activating a release control. Source availability and open-source licensing must remain distinct.
+`data/projects.toml` holds product facts. Detail Markdown selects a project and supplies editorial headings. Verify any new store destination before activating a release control. Keep the catalog focused on mobile games and entertainment, with accurate platform and development status.
 
 Run `mise run check`, `node --check static/js/site.js` and `node --check static/js/feedback.js`. When the Blender scene changes, render and encode it again. The encoder checks every frame for a clear margin, the 3.2-second duration and single repeat count. Inspect desktop, tablet, phone and short landscape sizes. Exercise the index, focus restoration, galleries and motion control. Check actual changing transforms while scrolling, rather than relying solely on still images. Keep a factual record in `docs/VALIDATION.md`.
 

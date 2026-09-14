@@ -188,56 +188,11 @@ html.spatial-ready[data-motion="running"] {
 .atlas-image--studio {
   transform: scale(1.2) rotate(-10deg);
 }
-@each $project in studio, lighthouse, inkube, heronis, yanando, ktesio {
+@each $project in studio, lighthouse, inkube {
   [data-active-project="#{$project}"] .atlas-image--#{$project} {
     opacity: 1;
     transform: scale(1) rotate(-5deg);
   }
-}
-.atlas-image--heronis,
-.atlas-image--yanando,
-.atlas-image--ktesio {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  background: radial-gradient(ellipse at 30% 20%, #4b3c84, #171426 75%);
-  border: 1px solid #afa7ea30;
-  border-radius: 36px;
-}
-.atlas-image--heronis > span,
-.atlas-image--yanando > span,
-.atlas-image--ktesio > span {
-  font: 500 160px/0.9 var(--font-display);
-  color: #c1b3ff;
-  letter-spacing: -0.08em;
-}
-.atlas-image--heronis p,
-.atlas-image--yanando p,
-.atlas-image--ktesio p {
-  font-size: 12px;
-  margin-top: 30px;
-  color: #d0c8eb;
-}
-.atlas-image--yanando {
-  background: radial-gradient(ellipse at 20% 20%, #244f46, #0b1b1d 75%);
-  border-color: #96d6cb30;
-}
-.atlas-image--yanando > span {
-  color: #96d6cb;
-}
-.atlas-image--ktesio {
-  background: #111925;
-  border-color: var(--line);
-  border-radius: 4px;
-}
-.atlas-image--ktesio > span {
-  font-family: var(--font-mono);
-  font-size: 108px;
-  color: var(--text);
-}
-.atlas-image--ktesio > span > span {
-  color: var(--saffron);
 }
 .atlas-project {
   position: absolute;
@@ -274,23 +229,11 @@ html.spatial-ready[data-motion="running"] {
 }
 .atlas-project--lighthouse {
   left: 5%;
-  top: 16%;
+  top: 24%;
 }
 .atlas-project--inkube {
-  left: 12%;
+  right: 6%;
   top: 64%;
-}
-.atlas-project--heronis {
-  left: 74%;
-  top: 9%;
-}
-.atlas-project--yanando {
-  left: 76%;
-  top: 59%;
-}
-.atlas-project--ktesio {
-  left: 55%;
-  top: 82%;
 }
 .atlas-bottom {
   display: flex;
@@ -448,8 +391,7 @@ html:has(dialog[open]) {
   height: var(--story-length);
   position: relative;
 }
-.world,
-.software-scene {
+.world {
   scroll-margin-top: -105px;
 }
 .world-stage {
@@ -651,14 +593,15 @@ html:has(dialog[open]) {
   top: 25%;
   left: -20%;
 }
-
-// The app interfaces occupy planes at different depths.
-.software-scene {
-  height: 220svh;
+.studio-scene {
   position: relative;
-  background: transparent;
+  z-index: 4;
+  isolation: isolate;
+  display: grid;
+  align-items: center;
+  min-height: 100svh;
 }
-.software-scene::before {
+.studio-scene::before {
   content: "";
   position: absolute;
   inset: 0;
@@ -669,167 +612,9 @@ html:has(dialog[open]) {
     #000 calc((1 - var(--arrival, 1)) * 80px + 1px)
   );
 }
-.software-stage {
-  position: sticky;
-  top: 0;
-  height: 100svh;
-  min-height: 760px;
-  perspective: 1600px;
-}
-.software-heading {
-  position: absolute;
-  left: 0;
-  top: 14%;
-  z-index: 1;
-  transform: translateY(calc(var(--progress, 0) * -60px));
-}
-.software-heading h2,
-.source-heading h2 {
-  font-size: clamp(58px, 6.9vw, 112px);
-  line-height: 1.06;
-  letter-spacing: -0.067em;
-  font-weight: 450;
-}
-.software-heading h2 em {
-  color: var(--saffron);
-}
-.software-heading p {
-  font-size: 14px;
-  margin-top: 25px;
-}
-.software-plane {
-  position: absolute;
-  width: 48%;
-  transform-style: preserve-3d;
-}
-.software-plane--heronis {
-  left: 47%;
-  top: 20%;
-  z-index: 2;
-  transform: translate3d(
-      calc(var(--pointer-x, 0) * 10px),
-      calc((1 - var(--progress, 0)) * 100px),
-      0
-    )
-    rotateY(
-      calc(-18deg + var(--progress, 0) * 13deg + var(--pointer-x, 0) * 4deg)
-    )
-    rotateZ(calc(7deg - var(--progress, 0) * 11deg));
-}
-.software-plane--yanando {
-  left: 13%;
-  top: 50%;
-  z-index: 3;
-  transform: translate3d(
-      calc(var(--pointer-x, 0) * -10px),
-      calc((1 - var(--progress, 0)) * 200px),
-      0
-    )
-    rotateY(calc(12deg - var(--progress, 0) * 10deg))
-    rotateZ(calc(-7deg + var(--progress, 0) * 10deg));
-}
-.software-plane .app-visual {
-  height: 325px;
-  border-radius: 8px;
-  border: 1px solid #ffffff1a;
-  box-shadow: 10px 30px 90px #0007;
-  background: #161927;
-}
-.software-plane .app-window {
-  width: 100%;
-  height: 100%;
-  position: relative;
-  inset: auto;
-  transform: none;
-  border: 0;
-  box-shadow: none;
-  border-radius: 6px;
-}
-.software-plane--yanando .app-visual {
-  background: #132022;
-}
-.software-plane .app-window h4 {
-  font-size: 25px;
-}
-.software-caption {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  padding-top: 16px;
-}
-.software-caption h3 {
-  font-size: 19px;
-  letter-spacing: -0.035em;
-}
-.software-caption span {
-  font-size: 11px;
-  color: var(--muted);
-  display: inline-flex;
-  align-items: center;
-  gap: 20px;
-}
-.software-caption .icon {
-  width: 16px;
-}
-.software-plane a:hover .software-caption {
-  color: var(--saffron);
-}
-.software-status {
-  position: absolute;
-  bottom: 6%;
-  right: 0;
-  font-size: 11px;
-}
-.app-orbit {
-  display: none;
-}
-.source-scene {
-  min-height: 880px;
-  padding-block: 175px;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 9%;
-  align-items: center;
-  perspective: 1200px;
-}
-.source-heading h2 em {
-  color: var(--saffron);
-}
-.source-heading p {
-  max-width: 370px;
-  margin: 32px 0 22px;
-  font-size: 15px;
-}
-.source-object {
-  transform: rotateY(calc(var(--depth, 0) * -12deg))
-    rotateZ(calc(var(--depth, 0) * 5deg))
-    translateY(calc(var(--depth, 0) * 70px));
-}
-.source-object .terminal {
-  box-shadow: 0 35px 120px #0006;
-}
-.source-caption {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 20px;
-  margin-top: 25px;
-}
-.source-caption a {
-  font: 500 23px var(--font-display);
-}
-.source-caption a .icon {
-  width: 17px;
-  margin-left: 14px;
-}
-.source-caption span {
-  font-size: 10px;
-  text-align: right;
-}
 .studio-outro {
+  position: relative;
   padding-block: 120px 160px;
-  border-top: 1px solid var(--line);
 }
 .studio-outro p {
   margin-bottom: 38px;
@@ -947,10 +732,6 @@ html:has(dialog[open]) {
 .project-hero-art .detail-coast {
   transform: translateY(calc(var(--depth, 0) * 70px)) rotate(-7deg);
 }
-.project-hero-art .app-window {
-  transform: perspective(1000px) rotateY(calc(var(--pointer-x, 0) * -7deg))
-    rotateZ(calc(var(--depth, 0) * -5deg));
-}
 .project-hero .preview-label,
 .project-meta-bar span:nth-child(3) {
   display: none;
@@ -1017,6 +798,8 @@ html:has(dialog[open]) {
 }
 .footer-links {
   display: flex;
+  grid-column: auto;
+  grid-row: auto;
   flex-wrap: wrap;
   gap: 15px 35px;
   justify-content: flex-start;
@@ -1083,9 +866,6 @@ html.spatial-ready[data-motion="running"] .home {
 }
 .home .world--inkube {
   z-index: 3;
-}
-.home .software-scene {
-  z-index: 4;
 }
 html.spatial-ready[data-motion="running"] .home .world-window {
   mask-image: linear-gradient(
@@ -1189,9 +969,6 @@ html.spatial-ready[data-motion="running"] .home .world-window {
     top: 15%;
     width: 285px;
   }
-  .software-plane .app-visual {
-    height: 390px;
-  }
 }
 @media (max-width: 1000px) {
   .identity-copy {
@@ -1218,48 +995,12 @@ html.spatial-ready[data-motion="running"] .home .world-window {
   .world-copy {
     max-width: 50%;
   }
-  .software-plane {
-    width: 55%;
-  }
-  .software-plane--heronis {
-    left: 43%;
-  }
-  .software-plane--yanando {
-    left: 5%;
-    top: 53%;
-  }
-  .software-plane .app-visual {
-    height: 295px;
-  }
-  .source-scene {
-    gap: 5%;
-    padding-block: 100px;
-    min-height: 730px;
-  }
-  .atlas-project--heronis {
-    left: 70%;
-  }
-  .atlas-project--yanando {
-    left: 72%;
-  }
   .atlas-project--lighthouse {
     left: 1%;
   }
   .atlas-preview {
     width: 38vw;
     height: 46vw;
-  }
-  .atlas-image--heronis > span,
-  .atlas-image--yanando > span {
-    font-size: 120px;
-  }
-  .atlas-image--ktesio > span {
-    font-size: 80px;
-  }
-  .source-caption {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 8px;
   }
 }
 @media (max-width: 650px) {
@@ -1467,93 +1208,6 @@ html.spatial-ready[data-motion="running"] .home .world-window {
     top: 35%;
     left: -62%;
   }
-  .software-scene {
-    height: 205svh;
-  }
-  .software-stage {
-    min-height: 800px;
-  }
-  .software-heading {
-    top: 12%;
-  }
-  .software-heading h2 {
-    font-size: 13vw;
-  }
-  .software-heading p {
-    font-size: 12px;
-    margin-top: 15px;
-  }
-  .software-plane {
-    width: 90%;
-  }
-  .software-plane--heronis {
-    top: 33%;
-    left: 10%;
-  }
-  .software-plane--yanando {
-    top: 56%;
-    left: 0;
-  }
-  .software-plane .app-visual {
-    height: 235px;
-  }
-  .software-plane .app-window {
-    width: 100%;
-    transform: none;
-  }
-  .software-plane .agent-body {
-    padding: 16px 17px;
-  }
-  .software-plane .agent-body h4,
-  .software-plane .task-workspace h4 {
-    font-size: 22px;
-  }
-  .software-plane .task-workspace {
-    padding: 13px 20px;
-  }
-  .software-plane .task-assistant {
-    display: none;
-  }
-  .software-plane .agent-step {
-    font-size: 8px;
-  }
-  .software-caption {
-    padding-top: 10px;
-  }
-  .software-caption h3 {
-    font-size: 16px;
-  }
-  .software-caption span {
-    font-size: 9px;
-    gap: 8px;
-  }
-  .software-status {
-    bottom: 3%;
-    font-size: 9px;
-  }
-  .source-scene {
-    grid-template-columns: 1fr;
-    gap: 55px;
-    padding-block: 105px;
-    min-height: 0;
-  }
-  .source-heading h2 {
-    font-size: 18vw;
-  }
-  .source-heading p {
-    font-size: 14px;
-    max-width: 310px;
-  }
-  .source-object .terminal {
-    transform: none;
-  }
-  .source-caption {
-    flex-direction: row;
-    align-items: center;
-  }
-  .source-caption span {
-    max-width: 180px;
-  }
   .studio-outro {
     padding-block: 70px 95px;
   }
@@ -1723,8 +1377,7 @@ html.spatial-ready[data-motion="running"] .home .world-window {
     height: 78px;
   }
   .identity-stage,
-  .world-stage,
-  .software-stage {
+  .world-stage {
     min-height: 530px;
   }
   .identity-stage {
@@ -1742,15 +1395,6 @@ html.spatial-ready[data-motion="running"] .home .world-window {
   .world-phone {
     width: 160px;
     top: 15%;
-  }
-  .software-plane .app-visual {
-    height: 215px;
-  }
-  .software-heading h2 {
-    font-size: 5vw;
-  }
-  .software-plane--yanando {
-    top: 48%;
   }
   .atlas-map {
     min-height: 310px;
@@ -1785,35 +1429,22 @@ html.spatial-ready[data-motion="running"] .home .world-window {
 html:not(.spatial-ready) {
   .identity-scene,
   .world,
-  .software-scene,
   .home [data-next-scene] {
     height: auto;
   }
   .identity-stage,
-  .world-stage,
-  .software-stage {
+  .world-stage {
     position: relative;
-  }
-  .software-stage {
-    min-height: 1150px;
-  }
-  .software-plane--heronis {
-    top: 33%;
-  }
-  .software-plane--yanando {
-    top: 63%;
   }
 }
 html[data-motion="paused"] {
   .identity-scene,
   .world,
-  .software-scene,
   .home [data-next-scene] {
     height: auto;
   }
   .identity-stage,
-  .world-stage,
-  .software-stage {
+  .world-stage {
     position: relative;
   }
   .identity-copy,
@@ -1823,14 +1454,10 @@ html[data-motion="paused"] {
   .world-copy,
   .world-landscape,
   .ink-form,
-  .software-heading,
-  .software-plane,
-  .source-object,
   .studio-outro h2,
   .project-art,
   .hero-phone,
   .detail-coast,
-  .app-window,
   .feature,
   .screenshot,
   .brand-chapter,
@@ -1862,15 +1489,6 @@ html[data-motion="paused"] {
   .world-landscape {
     height: 100%;
   }
-  .software-stage {
-    min-height: 1000px;
-  }
-  .software-plane--heronis {
-    top: 33%;
-  }
-  .software-plane--yanando {
-    top: 60%;
-  }
   *,
   *::before,
   *::after {
@@ -1883,22 +1501,11 @@ html[data-motion="paused"] {
   }
   .identity-scene,
   .world,
-  .software-scene,
   .home [data-next-scene] {
     height: auto;
   }
   .identity-stage,
-  .world-stage,
-  .software-stage {
+  .world-stage {
     position: relative;
-  }
-  .software-stage {
-    min-height: 1000px;
-  }
-  .software-plane--heronis {
-    top: 33%;
-  }
-  .software-plane--yanando {
-    top: 60%;
   }
 }

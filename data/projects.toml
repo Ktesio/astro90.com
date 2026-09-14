@@ -18,8 +18,6 @@ screenshots = ["lighthouse-home.webp", "lighthouse-world.webp", "lighthouse-game
 features = ["An island chart", "Coastal logic", "A quiet setting"]
 feature_descriptions = ["Follow the chart through an illustrated archipelago.", "Work out how the islands, water and lighthouses fit together.", "Nautical illustrations and tactile details frame each puzzle."]
 release = "Coming to iOS"
-source = ""
-license = ""
 
 [[projects]]
 id = "inkube"
@@ -41,68 +39,3 @@ screenshots = ["inkube-home.webp", "inkube-game.webp", "inkube-gameover.webp"]
 features = ["Merge and burst", "Daily Ink", "Color palettes"]
 feature_descriptions = ["Slide matching ink together. Grow a blot to level four and trigger a burst.", "Return for a daily puzzle with a new starting board.", "Explore different palettes and ink designs as you play."]
 release = "Coming to iOS"
-source = ""
-license = ""
-
-[[projects]]
-id = "heronis"
-title = "Heronis"
-kind = "apps"
-category = "Personal AI agents"
-platform = "Web"
-status = "In development"
-tagline = "Your agents, in one place."
-description = "Work with personal AI agents through conversation. Follow their runs and review the results."
-accent = "#AFA7EA"
-url = "apps/heronis/"
-cover = ""
-icon = ""
-hero = ""
-screenshots = []
-features = ["Start with a conversation", "Keep the work in view", "Make it your own"]
-feature_descriptions = ["Bring an idea, a question, or a task to your personal agent.", "Follow runs, review their progress, and see the artifacts they produce.", "Shape an agent around the way you think and work."]
-release = "Product preview"
-source = ""
-license = ""
-
-[[projects]]
-id = "yanando"
-title = "Yanando"
-kind = "apps"
-category = "AI-assisted productivity"
-platform = "Web"
-status = "In development"
-tagline = "See the work ahead."
-description = "Organize tasks, priorities and teamwork in a shared workspace with AI assistance."
-accent = "#96D6CB"
-url = "apps/yanando/"
-cover = ""
-icon = ""
-hero = ""
-screenshots = []
-features = ["Capture tasks", "Set priorities", "Work together"]
-feature_descriptions = ["Collect tasks and ideas in one workspace.", "See which tasks need your attention and plan the next steps.", "Keep a shared view of the work and its progress."]
-release = "Product preview"
-source = ""
-license = ""
-
-[[projects]]
-id = "ktesio"
-title = "Ktesio"
-kind = "code"
-category = "Agent infrastructure"
-platform = "Rust · CLI"
-status = "Source available"
-tagline = "Your agents. Under control."
-description = "Run AI agents like services. Supervise their lifecycle, meter token usage, and put real boundaries around spend."
-accent = "#F4C84C"
-url = "open-source/ktesio/"
-cover = ""
-icon = ""
-hero = ""
-screenshots = []
-features = ["Supervise the lifecycle", "See what runs consume", "Give autonomy a budget"]
-feature_descriptions = ["Start, stop, pause, and resume registered agents with consistent lifecycle controls.", "Follow token usage and costs through a durable usage ledger.", "Set token and cost ceilings so long-running agents stay within your limits."]
-release = "Explore the project"
-source = "https://github.com/iMagdy/ktesio"
-license = "Ktesio NC–Attribution 1.0.0"

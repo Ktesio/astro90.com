@@ -17,8 +17,7 @@ INTERNAL_HOSTS = {ORIGIN.hostname, "127.0.0.1", "localhost"}
 ERRORS = []
 EXPECTED = {
     "index.html", "404.html", "games/index.html", "games/lighthouse/index.html",
-    "games/inkube/index.html", "apps/index.html", "apps/heronis/index.html",
-    "apps/yanando/index.html", "open-source/index.html", "open-source/ktesio/index.html",
+    "games/inkube/index.html",
     "studio/index.html", "about/index.html", "contact/index.html",
     "accessibility/index.html", "brand/index.html", "brand/states/index.html",
 }
@@ -125,6 +124,8 @@ documents = {p: Document(p) for p in sorted(PUBLIC.rglob("*.html"))}
 generated = {p.relative_to(PUBLIC).as_posix() for p in documents}
 for missing in EXPECTED - generated:
     ERRORS.append(f"Missing page: {missing}; run zola build first")
+for unexpected in generated - EXPECTED:
+    ERRORS.append(f"Unexpected page: {unexpected}; remove retired routes from the build")
 
 titles = Counter()
 references = 0

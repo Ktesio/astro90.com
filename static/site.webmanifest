@@ -2,7 +2,7 @@
   "id": "/",
   "name": "Astro90",
   "short_name": "Astro90",
-  "description": "An independent development studio making mobile games, agentic AI software, and tools for developers.",
+  "description": "An independent studio focused on mobile games and entertainment.",
   "lang": "en",
   "dir": "ltr",
   "start_url": "/",
@@ -11,14 +11,46 @@
   "background_color": "#090E17",
   "theme_color": "#090E17",
   "icons": [
-    {"src":"/brand/icon-192.png","sizes":"192x192","type":"image/png","purpose":"any"},
-    {"src":"/brand/icon-512.png","sizes":"512x512","type":"image/png","purpose":"any"},
-    {"src":"/brand/icon-maskable-192.png","sizes":"192x192","type":"image/png","purpose":"maskable"},
-    {"src":"/brand/icon-maskable-512.png","sizes":"512x512","type":"image/png","purpose":"maskable"}
+    {
+      "src": "/brand/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/brand/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/brand/icon-maskable-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "/brand/icon-maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
   ],
   "shortcuts": [
-    {"name":"Games","url":"/games/","description":"Explore Lighthouse and Inkube"},
-    {"name":"Apps","url":"/apps/","description":"Explore Heronis and Yanando"},
-    {"name":"Public code","url":"/open-source/","description":"Explore developer tools and source"}
+    {
+      "name": "Games",
+      "url": "/games/",
+      "description": "Explore Lighthouse and Inkube"
+    },
+    {
+      "name": "Lighthouse",
+      "url": "/games/lighthouse/",
+      "description": "Coastal logic puzzles"
+    },
+    {
+      "name": "Inkube",
+      "url": "/games/inkube/",
+      "description": "Swipe-and-merge puzzles"
+    }
   ]
 }

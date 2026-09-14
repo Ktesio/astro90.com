@@ -1,8 +1,8 @@
 # Astro90 identity standards
 
-Version 1.3 · September 2026
+Version 1.4 · September 2026
 
-Astro90 is a development studio for games, agentic AI software and open source. The selected identity is **04 Studio Wordmark** with **09 Saffron**, used on dark surfaces by default. The signature line is **Built from curiosity.**
+Astro90 is an independent studio focused on mobile games and entertainment. The selected identity is **04 Studio Wordmark** with **09 Saffron**, used on dark surfaces by default. The signature line is **Built from curiosity.**
 
 ## Signature
 
@@ -33,7 +33,7 @@ Download the kit from `/brand/#downloads`. See `docs/WEB-ASSETS.md` for the size
 
 ## Meaning of the form
 
-The a identifies the studio directly. Its rounded corners preserve the selected lettering; the saffron face and dark core translate the two brand colors into a physical object. The index connects the five products to that object with paths that turn through 90 degrees. This is a visual use of the name, not a claim about its origin.
+The a identifies the studio directly. Its rounded corners preserve the selected lettering; the saffron face and dark core translate the two brand colors into a physical object. The index connects the two games to that object with paths that turn through 90 degrees. This is a visual use of the name, not a claim about its origin.
 
 The earlier rings were intended to suggest products orbiting one studio. They did not establish a distinctive Astro90 association and are retired from the website. Original explorations remain in the source archive. Do not reintroduce rings or floating spheres as default brand decoration.
 
@@ -67,9 +67,9 @@ Use scale, alignment and spacing for hierarchy. Avoid decorative chips, numbered
 
 The studio's opening is a painted coastal panorama with a small lighthouse. It establishes a setting for exploration and leads into the first game. It is editorial studio artwork, not a gameplay screenshot or a nautical theme to apply to every product. Keep the responsive crop focused on the lighthouse and maintain readable sky above it on phones. Source artwork and its generation prompt are preserved in `assets/source/studio/`.
 
-Lighthouse keeps its coastal illustration and nautical interfaces. Inkube keeps its colorful ink and dark puzzle board. Heronis uses violet and Yanando uses mint within clearly labeled interface studies. Ktesio uses technical typography and a terminal illustration.
+Lighthouse keeps its coastal illustration and nautical interfaces. Inkube keeps its colorful ink and dark puzzle board.
 
-Actual development screens take priority over invented mockups. Label interface studies and unreleased products. Do not fabricate stores, dates, reviews, ratings, customers or usage metrics. Ktesio has a non-commercial source-available license, which is distinct from OSI open source.
+Actual development screens take priority over invented mockups. Label unreleased games and development previews. Do not fabricate stores, dates, reviews, ratings, customers or usage metrics.
 
 ## Motion
 
@@ -83,9 +83,9 @@ Honor `prefers-reduced-motion`. The manual Reduce motion control in the index an
 
 ## Voice
 
-Describe what the product does and where it stands. Let artwork supply atmosphere. Use concrete language such as “coastal logic puzzles,” “personal AI agents” and “token budgets.” Keep technical detail where it helps a developer decide what to inspect.
+Describe how the game plays and where it stands. Let artwork supply atmosphere. Use concrete language such as “coastal logic puzzles,” “merging ink” and “chain reactions.” State supported platforms and development status.
 
-Astro90 is the shared signature, while Lighthouse, Inkube, Heronis, Yanando and Ktesio retain distinct names and product identities.
+Astro90 is the shared signature, while Lighthouse and Inkube retain distinct names and game identities.
 
 ## Feedback
 

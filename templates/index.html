@@ -10,7 +10,7 @@
     </div>
     <div class="night-shade" aria-hidden="true"></div>
     <div class="night-copy"><h1><span>Built from</span><em>curiosity.</em></h1></div>
-    <div class="night-footer"><p>A development studio for games,<br>agentic AI and open source.</p><a href="#lighthouse" class="night-explore"><span>Explore the work</span>{{ <ui.icon name="down" /> }}</a></div>
+    <div class="night-footer"><p>An independent studio for<br>mobile games and entertainment.</p><a href="#lighthouse" class="night-explore"><span>Explore the games</span>{{ <ui.icon name="down" /> }}</a></div>
   </div>
 </section>
 
@@ -24,29 +24,17 @@
   </div>
 </section>
 
-<section class="world world--inkube" id="inkube" data-scene="world" data-next-scene="software">
+<section class="world world--inkube" id="inkube" data-scene="world" data-next-scene="studio">
   <div class="world-stage">
     <div class="world-window ink-field"><div class="ink-form ink-form--pink"></div><div class="ink-form ink-form--yellow"></div><div class="ink-form ink-form--lime"></div><div class="ink-form ink-form--violet"></div></div>
     <h2 class="world-name">inkube</h2>
     <div class="world-phone" data-media><img data-media-image src="{{ get_url(path='media/inkube-game.webp') }}" alt="Inkube's grid of colorful ink blots ready to merge" width="395" height="860" loading="lazy">{{ <ui.media_status /> }}</div>
     <div class="world-copy"><p>Swipe the ink.<br>Start a chain reaction.</p><a class="world-link" href="{{ get_url(path='games/inkube/') }}">Explore Inkube{{ <ui.icon name="diagonal" /> }}</a><span>Swipe-and-merge puzzles · iOS · In development</span></div>
-    <a class="world-next" href="#software" aria-label="Continue to software">{{ <ui.icon name="down" /> }}</a>
+    <a class="world-next" href="#studio" aria-label="Meet the studio">{{ <ui.icon name="down" /> }}</a>
   </div>
 </section>
 
-<section class="software-scene" id="software" data-scene="software">
-  <div class="software-stage container">
-    <div class="software-heading"><h2>From a thought<br>to <em>done.</em></h2><p>Personal agents and software<br>for the work in front of you.</p></div>
-    <article class="software-plane software-plane--heronis"><a href="{{ get_url(path='apps/heronis/') }}" aria-label="Explore Heronis">{{ <ui.app_visual id="heronis" /> }}<div class="software-caption"><h3>Heronis</h3><span>Personal AI agents{{ <ui.icon name="diagonal" /> }}</span></div></a></article>
-    <article class="software-plane software-plane--yanando"><a href="{{ get_url(path='apps/yanando/') }}" aria-label="Explore Yanando">{{ <ui.app_visual id="yanando" /> }}<div class="software-caption"><h3>Yanando</h3><span>AI-assisted productivity{{ <ui.icon name="diagonal" /> }}</span></div></a></article>
-    <p class="software-status">Both in development. Interface studies shown.</p>
-  </div>
+<section class="studio-scene" id="studio" data-scene="studio">
+  <div class="studio-outro container" data-depth><p>We’re the studio behind Lighthouse and Inkube.</p><a href="{{ get_url(path='about/') }}"><h2>Meet the<br><em>studio.</em></h2>{{ <ui.icon name="diagonal" /> }}</a></div>
 </section>
-
-<section class="source-scene container" data-depth>
-  <div class="source-heading"><h2>Open the<br><em>source.</em></h2><p>Ktesio is a Rust toolkit for supervising AI agents, tracking token use and enforcing budgets.</p><a class="world-link" href="{{ get_url(path='open-source/') }}">Code from the studio{{ <ui.icon name="diagonal" /> }}</a></div>
-  <div class="source-object">{{ <ui.terminal /> }}<div class="source-caption"><a href="{{ get_url(path='open-source/ktesio/') }}">Ktesio{{ <ui.icon name="diagonal" /> }}</a><span>Source available · Non-commercial license</span></div></div>
-</section>
-
-<section class="studio-outro container" data-depth><p>Astro90 is the studio behind all five projects.</p><a href="{{ get_url(path='about/') }}"><h2>Meet the<br><em>studio.</em></h2>{{ <ui.icon name="diagonal" /> }}</a></section>
 {% endblock %}
